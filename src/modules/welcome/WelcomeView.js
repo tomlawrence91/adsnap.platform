@@ -14,7 +14,7 @@ import * as ICONS from '../../constants/icons';
 import * as WelcomeState from './WelcomeState';
 import Container from '../../components/Container';
 import Button from '../../components/Button';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import styles from './WelcomeStyles';
 
 
@@ -22,7 +22,7 @@ export default class Welcome extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: '',
+      email: '',
       password: '',
       tab: 0
     };
@@ -30,7 +30,6 @@ export default class Welcome extends React.Component {
 
   static route = {
     navigationBar: {
-      title: 'Welcome',
       backgroundColor: COLORS.APP_HEADER
     }
   }
@@ -48,6 +47,15 @@ export default class Welcome extends React.Component {
     let tab = this.state.tab == 0 ? 1 : 0;
     this.setState({ 'tab': tab });
   }
+  login(email, password) {
+    let success = this.props.dispatch(WelcomeState.login(this.state.email, this.state.password))
+    if (success) {
+      this.goToTabMenu();
+    }
+  }
+  signup() {
+    this.props.dispatch(WelcomeState.signup(this.state.email, this.state.password))
+  }
   render() {
     //TODO: LOGO
     //TODO: AUTH0
@@ -55,34 +63,38 @@ export default class Welcome extends React.Component {
     return (
       <Container>
         <ScrollView>
-        <View style={styles.logoWrapper}>
-          <Image style={styles.logo} source={ICONS.LOGO_WHITE} ></Image>
-        </View>
-        <View style={styles.contentWrapper}>
-          <Text style={styles.description}>
-            Discover discounts for shops and brands in your local area, get deals and know in advance where to buy nice stuff.
-        </Text>
+          <View style={styles.logoWrapper}>
+            <Image style={styles.logo} source={ICONS.LOGO_WHITE} ></Image>
+          </View>
+          <View style={styles.contentWrapper}>
+            <Text style={styles.description}>
+              Discover discounts for shops and brands in your local area, get deals and know in advance where to buy nice stuff.
+              </Text>
 
-          <View style={styles.tabSwitch}>
-            <Text style={[styles.tab, this.state.tab == 0 && styles.tabHover]} onPress={() => this.changeTab()}>LOGIN</Text>
-            <View style={styles.divider}></View>
-            <Text style={[styles.tab, this.state.tab == 1 && styles.tabHover]} onPress={() => this.changeTab()}>REGISTER</Text>
-          </View>
-          <View style={styles.formWrapper}>
-            <Text style={styles.label}>E-Mail</Text>
-            <TextInput
-              style={styles.input}
-              onChangeText={(text) => this.setState({ text })}
-              value={this.state.text} />
-            <Text style={styles.label}>Password</Text>
-            <TextInput
-              style={styles.input}
-              onChangeText={(password) => this.setState({ password })}
-              value={this.state.password}
-              secureTextEntry={false} />
-            {this.state.tab == 0 && <Button onPress={() => this.goToTabMenu()} text={'Sign In'} />}
-            {this.state.tab == 1 && <Button onPress={() => this.goToTabMenu()} text={'Sing Up'} />}
-          </View>
+            <View style={styles.tabSwitch}>
+              <Text style={[styles.tab, this.state.tab == 0 && styles.tabHover]} onPress={() => this.changeTab()}>LOGIN</Text>
+              <View style={styles.divider}></View>
+              <Text style={[styles.tab, this.state.tab == 1 && styles.tabHover]} onPress={() => this.changeTab()}>REGISTER</Text>
+            </View>
+            <View style={styles.formWrapper}>
+              <KeyboardAwareScrollView style={styles.inputWrapper} >
+                <Text style={styles.label}>E-Mail</Text>
+
+                <TextInput
+                  style={styles.input}
+                  onChangeText={(email) => this.setState({ email })}
+                  value={this.state.email} />
+                <Text style={styles.label}>Password</Text>
+                <TextInput
+                  style={styles.input}
+                  onChangeText={(password) => this.setState({ password })}
+                  value={this.state.password}
+                  secureTextEntry={true} />
+              </KeyboardAwareScrollView>
+
+              {this.state.tab == 0 && <Button onPress={() => this.login()} text={'Sign In'} width={200} />}
+              {this.state.tab == 1 && <Button onPress={() => this.signup()} text={'Sing Up'} width={200} />}
+            </View>
           </View>
         </ScrollView>
 

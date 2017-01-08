@@ -17,9 +17,9 @@ export default class SnapView extends React.Component {
     }
 
     takePicture() {
-        // this.camera.capture()
-        //     .then((data) => console.log(data))
-        //     .catch(err => console.error(err));
+        this.camera.capture()
+            .then((data) => this.props.dispatch(SnapState.uploadImage(data)))
+            .catch(err => console.error(err));
         console.log("snap snap")
     }
 

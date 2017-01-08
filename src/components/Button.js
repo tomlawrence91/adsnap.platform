@@ -13,12 +13,13 @@ import {
 const Button = React.createClass({
     propTypes: {
       onPress: React.PropTypes.func.isRequired,
-      text: React.PropTypes.string.isRequired
+      text: React.PropTypes.string.isRequired,
+      width: React.PropTypes.number
     },
 
     render() {
       return(
-        <TouchableOpacity style={styles.buttonWrapper} onPress={()=>this.props.onPress()}>
+        <TouchableOpacity style={[styles.buttonWrapper,{width:this.props.width}]} onPress={()=>this.props.onPress()}>
             <Text style={styles.buttonText}>{this.props.text}</Text>
         </TouchableOpacity>
       )

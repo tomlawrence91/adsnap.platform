@@ -3,20 +3,19 @@ import * as COLORS from '../../constants/colors';
 import * as FONTS from '../../constants/colors';
 import * as COMMON_STYLES from '../../constants/commonStyles';
 
-const tabHeight = 40;
+const tabHeight = 35;
 export default styles = StyleSheet.create({
     logoWrapper:{
         flex: .4,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginTop: 20
     },
 
     logo: {
         // width:75,
         height: 150,
         resizeMode: 'contain'
-        
-
     },
     contentWrapper:{flex:1},
     description: {
@@ -32,7 +31,11 @@ export default styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 15,
         marginTop: 20,
-        // justifyContent: 'center'
+        justifyContent: 'center'
+    },
+    inputWrapper: {
+        flex:1,
+        width: 300,
     },
     input: {
         // width: 200,
@@ -40,6 +43,7 @@ export default styles = StyleSheet.create({
         borderColor: COLORS.WHITE,
         borderWidth: 1,
         marginVertical: 10,
+        color: COLORS.WHITE
     },
     label:{
         color: COLORS.WHITE,
@@ -69,7 +73,7 @@ export default styles = StyleSheet.create({
     // },
     divider:{
         marginHorizontal: 50,
-        width:4,
+        width:3,
         backgroundColor: COLORS.WHITE,
         paddingVertical: 15,
     },
@@ -85,12 +89,16 @@ export default styles = StyleSheet.create({
         height: tabHeight,
         backgroundColor: 'transparent',
         color: COLORS.WHITE,
-        fontSize: 20,
+        fontSize: 16,
         width: 110
     },
     tabHover:{
-        fontSize: 22,
+        fontSize: 17,
         textDecorationLine: 'underline'
+    },
+    button: {
+        width: 200
     }
+
 
 })

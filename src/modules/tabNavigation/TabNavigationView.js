@@ -37,7 +37,7 @@ export default class TabNavigationView extends React.Component {
       <TabNavigation
         tabBarColor={COLORS.NAVIGATION_PINK}
         tabBarHeight={56}
-        initialTab="deals">
+        initialTab="snap">
 
         <TabNavigationItem
           id="snap"
