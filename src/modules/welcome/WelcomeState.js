@@ -9,7 +9,7 @@ const initialState = fromJS({
   ready: false,
 });
 
-export function login(email, password) {
+export function login(email, password, successCallback, errorCallback) {
   return (dispatch, getState) => {
     ajaxService.auth0login(email, password)
       .then(response => {
@@ -19,10 +19,10 @@ export function login(email, password) {
           console.log("failure")
           console.log(response.error)
           //TODO: error popup
-          return false;
-          
+          errorCallback();
+          return;
         }
-        return true;
+        successCallback();
       })
 
   }

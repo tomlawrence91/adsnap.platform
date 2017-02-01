@@ -1,5 +1,5 @@
 
-export const baseUrl = 'http://192.168.178.24:8000/v1';
+export const baseUrl = 'http://192.168.178.26:8000/v1';
 // export const baseUrl = 'http://192.168.22.22/v1/';
 export const flaskBaseUrl = 'http://127.0.0.1:5000/';
 

@@ -20,17 +20,22 @@ export default class RedeemView extends React.Component {
             title: 'Chat',
         }
     }
+    //TODO: fetch code
+    //TODO: popup on remove
     render() {
         return (
             <Container loading={!this.props.deal}>
-                <Text style={styles.brand}>{this.props.route.params.deal.retailer}</Text>
                 <View style={styles.codeWrapper}>
                     <Image style={styles.backgroundImage} source={{ uri: "http://www.urlaubwelt.com/wp-content/uploads/2016/02/Hawaii-15.jpg" }}>
                         <View style={styles.coloredOverlay} />
                         <View style={styles.codeBox}><Text style={styles.codeText}>{this.props.route.params.deal.code}</Text></View>
                     </Image>
                 </View>
-                <Button text="Remove Deal" onPress={() => { } }></Button>
+                <Text style={styles.brand}>{this.props.route.params.deal.retailer}</Text>
+
+                <Button text="Share" onPress={() => { } }></Button>
+                <Button text="Trade" onPress={() => { } }></Button>
+                <Button text="Remove" onPress={() => { } }></Button>
 
             </Container>
         );

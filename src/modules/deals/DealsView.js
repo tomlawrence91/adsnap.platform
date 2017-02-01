@@ -15,7 +15,10 @@ import Tile from '../../components/Tile';
 import styles from './DealsStyles';
 
 export default class DealsView extends React.Component {
-
+    componentWillMount(){
+        console.log("dispatching")
+        this.props.dispatch(DealsState.retrieveDeals());
+    }
      
     onPress = (deal) => {
         this.props.navigator.push(Router.getRoute('redeem',{deal:deal}));

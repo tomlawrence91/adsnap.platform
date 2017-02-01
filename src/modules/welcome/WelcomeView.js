@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import Router from '../AppRouter';
 import * as COLORS from '../../constants/colors';
+import * as COMMON_STYLES from '../../constants/commonStyles';
 import * as ICONS from '../../constants/icons';
 import * as WelcomeState from './WelcomeState';
 import Container from '../../components/Container';
@@ -30,6 +31,7 @@ export default class Welcome extends React.Component {
 
   static route = {
     navigationBar: {
+      visible: false,
       backgroundColor: COLORS.APP_HEADER
     }
   }
@@ -47,11 +49,19 @@ export default class Welcome extends React.Component {
     let tab = this.state.tab == 0 ? 1 : 0;
     this.setState({ 'tab': tab });
   }
+
+
   login(email, password) {
-    let success = this.props.dispatch(WelcomeState.login(this.state.email, this.state.password))
-    if (success) {
-      this.goToTabMenu();
-    }
+    this.props.dispatch(WelcomeState.login(
+      this.state.email,
+      this.state.password,
+      () => {
+        this.goToTabMenu();
+        this.props.navigator.showLocalAlert('Login succesful.', COMMON_STYLES.ALERT_STYLES_SUCCESS);
+      },
+      () => {
+        this.props.navigator.showLocalAlert('Sorry, but this code doesn\'t match any event.', COMMON_STYLES.ALERT_STYLES_ERROR);
+      }))
   }
   signup() {
     this.props.dispatch(WelcomeState.signup(this.state.email, this.state.password))
