@@ -10,15 +10,15 @@ const initialState = fromJS({
 });
 
 export function login(email, password, successCallback, errorCallback) {
+  console.log("email", email)
+  console.log("password", password)
   return (dispatch, getState) => {
     ajaxService.auth0login(email, password)
       .then(response => {
 
         console.log(response)
         if (response.error) {
-          console.log("failure")
           console.log(response.error)
-          //TODO: error popup
           errorCallback();
           return;
         }
@@ -28,10 +28,17 @@ export function login(email, password, successCallback, errorCallback) {
   }
 }
 
-export function signup(email, password) {
+export function signup(user, callback) {
   return (dispatch, getState) => {
     //TODO: register user in backend
-    ajaxService.auth0signup(email, password).then(response => console.log(response))
+    ajaxService.auth0signup(user.email, user.password).then(
+      response => {
+        console.log(response)
+        if (response.error) {
+          callback(response.error, null)
+        }
+        callback(null, response)
+      });
   }
 }
 //actions

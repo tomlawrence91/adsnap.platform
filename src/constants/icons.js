@@ -5,6 +5,13 @@ export const VOUCHER = require('../../images/icon_voucher.png');
 export const LOGO_WHITE = require('../../images/logo_white.png');
 export const LOGO_COLORED = require('../../images/logo_colored.png');
 
+export const MALE_ACTIVE = require('../../images/icon_male_selected.png');
+export const MALE_INACTIVE = require('../../images/icon_male_unselected.png');
+export const FEMALE_ACTIVE = require('../../images/icon_female_selected.png');
+export const FEMALE_INACTIVE = require('../../images/icon_female_unselected.png');
+export const OTHER_ACTIVE = require('../../images/icon_other_selected.png');
+export const OTHER_INACTIVE = require('../../images/icon_other_unselected.png');
+
 /* STOCK PHOTOS */
 export const HEINEKEN = require('../../images/stock/heineken.png');
 export const WELCOME_BG = require('../../images/bg_welcome.png');

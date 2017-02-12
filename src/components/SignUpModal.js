@@ -17,19 +17,16 @@ import RectButton from './RectButton';
 import GenderButton from './GenderButton';
 
 export default class SignUpModal extends React.Component {
-    setGender(text) {
-        console.log(text)
-    }
     renderAccountInfoForm() {
         return (
-            <View style={styles.accountInfoForm}>
+            <View style={styles.form}>
                 <View style={styles.inputWrapper}>
                     <TextInput
                         underlineColorAndroid={COLORS.WHITE}
                         keyboardType={'email-address'}
                         autoCapitalize={'none'}
                         placeholder={'Email'}
-                        onChangeText={(text) => this.onEmailChange(text)}
+                        onChangeText={(text) => this.props.setEmail(text)}
                         placeholderTextColor={COLORS.SOFT_TRANSPARENT_WHITE}
                         style={styles.input} />
                 </View>
@@ -40,7 +37,7 @@ export default class SignUpModal extends React.Component {
                         autoCapitalize={'none'}
                         placeholderTextColor={COLORS.SOFT_TRANSPARENT_WHITE}
                         placeholder={'Password'}
-                        onChangeText={(text) => this.onPasswordChange(text)}
+                        onChangeText={(text) => this.props.setPassword(text)}
                         style={styles.input} />
                 </View>
                 <View style={styles.inputWrapper}>
@@ -50,7 +47,7 @@ export default class SignUpModal extends React.Component {
                         autoCapitalize={'none'}
                         placeholderTextColor={COLORS.SOFT_TRANSPARENT_WHITE}
                         placeholder={'Repeat password'}
-                        onChangeText={(text) => this.onRepeatedPasswordChange(text)}
+                        onChangeText={(text) => this.props.confirmPassword(text)}
                         style={styles.input} />
                 </View>
             </View>
@@ -60,24 +57,24 @@ export default class SignUpModal extends React.Component {
         return (
             <View style={styles.form}>
                 <Text style={styles.title}>Gender</Text>
-                <View style={styles.buttonWrapper}>
+                <View style={styles.genderButtonWrapper}>
                     <GenderButton
                         text={'Female'}
-                        onPress={this.setGender('FEMALE')}
+                        onPress={() => this.props.setGender('FEMALE')}
                         selected={this.props.gender == 'FEMALE'}
                         inactiveIcon={ICONS.FEMALE_INACTIVE}
                         activeIcon={ICONS.FEMALE_ACTIVE}
                     />
                     <GenderButton
                         text={'Male'}
-                        onPress={this.setGender('MALE')}
+                        onPress={() => this.props.setGender('MALE')}
                         selected={this.props.gender == 'MALE'}
                         inactiveIcon={ICONS.MALE_INACTIVE}
                         activeIcon={ICONS.MALE_ACTIVE}
                     />
                     <GenderButton
                         text={'Other'}
-                        onPress={this.setGender('OTHER')}
+                        onPress={() => this.props.setGender('OTHER')}
                         selected={this.props.gender == 'OTHER'}
                         inactiveIcon={ICONS.OTHER_INACTIVE}
                         activeIcon={ICONS.OTHER_ACTIVE}
@@ -92,28 +89,32 @@ export default class SignUpModal extends React.Component {
                 animationType={"slide"}
                 transparent={true}
                 visible={this.props.visible}>
+
+
                 <Image style={styles.backgroundImage} source={ICONS.WELCOME_BG}>
-                    <TouchableOpacity style={styles.cancel} onPress={this.props.cancel}><Text style={styles.cancelIcon}>X</Text></TouchableOpacity>
+                    <ScrollView contentContainerStyle={{ alignItems: 'center' }}>
+                        <TouchableOpacity style={styles.cancel} onPress={this.props.cancel}><Text style={styles.cancelIcon}>X</Text></TouchableOpacity>
 
-                    <Image style={styles.logo} source={ICONS.LOGO_WHITE} ></Image>
+                        <Image style={styles.logo} source={ICONS.LOGO_WHITE} ></Image>
 
-                    <Text style={styles.description}>Sign in</Text>
+                        <Text style={styles.description}>Sign up</Text>
 
+                        {this.renderAccountInfoForm()}
+                        {this.renderGenderForm()}
+                        {/*TODO: password reset*/}
 
-                    {this.renderAccountInfoForm()}
-                    {this.renderGenderForm()}
-                    {/*TODO: password reset*/}
+                        <View style={styles.buttonWrapper}>
+                            <RectButton
+                                onPress={this.props.onSignUpPress}
+                                width={COMMON_STYLES.BUTTON_WIDTH(Dimensions)}
+                                height={COMMON_STYLES.BUTTON_HEIGHT}
+                                textColor={COLORS.WHITE}
+                                backgroundColor={COLORS.TRANSPARENT}
+                                border={{ borderColor: COLORS.WHITE, borderStyle: 'solid', borderWidth: 2 }}
+                                text={`Sign up`} />
+                        </View>
+                    </ScrollView>
 
-                    <View style={styles.buttonWrapper}>
-                        <RectButton
-                            onPress={() => this.signup()}
-                            width={COMMON_STYLES.BUTTON_WIDTH(Dimensions)}
-                            height={COMMON_STYLES.BUTTON_HEIGHT}
-                            textColor={COLORS.WHITE}
-                            backgroundColor={COLORS.TRANSPARENT}
-                            border={{ borderColor: COLORS.WHITE, borderStyle: 'solid', borderWidth: 2 }}
-                            text={`Sign up`} />
-                    </View>
                 </Image>
 
             </Modal>
@@ -146,8 +147,13 @@ const styles = {
         resizeMode: 'contain',
         marginTop: 50,
     },
-    accountInfoForm: {},
-
+    form: {
+        marginVertical: 5,
+    },
+    title: {
+        color: COLORS.WHITE,
+        fontSize: FONTS.DEFAULT_FONT_SIZE,
+    },
     description: {
         backgroundColor: 'transparent',
         color: COLORS.WHITE,
@@ -167,6 +173,10 @@ const styles = {
     },
     buttonWrapper: {
         marginTop: 25,
+    },
+    genderButtonWrapper: {
+        flexDirection: 'row',
+        marginHorizontal: -100,
     },
     backgroundImage: {
         flex: 1,

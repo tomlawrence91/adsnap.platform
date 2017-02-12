@@ -17,6 +17,7 @@ import * as WelcomeState from './WelcomeState';
 import Container from '../../components/Container';
 import RectButton from '../../components/RectButton';
 import SignUpModal from '../../components/SignUpModal';
+import SignInModal from '../../components/SignInModal';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import styles from './WelcomeStyles';
 
@@ -26,6 +27,12 @@ export default class Welcome extends React.Component {
     super(props);
     this.state = {
       signUpModalVisible: false,
+      signInModalVisible: false,
+      user: {
+        email: '',
+        password: '',
+        gender: '',
+      },
     };
   }
 
@@ -36,13 +43,65 @@ export default class Welcome extends React.Component {
     }
   }
 
+  setEmail(text) {
+    this.setState({ user: { ...this.state.user, email: text } })
+    console.log(this.state)
+  }
+
+  setPassword(text) {
+    this.setState({ user: { ...this.state.user, password: text } })
+  }
+
+  confirmPassword(text) {
+    if (this.state.user.password !== text) {
+      this.props.navigator.showLocalAlert(`Passwords don't match.`, COMMON_STYLES.ALERT_STYLES_ERROR);
+    }
+  }
+
+  setGender(text) {
+    this.setState({ user: { ...this.state.user, gender: text } })
+  }
+
+  login() {
+    const callback = (error, response) => {
+      if (error) {
+        return this.props.navigator.showLocalAlert(`Email and password don't match.`, COMMON_STYLES.ALERT_STYLES_ERROR);
+      }
+      this.goToTabMenu();
+      this.closeModal();
+      this.props.navigator.showLocalAlert('Login succesful.', COMMON_STYLES.ALERT_STYLES_SUCCESS);
+    }
+    this.props.dispatch(WelcomeState.login(
+      this.state.user.email,
+      this.state.user.password, callback));
+  }
+
+  signup() {
+    const user = this.state.user;
+    if (!user.email || !user.password || !user.gender) {
+      this.props.navigator.showLocalAlert(`Please check if all fields are filled in correctly.`, COMMON_STYLES.ALERT_STYLES_ERROR);
+    }
+
+    const callback = (error, response) => {
+      if (error) {
+        return this.props.navigator.showLocalAlert(`${error.description}`, COMMON_STYLES.ALERT_STYLES_ERROR);
+      }
+      this.goToTabMenu();
+      this.closeModal();
+      return this.props.navigator.showLocalAlert('Signup succesful. You will receive a confirmation email to activate your account.', COMMON_STYLES.ALERT_STYLES_SUCCESS);
+    }
+    this.props.dispatch(WelcomeState.signup(this.state.user, callback));
+  }
+
   openSignUpModal() {
-    // this.props.navigator.push(Router.getRoute('signup'));
     this.setState({ signUpModalVisible: true })
   }
-  closeSignUpModal() {
+  openSignInModal() {
+    this.setState({ signInModalVisible: true })
+  }
+  closeModal() {
     console.log("clicked")
-    this.setState({ signUpModalVisible: false })
+    this.setState({ signUpModalVisible: false, signInModalVisible: false })
   }
   goToSignin() {
     this.props.navigator.push(Router.getRoute('signin'));
@@ -59,7 +118,7 @@ export default class Welcome extends React.Component {
     const BUTTON_WIDTH = Dimensions.get('window').width - 30;
     const BUTTON_HEIGHT = 40;
     return (
-      <Container>
+      <Container >
 
         <Image style={styles.backgroundImage} source={ICONS.WELCOME_BG}>
 
@@ -79,7 +138,7 @@ export default class Welcome extends React.Component {
           </View>
           <View style={styles.buttonWrapper}>
             <RectButton
-              onPress={() => this.goToSignin()}
+              onPress={() => this.openSignInModal()}
               text={'Sign in with Email'}
               width={COMMON_STYLES.BUTTON_WIDTH(Dimensions)}
               height={COMMON_STYLES.BUTTON_HEIGHT}
@@ -99,9 +158,21 @@ export default class Welcome extends React.Component {
           </View>
         </Image>
 
-        <SignUpModal visible={this.state.signUpModalVisible} cancel={() => this.closeSignUpModal()} />
+        <SignUpModal visible={this.state.signUpModalVisible}
+          cancel={() => this.closeModal()}
+          setEmail={(text) => this.setEmail(text)}
+          setPassword={(text) => this.setPassword(text)}
+          confirmPassword={(text) => this.confirmPassword(text)}
+          setGender={(text) => this.setGender(text)}
+          onSignUpPress={() => this.signup()} />
+        <SignInModal
+          visible={this.state.signInModalVisible}
+          cancel={() => this.closeModal()}
+          setEmail={(text) => this.setEmail(text)}
+          setPassword={(text) => this.setPassword(text)}
+          onLoginPress={() => this.login()} />
 
-      </Container>
+      </Container >
     );
   }
 }

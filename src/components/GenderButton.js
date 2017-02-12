@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain'
     },
     buttonWrapper: {
-        borderColor: COLORS.TEXT_GRAY,
+        borderColor: COLORS.WHITE,
         borderWidth: 1,
         flex: 1,
         borderRadius: 5,
@@ -45,13 +45,13 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     buttonWrapperActive: {
-        backgroundColor: COLORS.FF_ORANGE,
-        borderColor: COLORS.FF_ORANGE
+        backgroundColor: COLORS.DARK_PINK,
+        borderColor: COLORS.DARK_PINK
     },
     buttonText: {
         backgroundColor: 'transparent',
         textAlign: 'center',
-        color: COLORS.TEXT_GRAY,
+        color: COLORS.WHITE,
         fontSize: 16,
         padding: 6,
     },

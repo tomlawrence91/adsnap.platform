@@ -47,7 +47,7 @@ const styles = {
     buttonText: {
         color: COLORS.DARK_TEXT,
         fontWeight: '500',
-        fontSize: 20,
+        fontSize: 19,
     }
 
 }
