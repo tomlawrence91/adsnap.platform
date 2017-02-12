@@ -5,9 +5,13 @@ import TabNavigationViewContainer from './tabNavigation/TabNavigationViewContain
 import SnapViewContainer from './snap/SnapViewContainer';
 import DealsViewContainer from './deals/DealsViewContainer';
 import RedeemViewContainer from './redeem/RedeemViewContainer';
+import SignInViewContainer from './signin/SignInViewContainer';
+import SignUpViewContainer from './signup/SignUpViewContainer';
 
 export default Router = createRouter(() => ({
     welcome: () => WelcomeViewContainer,
+    signin: () => SignInViewContainer,
+    signup: () => SignUpViewContainer,
     tabNavigation: () => TabNavigationViewContainer,
     snap: () => SnapViewContainer,
     deals: () => DealsViewContainer,

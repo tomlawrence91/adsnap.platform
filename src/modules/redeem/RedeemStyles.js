@@ -1,26 +1,30 @@
-import {StyleSheet, Dimensions} from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import * as COLORS from '../../constants/colors';
 import * as FONTS from '../../constants/fonts';
 import * as COMMON_STYLES from '../../constants/commonStyles';
 
 export default styles = StyleSheet.create({
-    wrapper:{
-        flex:1,
+    wrapper: {
+        flex: 1,
         justifyContent: 'center'
     },
-    brand:{
+    contentWrapper: {
+        paddingHorizontal: 15,
+        
+    },
+    brand: {
         fontSize: FONTS.HEADER_FONT_SIZE,
-        color: COLORS.WHITE,
+        color: COLORS.GREY,
         backgroundColor: 'transparent',
         textAlign: 'center',
         marginVertical: 30,
     },
-    codeWrapper:{
-        height:200,
+    codeWrapper: {
+        height: 200,
         marginBottom: 35,
     },
-    backgroundImage:{
-        flex:1,
+    backgroundImage: {
+        flex: 1,
         resizeMode: 'cover',
         justifyContent: 'center',
         alignItems: 'center'
@@ -28,13 +32,13 @@ export default styles = StyleSheet.create({
     coloredOverlay: {
         opacity: 0.6,
         position: 'absolute',
-        top:0,
-        left:0,
-        right:0,
-        bottom:0,
-        backgroundColor: COLORS.TRANSPARENT_LIGHT_PURPLE
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: COLORS.TRANSPARENT_BLACK
     },
-    codeBox:{
+    codeBox: {
         height: 40,
         backgroundColor: 'transparent',
         justifyContent: 'center',
@@ -43,10 +47,13 @@ export default styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: COLORS.WHITE
     },
-    codeText:{
-        backgroundColor:'transparent',
+    codeText: {
+        backgroundColor: 'transparent',
         textAlign: 'center',
         color: COLORS.WHITE,
-        fontSize: FONTS.SMALL_FONT_SIZE
-    }
+        fontSize: FONTS.BIG_FONT_SIZE
+    },
+    buttonWrapper: {
+        marginVertical: 5,
+    },
 })

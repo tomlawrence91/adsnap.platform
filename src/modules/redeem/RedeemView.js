@@ -4,12 +4,14 @@ import React from 'react';
 import {
     Image,
     Text,
-    View
+    View,
+    Dimensions,
 } from 'react-native';
 import * as ICONS from '../../constants/icons';
 import Container from '../../components/Container';
-import Button from '../../components/Button';
+import RectButton from '../../components/RectButton';
 import Tile from '../../components/Tile';
+import * as COMMON_STYLES from '../../constants/commonStyles';
 
 import styles from './RedeemStyles';
 
@@ -31,13 +33,31 @@ export default class RedeemView extends React.Component {
                         <View style={styles.codeBox}><Text style={styles.codeText}>{this.props.route.params.deal.code}</Text></View>
                     </Image>
                 </View>
-                <Text style={styles.brand}>{this.props.route.params.deal.retailer}</Text>
+                <View style={styles.contentWrapper}>
+                    <Text style={styles.brand}>{this.props.route.params.deal.retailer}</Text>
 
-                <Button text="Share" onPress={() => { } }></Button>
-                <Button text="Trade" onPress={() => { } }></Button>
-                <Button text="Remove" onPress={() => { } }></Button>
-
-            </Container>
+                    <View style={styles.buttonWrapper}>
+                        <RectButton
+                            onPress={() => this.login()}
+                            text={'Trade'}
+                            width={COMMON_STYLES.BUTTON_WIDTH(Dimensions)}
+                            height={COMMON_STYLES.BUTTON_HEIGHT}
+                            textColor={COLORS.WHITE}
+                            backgroundColor={COLORS.DARK_GREY}
+                            borderColor={COLORS.BLACK} />
+                    </View>
+                    <View style={styles.buttonWrapper}>
+                        <RectButton
+                            onPress={() => this.login()}
+                            text={'Remove Discount'}
+                            width={COMMON_STYLES.BUTTON_WIDTH(Dimensions)}
+                            height={COMMON_STYLES.BUTTON_HEIGHT}
+                            textColor={COLORS.WHITE}
+                            backgroundColor={COLORS.DARK_GREY}
+                            borderColor={COLORS.BLACK} />
+                    </View>
+                </View>
+            </Container >
         );
     }
 }

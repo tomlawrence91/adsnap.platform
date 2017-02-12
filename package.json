@@ -11,16 +11,18 @@
     "@exponent/vector-icons": "^2.0.3",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "immutable": "^3.8.1",
+    "lodash": "^4.17.4",
     "react": "^15.0.2",
     "react-native": "0.39.2",
-    "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
+    "react-native-camera": "^0.4.1",
     "react-native-keyboard-aware-scrollview": "^1.1.4",
     "react-native-linear-gradient": "^1.6.2",
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
     "redux-immutable": "^3.0.9",
     "redux-logger": "^2.7.4",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "tcomb-form-native": "^0.6.4"
   },
   "devDependencies": {
     "babel-jest": "18.0.0",

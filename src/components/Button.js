@@ -11,23 +11,30 @@ import {
 
 
 const Button = React.createClass({
-    propTypes: {
-      onPress: React.PropTypes.func.isRequired,
-      text: React.PropTypes.string.isRequired,
-      width: React.PropTypes.number
-    },
+  propTypes: {
+    onPress: React.PropTypes.func.isRequired,
+    text: React.PropTypes.string.isRequired,
+    width: React.PropTypes.number,
+    styles: React.PropTypes.object,
+  },
 
-    render() {
-      return(
-        <TouchableOpacity style={[styles.buttonWrapper,{width:this.props.width}]} onPress={()=>this.props.onPress()}>
-            <Text style={styles.buttonText}>{this.props.text}</Text>
-        </TouchableOpacity>
-      )
-    }
+  render() {
+    return (
+      <TouchableOpacity
+        style={[
+          styles.buttonWrapper,
+          { width: this.props.width },
+          { ...this.props.style }
+        ]}
+        onPress={() => this.props.onPress()}>
+        <Text style={styles.buttonText}>{this.props.text}</Text>
+      </TouchableOpacity>
+    )
+  }
 });
 
 const styles = StyleSheet.create({
-  buttonWrapper:{
+  buttonWrapper: {
     height: 40,
     backgroundColor: 'transparent',
     borderRadius: 60,
@@ -35,10 +42,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     borderWidth: 1,
-    borderColor: COLORS.WHITE
+    borderColor: COLORS.WHITE,
   },
-  buttonText:{
-    backgroundColor:'transparent',
+  buttonText: {
+    backgroundColor: 'transparent',
     textAlign: 'center',
     color: COLORS.WHITE,
     fontSize: FONTS.BUTTON_FONT_SIZE

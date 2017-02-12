@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
-  ScrollView
+  ScrollView,
+  Dimensions,
 } from 'react-native';
 import Router from '../AppRouter';
 import * as COLORS from '../../constants/colors';
@@ -14,7 +15,8 @@ import * as COMMON_STYLES from '../../constants/commonStyles';
 import * as ICONS from '../../constants/icons';
 import * as WelcomeState from './WelcomeState';
 import Container from '../../components/Container';
-import Button from '../../components/Button';
+import RectButton from '../../components/RectButton';
+import SignUpModal from '../../components/SignUpModal';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import styles from './WelcomeStyles';
 
@@ -23,9 +25,7 @@ export default class Welcome extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
-      tab: 0
+      signUpModalVisible: false,
     };
   }
 
@@ -36,11 +36,16 @@ export default class Welcome extends React.Component {
     }
   }
 
-  goToSignup() {
-    this.props.navigator.push(Router.getRoute('tabNavigation'));
+  openSignUpModal() {
+    // this.props.navigator.push(Router.getRoute('signup'));
+    this.setState({ signUpModalVisible: true })
   }
-  goToLogin() {
-    this.props.navigator.push(Router.getRoute('tabNavigation'));
+  closeSignUpModal() {
+    console.log("clicked")
+    this.setState({ signUpModalVisible: false })
+  }
+  goToSignin() {
+    this.props.navigator.push(Router.getRoute('signin'));
   }
   goToTabMenu() {
     this.props.navigator.push(Router.getRoute('tabNavigation'));
@@ -50,66 +55,55 @@ export default class Welcome extends React.Component {
     this.setState({ 'tab': tab });
   }
 
-
-  login(email, password) {
-    this.props.dispatch(WelcomeState.login(
-      this.state.email,
-      this.state.password,
-      () => {
-        this.goToTabMenu();
-        this.props.navigator.showLocalAlert('Login succesful.', COMMON_STYLES.ALERT_STYLES_SUCCESS);
-      },
-      () => {
-        this.props.navigator.showLocalAlert('Sorry, but this code doesn\'t match any event.', COMMON_STYLES.ALERT_STYLES_ERROR);
-      }))
-  }
-  signup() {
-    this.props.dispatch(WelcomeState.signup(this.state.email, this.state.password))
-  }
   render() {
-    //TODO: LOGO
-    //TODO: AUTH0
-    //TODO: SIGNIN/UP switch
+    const BUTTON_WIDTH = Dimensions.get('window').width - 30;
+    const BUTTON_HEIGHT = 40;
     return (
       <Container>
-        <ScrollView>
-          <View style={styles.logoWrapper}>
-            <Image style={styles.logo} source={ICONS.LOGO_WHITE} ></Image>
+
+        <Image style={styles.backgroundImage} source={ICONS.WELCOME_BG}>
+
+          <Image style={styles.logo} source={ICONS.LOGO_WHITE} ></Image>
+
+          <Text style={styles.description}>Use Adsnap for something and save money and especially give us your data. 'Cause data is money and mo money is mo money.</Text>
+
+          <View style={styles.buttonWrapper}>
+            <RectButton
+              onPress={() => this.facebookSignin()}
+              text={'Log in with Facebook'}
+              width={COMMON_STYLES.BUTTON_WIDTH(Dimensions)}
+              height={COMMON_STYLES.BUTTON_HEIGHT}
+              textColor={COLORS.WHITE}
+              backgroundColor={COLORS.FACEBOOK_BLUE}
+              borderColor={COLORS.FACEBOOK_DARK_BLUE} />
           </View>
-          <View style={styles.contentWrapper}>
-            <Text style={styles.description}>
-              Discover discounts for shops and brands in your local area, get deals and know in advance where to buy nice stuff.
-              </Text>
-
-            <View style={styles.tabSwitch}>
-              <Text style={[styles.tab, this.state.tab == 0 && styles.tabHover]} onPress={() => this.changeTab()}>LOGIN</Text>
-              <View style={styles.divider}></View>
-              <Text style={[styles.tab, this.state.tab == 1 && styles.tabHover]} onPress={() => this.changeTab()}>REGISTER</Text>
-            </View>
-            <View style={styles.formWrapper}>
-              <KeyboardAwareScrollView style={styles.inputWrapper} >
-                <Text style={styles.label}>E-Mail</Text>
-
-                <TextInput
-                  style={styles.input}
-                  onChangeText={(email) => this.setState({ email })}
-                  value={this.state.email} />
-                <Text style={styles.label}>Password</Text>
-                <TextInput
-                  style={styles.input}
-                  onChangeText={(password) => this.setState({ password })}
-                  value={this.state.password}
-                  secureTextEntry={true} />
-              </KeyboardAwareScrollView>
-
-              {this.state.tab == 0 && <Button onPress={() => this.login()} text={'Sign In'} width={200} />}
-              {this.state.tab == 1 && <Button onPress={() => this.signup()} text={'Sing Up'} width={200} />}
-            </View>
+          <View style={styles.buttonWrapper}>
+            <RectButton
+              onPress={() => this.goToSignin()}
+              text={'Sign in with Email'}
+              width={COMMON_STYLES.BUTTON_WIDTH(Dimensions)}
+              height={COMMON_STYLES.BUTTON_HEIGHT}
+              textColor={COLORS.WHITE}
+              backgroundColor={COLORS.NAVIGATION_PINK}
+              borderColor={COLORS.DARK_PINK} />
           </View>
-        </ScrollView>
+          <View style={styles.buttonWrapper}>
+            <RectButton
+              onPress={() => this.openSignUpModal()}
+              text={'Sign up'}
+              width={COMMON_STYLES.BUTTON_WIDTH(Dimensions)}
+              height={COMMON_STYLES.BUTTON_HEIGHT}
+              textColor={COLORS.WHITE}
+              backgroundColor={COLORS.TRANSPARENT}
+              border={{ borderColor: COLORS.WHITE, borderStyle: 'solid', borderWidth: 2 }} />
+          </View>
+        </Image>
 
+        <SignUpModal visible={this.state.signUpModalVisible} cancel={() => this.closeSignUpModal()} />
 
       </Container>
     );
   }
 }
+/*
+*/

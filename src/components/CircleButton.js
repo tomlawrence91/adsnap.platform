@@ -13,7 +13,7 @@ import {
 const CircleButton = React.createClass({
     propTypes: {
       onPress: React.PropTypes.func.isRequired,
-      imageUrl:React.PropTypes.any,
+      imageUrl:React.PropTypes.string,
       text: React.PropTypes.string,
       radius: React.PropTypes.number.isRequired,
       backgroundColor: React.PropTypes.string

@@ -3,9 +3,16 @@ import GlobalStateReducer from './GlobalState';
 import { combineReducers } from 'redux-immutable';
 import WelcomeViewStateReducer from '../modules/welcome/WelcomeState';
 import DealsViewStateReducer from '../modules/deals/DealsState';
+import SnapStateReducer from '../modules/snap/SnapState';
+import SignInStateReducer from '../modules/signin/SignInState';
+import SignUpStateReducer from '../modules/signup/SignUpState';
+
 const reducers = {
   welcome: WelcomeViewStateReducer,
-  deals: DealsViewStateReducer
+  deals: DealsViewStateReducer,
+  snap: SnapStateReducer,
+  signin: SignInStateReducer,
+  signup: SignUpStateReducer,
 };
 
 // initial state, accessor and mutator for supporting root-level

@@ -14,39 +14,129 @@ import Tile from '../../components/Tile';
 
 import styles from './DealsStyles';
 
+var _ = require('lodash');
+
 export default class DealsView extends React.Component {
-    componentWillMount(){
-        console.log("dispatching")
-        this.props.dispatch(DealsState.retrieveDeals());
+    static route = {
+        navigationBar: {
+            title: 'Your Discounts',
+        }
     }
-     
-    onPress = (deal) => {
-        this.props.navigator.push(Router.getRoute('redeem',{deal:deal}));
+    componentWillMount() {
+        // this.props.dispatch(DealsState.retrieveDeals());
+        this.colorDeals();
     }
 
-    renderTile(i) {
+
+    onPress = (deal) => {
+        this.props.navigator.push(Router.getRoute('redeem', { deal: deal }));
+    }
+
+    renderTile(i, overlayColor) {
         let deal = this.props.deals[i];
         if (!deal) {
             return (<View style={{ flex: .5 }} />);
         }
-        return (<Tile
-            description={deal.description} imgUrl={deal.imgUrl} brand={deal.retailer} amount={deal.amount}
-            onPress={() => this.onPress(deal)} />)
+        return (
+            <Tile
+                description={deal.description} imgUrl={deal.imgUrl}
+                brand={deal.retailer}
+                amount={deal.amount}
+                overlayColor={deal.overlayColor}
+                onPress={() => this.onPress(deal)} />
+        );
+    }
+
+    setDealOverlayColor(dealColorMap) {
+        console.log('called')
+        this.props.dispatch(DealsState.setDealOverlayColor(dealColorMap));
+    }
+
+    //new 
+    // colorDeal(index) {
+    //     const color = _.sample(this.props.colors);
+    //     const deal = this.props.deals[index];
+    //     if(index === 0) {
+    //         return color;
+    //     } else if ( index % 2 === 0 && index > 0 ) {
+    //         const prevDeal = this.props.deals[index-2];
+    //         if (prevDeal.overlayColor !== color) {
+    //             this.setDealOverlayColor(deal.id, color);
+    //         }
+    //         return colorDeal(index)
+    //     } else if ( index % 2 !== 0 && index > 0 ) {
+    //         const prevDeal = this.props.deals[index-1];
+    //         if (prevDeal.overlayColor !== color) {
+    //             this.setDealOverlayColor(deal.id, color);
+    //         }
+    //         return colorDeal(index)
+    //     }
+    // }
+
+    colorDeals() {
+        dealColorMap = this.props.deals.map(deal=> {
+            return {...deal, overlayColor: _.sample(this.props.colors)}
+        });
+        this.setDealOverlayColor(dealColorMap);
+    }
+
+
+
+    // colorDeals(colorMap = [], retryCount = 0) {
+    //     let deals = this.props.deals;
+    //     if (retryCount > this.props.deals.length) {
+    //         return;
+    //     }
+    //     for (let i = 0; i < this.props.deals.length; i++) {
+
+    //         let deal = this.props.deals[i];
+    //         console.log("i", i)
+    //         console.log("deal", deal)
+
+    //         if (deal['overlayColor']) {
+    //             continue;
+    //         }
+    //         const color = _.sample(this.props.colors);
+    //         if (i === 0) {
+    //             colorMap.push({ id: deal.id, overlayColor: color });
+    //         }
+    //         else if (i % 2 === 0) {
+    //             const prevDeal = this.props.deals[i - 2]
+    //             if (color !== prevDeal.overlayColor) {
+    //                 colorMap.push({ id: deal.id, overlayColor: color });
+    //             } else {
+    //                 return colorDeals(colorMap, retryCount++);
+    //             }
+    //         }
+    //         else if (i % 2 !== 0) {
+    //             const prevDeal = this.props.deals[i - 1]
+    //             if (color !== prevDeal.overlayColor) {
+    //                 colorMap.push({ id: deal.id, overlayColor: color });
+    //             } else {
+    //                 return colorDeals(colorMap, retryCount++);
+    //             }
+    //         }
+    //     }
+    //     this.setDealOverlayColor(colorMap)
+    // }
+
+    renderTiles() {
+        return this.props.deals.reduce((tiles, deal, i) => {
+            return i % 2 == 0
+                ? tiles.concat([
+                    <View key={i} style={styles.tileWrapper}>
+                        {this.renderTile(i)}
+                        {this.renderTile(i + 1)}
+                    </View>])
+                : tiles
+        }, [])
     }
 
     renderDeals() {
         return (
             <View style={styles.table}>
                 {
-                    this.props.deals.reduce((tiles, deal, i) => {
-                        return i % 2 == 0 
-                            ? tiles.concat([
-                                <View key={i} style={styles.tileWrapper}>
-                                    {this.renderTile(i)}
-                                    {this.renderTile(i + 1)}
-                                </View>]) 
-                            : tiles
-                    },[])
+                    this.renderTiles()
                 }
             </View>);
     }

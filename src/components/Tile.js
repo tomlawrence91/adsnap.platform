@@ -7,7 +7,8 @@ import {
     StyleSheet,
     View,
     Text,
-    Image
+    Image,
+    Dimensions
 } from 'react-native';
 
 import Button from './Button';
@@ -20,24 +21,26 @@ const Tile = React.createClass({
         description: React.PropTypes.string.isRequired,
         imgUrl: React.PropTypes.string.isRequired,
         brand: React.PropTypes.string.isRequired,
+        overlayColor: React.PropTypes.string,
     },
-    getInitialState(){
+    getInitialState() {
         return {}
     },
 
     render() {
+        console.log(this.props.imgUrl)
         return (
-            <TouchableOpacity style={styles.wrapper} onPress={()=>this.props.onPress()}>
-             <Image
+            <TouchableOpacity style={styles.wrapper} onPress={() => this.props.onPress()}>
+                <Image
                     style={styles.backgroundImage}
-                    source={{uri: "https://facebook.github.io/react/img/logo_og.png"}}>
-                    <View style={styles.coloredOverlay}/>
-                    <Text style={styles.text}>{this.props.amount}</Text>
+                    source={{ uri: "https://facebook.github.io/react/img/logo_og.png" }}>
+                    <View style={[styles.coloredOverlay, {backgroundColor: this.props.overlayColor}]} />
+                    <Text style={styles.amount}>{this.props.amount}</Text>
                     <Text style={styles.text}>{this.props.description}</Text>
-                    <View style={styles.buttonWrapper} onPress={()=>this.props.onPress()}>
-                        <Text style={styles.text}>REDEEM NOW</Text>
+                    <View style={styles.buttonWrapper} onPress={() => this.props.onPress()}>
+                        <Text style={styles.buttonText}>REDEEM  NOW</Text>
                     </View>
-                    <Text style={styles.text}>{this.props.brand}</Text>
+                    <Text style={styles.brandText}>{this.props.brand}</Text>
                 </Image>
             </TouchableOpacity>
         )
@@ -45,19 +48,19 @@ const Tile = React.createClass({
 });
 const styles = StyleSheet.create({
     wrapper: {
-        height: 200,
-        flex:0.5,
-        borderWidth: .5,
-        borderColor: COLORS.WHITE
+        width: Dimensions.get('window').width / 2 - 0.25,
+        height: Dimensions.get('window').width / 2 - 0.25,
+        borderWidth: 0.5,
+        borderColor: COLORS.WHITE,
     },
     backgroundImage: {
         flex: 1,
         resizeMode: 'cover',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     coloredOverlay: {
-        opacity: 0.6,
+        opacity: 0.85,
         backgroundColor: COLORS.TRANSPARENT_PURPLE,
         position: 'absolute',
         top: 0,
@@ -70,20 +73,38 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         justifyContent: 'center',
         alignItems: 'center',
-        paddingHorizontal: 20,
+        paddingHorizontal: 5,
         borderWidth: 1,
         borderColor: COLORS.WHITE
     },
     amount: {
-        fontSize: FONTS.BIG_FONT_SIZE,
+        backgroundColor: 'transparent',
+        fontSize: 30,
+        fontWeight: '500',
         color: COLORS.WHITE,
-
+    },
+    buttonText: {
+        backgroundColor: 'transparent',
+        fontSize: 15,
+        fontWeight: 'bold',
+        // fontFamily: 'Open Sans',
+        color: COLORS.WHITE,
     },
     text: {
         backgroundColor: 'transparent',
         textAlign: 'center',
         color: COLORS.WHITE,
-        fontSize: FONTS.SMALL_FONT_SIZE
+        fontSize: FONTS.SMALL_FONT_SIZE,
+        marginVertical: 7,
+    },
+    brandText: {
+        backgroundColor: 'transparent',
+        textAlign: 'center',
+        color: COLORS.WHITE,
+        fontSize: FONTS.SMALL_FONT_SIZE,
+        fontWeight: '500',
+
+        marginVertical: 7,
     }
 });
 

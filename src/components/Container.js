@@ -14,7 +14,7 @@ const Container = React.createClass({
     render() {
       return(
         <View style={styles.viewContainer}>
-          <LinearGradient colors={[COLORS.BACKGROUND_GRADIENT_START, COLORS.BACKGROUND_GRADIENT_END]} style={styles.linearGradient}>
+          {/*<LinearGradient colors={[COLORS.BACKGROUND_GRADIENT_START, COLORS.BACKGROUND_GRADIENT_END]} style={styles.linearGradient}>*/}
           {!this.props.loading && this.props.children}
           {this.props.loading && 
             <ActivityIndicator
@@ -22,10 +22,11 @@ const Container = React.createClass({
               style={styles.loading}
               color={COLORS.WHITE}
             />}
-            </LinearGradient>
+            {/*</LinearGradient>*/}
         </View>
       )
     }
+
 });
 
 const styles = StyleSheet.create({

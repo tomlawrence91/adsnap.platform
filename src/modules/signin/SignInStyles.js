@@ -26,28 +26,21 @@ export default styles = StyleSheet.create({
         backgroundColor: 'transparent',
         color: COLORS.WHITE,
         margin: 20,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontSize: FONTS.HEADER_FONT_SIZE
     },
-    // formWrapper: {
-    //     marginBottom: 20,
-    // },
-    // inputWrapper: {
-    //     marginTop: 10,
-    //     width: 300,
-    //     borderBottomColor: COLORS.WHITE,
-    //     borderBottomWidth: 1,
-    // },
-    // label: {
-    //     color: COLORS.WHITE,
-    //     fontSize: FONTS.DEFAULT_FONT_SIZE,
-    //     backgroundColor: 'transparent',
-    // },
-    // input: {
-    //     height: 40,
-    //     color: COLORS.WHITE,
-    // },
+    inputWrapper: {
+        marginTop: 10,
+        width: Dimensions.get('window').width-30,
+        borderBottomColor: COLORS.WHITE,
+        borderBottomWidth: 1,
+    },
+    input: {
+        height: 40,
+        color: COLORS.WHITE,
+    },
     buttonWrapper: {
-        marginVertical: 5,
+        marginTop: 25,
     },
     backgroundImage: {
         flex: 1,
