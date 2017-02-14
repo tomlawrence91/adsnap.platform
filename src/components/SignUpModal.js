@@ -22,7 +22,7 @@ export default class SignUpModal extends React.Component {
             <View style={styles.form}>
                 <View style={styles.inputWrapper}>
                     <TextInput
-                        underlineColorAndroid={COLORS.WHITE}
+                        underlineColorAndroid={COLORS.TRANSPARENT}
                         keyboardType={'email-address'}
                         autoCapitalize={'none'}
                         placeholder={'Email'}
@@ -34,7 +34,6 @@ export default class SignUpModal extends React.Component {
                     <TextInput
                         underlineColorAndroid={COLORS.TRANSPARENT}                    
                         selectionColor={COLORS.WHITE}
-                        underlineColorAndroid={COLORS.WHITE}
                         secureTextEntry={true}
                         autoCapitalize={'none'}
                         placeholderTextColor={COLORS.SOFT_TRANSPARENT_WHITE}
@@ -46,7 +45,6 @@ export default class SignUpModal extends React.Component {
                     <TextInput
                         underlineColorAndroid={COLORS.TRANSPARENT}
                         selectionColor={COLORS.WHITE}
-                        underlineColorAndroid={COLORS.WHITE}
                         secureTextEntry={true}
                         autoCapitalize={'none'}
                         placeholderTextColor={COLORS.SOFT_TRANSPARENT_WHITE}
