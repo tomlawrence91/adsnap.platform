@@ -1,3 +1,4 @@
 <resources>
+    <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">CwMZQWKze0JNVqNoB2tf2rN9Ov2CN1XUCWLnZ</string>
     <string name="app_name">adsnap</string>
 </resources>

@@ -11,10 +11,12 @@ import {
   Text,
   View
 } from 'react-native';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import store from './src/redux/store';
 import AppViewContainer from './src/modules/AppViewContainer';
+import codePush from "react-native-code-push";
 
+@codePush
 export default class adsnap extends Component {
   render() {
     return (
