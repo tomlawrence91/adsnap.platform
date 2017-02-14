@@ -42,7 +42,7 @@ export default class DealsView extends React.Component {
                 description={deal.description} imgUrl={deal.imgUrl}
                 brand={deal.retailer}
                 amount={deal.amount}
-                overlayColor={deal.overlayColor}
+                overlayColor={this.getColor(i)}
                 onPress={() => this.onPress(deal)} />
         );
     }
@@ -73,9 +73,21 @@ export default class DealsView extends React.Component {
     //     }
     // }
 
+    getColor(index) {
+        let ci = index % 4;
+        switch (ci) {
+            case 0:
+                return this.props.colors[2];
+            case 3:
+                return this.props.colors[1];
+            default:
+                return this.props.colors[0];
+        }
+    }
+
     colorDeals() {
-        dealColorMap = this.props.deals.map(deal=> {
-            return {...deal, overlayColor: _.sample(this.props.colors)}
+        dealColorMap = this.props.deals.map(deal => {
+            return { ...deal, overlayColor: _.sample(this.props.colors) }
         });
         this.setDealOverlayColor(dealColorMap);
     }

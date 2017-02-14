@@ -1,5 +1,6 @@
 import { fromJS } from 'immutable';
 import * as ajaxService from '../../services/ajaxService';
+import * as DealsState from '../deals/DealsState';
 
 const SET_UPLOADING_FLAG = 'SNAP/SET_UPLOADING_FLAG';
 const UPDATE_ANIMATION = 'SNAP/UPDATE_ANIMATION';
@@ -10,21 +11,30 @@ const initialState = fromJS({
     animationObj: {
         stage: 0,
         current: '<(°.°)>',
-        values: ['<(°.<°)', '<(°.°)>', '(°>.°)>', '<(°.°)>',]
+        values: ['<(°.°<)', '<(°.°)>', '(>°.°)>', '<(°.°)>']
     }
 });
 
 export function uploadImage(file) {
     console.log('uploadImage');
     console.log(file)
-    return (dispatch, getState) => {
+    return async (dispatch, getState) => {
         dispatch(setUploadingFlag(true))
         // ajaxService.uploadImage(file).then(response => response.json()).then(response => {
         //     console.log(response.data.fileName);
         //     let fileLocation = ajaxService.baseUrl + response.data.fileName;
         //     dispatch(setUploadingFlag(false))        
         // })
-        setTimeout(() => dispatch(setUploadingFlag(false)), 10000)
+        await setTimeout(() => dispatch(setUploadingFlag(false)), 10000);
+
+        dispatch(DealsState.addDeal({
+            imgUrl: 'http://vignette3.wikia.nocookie.net/mrrobot/images/8/87/ECorp.png/revision/latest?cb=20150602024409',
+            id: '8',
+            amount: '90%',
+            description: 'on E-Coins 4',
+            retailer: 'Evil Corp',
+            code: 'Td34dJ'
+        }))
     }
 }
 

@@ -5,6 +5,7 @@ import React from 'react';
 import { Text, Animated } from 'react-native';
 
 import Container from '../../components/Container';
+import CaptureButton from '../../components/CaptureButton';
 import Camera from 'react-native-camera';
 
 import styles from './SnapStyles';
@@ -32,17 +33,21 @@ export default class SnapView extends React.Component {
     }
 
     renderCameraOverlay() {
-        return <Text style={styles.capture} onPress={() => this.takePicture()}>[CAPTURE]</Text>;
+        return (<CaptureButton
+            onPress={() => this.takePicture()}
+                />)
+        //return <Text style={styles.capture} onPress={() => this.takePicture()}>[CAPTURE]</Text>;
     }
 
     updateAnimation() {
         setTimeout(() => {
             console.log('I do not leak!');
             this.props.dispatch(SnapState.updateAnimation());
-        }, 100);
+        }, 400);
     }
 
     renderUploadingAnimation() {
+        return null;
         this.updateAnimation();
         return <Text style={styles.capture} onPress={() => { }}>{this.props.animationValue}</Text>;
     }

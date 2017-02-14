@@ -59,7 +59,9 @@ export default class SignUpModal extends React.Component {
 
 
                 <Image style={styles.backgroundImage} source={ICONS.WELCOME_BG}>
-                    <ScrollView contentContainerStyle={styles.scrollView}>
+                    <ScrollView
+                        keyboardShouldPersistTaps={true}
+                        contentContainerStyle={styles.scrollView}>
                         <TouchableOpacity style={styles.cancel} onPress={this.props.cancel}><Text style={styles.cancelIcon}>X</Text></TouchableOpacity>
                         <Image style={styles.logo} source={ICONS.LOGO_WHITE} ></Image>
 

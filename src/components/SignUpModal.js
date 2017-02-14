@@ -62,21 +62,21 @@ export default class SignUpModal extends React.Component {
                         text={'Female'}
                         onPress={() => this.props.setGender('FEMALE')}
                         selected={this.props.gender == 'FEMALE'}
-                        inactiveIcon={ICONS.FEMALE_INACTIVE}
+                        inactiveIcon={ICONS.FEMALE_ACTIVE}
                         activeIcon={ICONS.FEMALE_ACTIVE}
                     />
                     <GenderButton
                         text={'Male'}
                         onPress={() => this.props.setGender('MALE')}
                         selected={this.props.gender == 'MALE'}
-                        inactiveIcon={ICONS.MALE_INACTIVE}
+                        inactiveIcon={ICONS.MALE_ACTIVE}
                         activeIcon={ICONS.MALE_ACTIVE}
                     />
                     <GenderButton
                         text={'Other'}
                         onPress={() => this.props.setGender('OTHER')}
                         selected={this.props.gender == 'OTHER'}
-                        inactiveIcon={ICONS.OTHER_INACTIVE}
+                        inactiveIcon={ICONS.OTHER_ACTIVE}
                         activeIcon={ICONS.OTHER_ACTIVE}
                     />
                 </View>
@@ -92,7 +92,9 @@ export default class SignUpModal extends React.Component {
 
 
                 <Image style={styles.backgroundImage} source={ICONS.WELCOME_BG}>
-                    <ScrollView contentContainerStyle={{ alignItems: 'center' }}>
+                    <ScrollView
+                        keyboardShouldPersistTaps={true}
+                        contentContainerStyle={{ alignItems: 'center' }}>
                         <TouchableOpacity style={styles.cancel} onPress={this.props.cancel}><Text style={styles.cancelIcon}>X</Text></TouchableOpacity>
 
                         <Image style={styles.logo} source={ICONS.LOGO_WHITE} ></Image>

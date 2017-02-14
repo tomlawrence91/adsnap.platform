@@ -7,6 +7,7 @@ var _ = require('lodash');
 
 const SET_DEALS = 'DEALS/SET_DEALS';
 const SET_OVERLAY_COLOR = 'DEALS/SET_COLOR';
+const ADD_DEAL = 'DEALS/ADD_DEAL';
 
 
 // Initial state
@@ -32,6 +33,13 @@ export function retrieveDeals() {
   }
 }
 
+export function addDeal(deal){
+  return {
+    type: ADD_DEAL,
+    payload: deal
+  }
+}
+
 export function setDeals(deals) {
   return {
     type: SET_DEALS,
@@ -49,11 +57,17 @@ export function setDealOverlayColor(dealColorMap) {
 // Reducer
 export default function DealsStateReducer(state = initialState, action = {}) {
   switch (action.type) {
+
+    case ADD_DEAL:
+      return state.updateIn(['deals'], deals => deals.push(fromJS(action.payload)));
+
     case SET_DEALS:
       let newDeals = fromJS(action.payload);
       return state.set('deals', newDeals);
+
     case SET_OVERLAY_COLOR:
       return state.set('deals', fromJS(action.payload));
+      
     default:
       return state;
   }
