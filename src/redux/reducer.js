@@ -6,6 +6,7 @@ import DealsViewStateReducer from '../modules/deals/DealsState';
 import SnapStateReducer from '../modules/snap/SnapState';
 import SignInStateReducer from '../modules/signin/SignInState';
 import SignUpStateReducer from '../modules/signup/SignUpState';
+import RedeemStateReducer from '../modules/redeem/RedeemState';
 
 const reducers = {
   welcome: WelcomeViewStateReducer,
@@ -13,6 +14,7 @@ const reducers = {
   snap: SnapStateReducer,
   signin: SignInStateReducer,
   signup: SignUpStateReducer,
+  redeem: RedeemStateReducer,
 };
 
 // initial state, accessor and mutator for supporting root-level

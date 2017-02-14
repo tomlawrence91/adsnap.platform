@@ -1,4 +1,5 @@
 import * as DealsState from './DealsState';
+import * as RedeemState from '../redeem/RedeemState';
 import * as COLORS from '../../constants/colors';
 import React from 'react';
 import {
@@ -29,6 +30,7 @@ export default class DealsView extends React.Component {
 
 
     onPress = (deal) => {
+        this.props.dispatch(RedeemState.setDeal(deal));
         this.props.navigator.push(Router.getRoute('redeem', { deal: deal }));
     }
 

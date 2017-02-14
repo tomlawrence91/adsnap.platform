@@ -6,9 +6,11 @@ import {
     Text,
     View,
     Dimensions,
+    ScrollView
 } from 'react-native';
 import * as ICONS from '../../constants/icons';
 import Container from '../../components/Container';
+import KeyValue from '../../components/KeyValue';
 import RectButton from '../../components/RectButton';
 import Tile from '../../components/Tile';
 import * as COMMON_STYLES from '../../constants/commonStyles';
@@ -19,44 +21,69 @@ import styles from './RedeemStyles';
 export default class RedeemView extends React.Component {
     static route = {
         navigationBar: {
-            title: 'Chat',
+            title: 'Redeem',
         }
     }
     //TODO: fetch code
     //TODO: popup on remove
     render() {
+        console.log(this.props)
         return (
             <Container loading={!this.props.deal}>
-                <View style={styles.codeWrapper}>
-                    <Image style={styles.backgroundImage} source={{ uri: "http://www.urlaubwelt.com/wp-content/uploads/2016/02/Hawaii-15.jpg" }}>
-                        <View style={styles.coloredOverlay} />
-                        <View style={styles.codeBox}><Text style={styles.codeText}>{this.props.route.params.deal.code}</Text></View>
-                    </Image>
-                </View>
-                <View style={styles.contentWrapper}>
-                    <Text style={styles.brand}>{this.props.route.params.deal.retailer}</Text>
-
-                    <View style={styles.buttonWrapper}>
-                        <RectButton
-                            onPress={() => this.login()}
-                            text={'Trade'}
-                            width={COMMON_STYLES.BUTTON_WIDTH(Dimensions)}
-                            height={COMMON_STYLES.BUTTON_HEIGHT}
-                            textColor={COLORS.WHITE}
-                            backgroundColor={COLORS.DARK_GREY}
-                            borderColor={COLORS.BLACK} />
+                <ScrollView>
+                    <View style={styles.codeWrapper}>
+                        <Image style={styles.backgroundImage} source={{ uri: "http://www.urlaubwelt.com/wp-content/uploads/2016/02/Hawaii-15.jpg" }}>
+                            <View style={styles.coloredOverlay} />
+                            <View style={styles.codeBox}><Text style={styles.codeText}>{this.props.route.params.deal.code}</Text></View>
+                        </Image>
                     </View>
-                    <View style={styles.buttonWrapper}>
-                        <RectButton
-                            onPress={() => this.login()}
-                            text={'Remove Discount'}
-                            width={COMMON_STYLES.BUTTON_WIDTH(Dimensions)}
-                            height={COMMON_STYLES.BUTTON_HEIGHT}
-                            textColor={COLORS.WHITE}
-                            backgroundColor={COLORS.DARK_GREY}
-                            borderColor={COLORS.BLACK} />
+                    <View style={styles.contentWrapper}>
+                        <Text style={styles.brand}>{this.props.route.params.deal.retailer}</Text>
+                        <Text style={styles.description}>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.
+                    </Text>
+                        <KeyValue
+                            name={'Discount'}
+                            value={'40%'}
+                        />
+                        <KeyValue
+                            name={'Brand'}
+                            value={'Nike'}
+                        />
+                        <KeyValue
+                            name={'Expiration'}
+                            value={'12.07.2017'}
+                        />
+                        <KeyValue
+                            name={'Website'}
+                            isLink={true}
+                            value={'www.this-could-be-your-website.com'}
+                        />
+                        <Text style={styles.description}>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                    </Text>
+                        <View style={styles.buttonWrapper}>
+                            <RectButton
+                                onPress={() => { }}
+                                text={'Trade'}
+                                width={COMMON_STYLES.BUTTON_WIDTH(Dimensions)}
+                                height={COMMON_STYLES.BUTTON_HEIGHT}
+                                textColor={COLORS.WHITE}
+                                backgroundColor={COLORS.DARK_GREY}
+                                borderColor={COLORS.BLACK} />
+                        </View>
+                        <View style={styles.buttonWrapper}>
+                            <RectButton
+                                onPress={() => { }}
+                                text={'Remove Discount'}
+                                width={COMMON_STYLES.BUTTON_WIDTH(Dimensions)}
+                                height={COMMON_STYLES.BUTTON_HEIGHT}
+                                textColor={COLORS.WHITE}
+                                backgroundColor={COLORS.DARK_GREY}
+                                borderColor={COLORS.BLACK} />
+                        </View>
                     </View>
-                </View>
+                </ScrollView>
             </Container >
         );
     }

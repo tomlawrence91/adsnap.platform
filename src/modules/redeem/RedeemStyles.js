@@ -13,15 +13,19 @@ export default styles = StyleSheet.create({
         
     },
     brand: {
-        fontSize: FONTS.HEADER_FONT_SIZE,
+        fontSize: FONTS.HEADER_FONT_SIZE +3,
         color: COLORS.GREY,
         backgroundColor: 'transparent',
         textAlign: 'center',
-        marginVertical: 30,
+        marginVertical: 20,
     },
     codeWrapper: {
         height: 200,
-        marginBottom: 35,
+        //marginBottom: 35,
+    },
+    description:{
+        marginVertical:10,
+        color: COLORS.GREY,
     },
     backgroundImage: {
         flex: 1,
