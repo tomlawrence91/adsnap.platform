@@ -29,7 +29,7 @@ export default class SignUpModal extends React.Component {
             <View>
                 <View style={styles.inputWrapper}>
                     <TextInput
-                    selectionColor={COLORS.WHITE}
+                        selectionColor={COLORS.WHITE}
                         underlineColorAndroid={COLORS.WHITE}
                         keyboardType={'email-address'}
                         autoCapitalize={'none'}
@@ -59,10 +59,11 @@ export default class SignUpModal extends React.Component {
                 transparent={true}
                 visible={this.props.visible}>
 
-
-                <Image style={styles.backgroundImage} source={ICONS.WELCOME_BG}>
+                <View style={{ flex: 1, }}>
+                    <Image style={styles.backgroundImage} source={ICONS.WELCOME_BG} />
                     <ScrollView
-                        keyboardShouldPersistTaps={true}
+                        style={{ flex: 1 }}
+                        keyboardShouldPersistTaps={'always'}
                         contentContainerStyle={styles.scrollView}>
                         <TouchableOpacity style={styles.cancel} onPress={this.props.cancel}><Text style={styles.cancelIcon}>X</Text></TouchableOpacity>
                         <Image style={styles.logo} source={ICONS.LOGO_WHITE} ></Image>
@@ -83,7 +84,7 @@ export default class SignUpModal extends React.Component {
                                 border={{ borderColor: COLORS.WHITE, borderStyle: 'solid', borderWidth: 2 }} />
                         </View>
                     </ScrollView>
-                </Image>
+                </View>
             </Modal>
         );
     }
@@ -146,13 +147,20 @@ const styles = {
         marginHorizontal: -100,
     },
     backgroundImage: {
+        position: 'absolute',
         flex: 1,
-        width: Dimensions.get('window').width,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+
+        //width: Dimensions.get('window').width,
         resizeMode: 'cover',
         // justifyContent: 'center',
         alignItems: 'center'
     },
     scrollView: {
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center'
     },
 }

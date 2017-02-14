@@ -32,7 +32,7 @@ export default class SignUpModal extends React.Component {
                 </View>
                 <View style={styles.inputWrapper}>
                     <TextInput
-                    selectionColor={COLORS.WHITE}
+                        selectionColor={COLORS.WHITE}
                         underlineColorAndroid={COLORS.WHITE}
                         secureTextEntry={true}
                         autoCapitalize={'none'}
@@ -43,7 +43,7 @@ export default class SignUpModal extends React.Component {
                 </View>
                 <View style={styles.inputWrapper}>
                     <TextInput
-                    selectionColor={COLORS.WHITE}
+                        selectionColor={COLORS.WHITE}
                         underlineColorAndroid={COLORS.WHITE}
                         secureTextEntry={true}
                         autoCapitalize={'none'}
@@ -92,10 +92,10 @@ export default class SignUpModal extends React.Component {
                 transparent={true}
                 visible={this.props.visible}>
 
-
-                <Image style={styles.backgroundImage} source={ICONS.WELCOME_BG}>
+                <View style={{ flex: 1 }}>
+                    <Image style={styles.backgroundImage} source={ICONS.WELCOME_BG} />
                     <ScrollView
-                        keyboardShouldPersistTaps={true}
+                        keyboardShouldPersistTaps={'always'}
                         contentContainerStyle={{ alignItems: 'center' }}>
                         <TouchableOpacity style={styles.cancel} onPress={this.props.cancel}><Text style={styles.cancelIcon}>X</Text></TouchableOpacity>
 
@@ -118,8 +118,7 @@ export default class SignUpModal extends React.Component {
                                 text={`Sign up`} />
                         </View>
                     </ScrollView>
-
-                </Image>
+                </View>
 
             </Modal>
         );
@@ -183,8 +182,13 @@ const styles = {
         marginHorizontal: -100,
     },
     backgroundImage: {
+        position: 'absolute',
         flex: 1,
-        width: Dimensions.get('window').width,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        //width: 0,//Dimensions.get('window').width,
         resizeMode: 'cover',
         // justifyContent: 'center',
         alignItems: 'center'

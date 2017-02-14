@@ -1,7 +1,6 @@
 import React from 'react';
 import * as COMMON_STYLES from '../constants/commonStyles';
 import * as COLORS from '../constants/colors';
-import LinearGradient from 'react-native-linear-gradient'
 
 import {
   StyleSheet,
