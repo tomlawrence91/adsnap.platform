@@ -32,6 +32,7 @@ export default class SignUpModal extends React.Component {
                 </View>
                 <View style={styles.inputWrapper}>
                     <TextInput
+                        underlineColorAndroid={COLORS.TRANSPARENT}                    
                         selectionColor={COLORS.WHITE}
                         underlineColorAndroid={COLORS.WHITE}
                         secureTextEntry={true}
@@ -43,6 +44,7 @@ export default class SignUpModal extends React.Component {
                 </View>
                 <View style={styles.inputWrapper}>
                     <TextInput
+                        underlineColorAndroid={COLORS.TRANSPARENT}
                         selectionColor={COLORS.WHITE}
                         underlineColorAndroid={COLORS.WHITE}
                         secureTextEntry={true}
