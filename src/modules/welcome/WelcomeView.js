@@ -63,17 +63,21 @@ export default class Welcome extends React.Component {
   }
 
   login() {
-    const callback = (error, response) => {
-      if (error) {
-        return this.props.navigator.showLocalAlert(`Email and password don't match.`, COMMON_STYLES.ALERT_STYLES_ERROR);
-      }
+    const successCallback = () => {
       this.goToTabMenu();
       this.closeModal();
       this.props.navigator.showLocalAlert('Login succesful.', COMMON_STYLES.ALERT_STYLES_SUCCESS);
     }
+
+    const errorCallback = (error) => {
+        return this.props.navigator.showLocalAlert(`Email and password don't match.`, COMMON_STYLES.ALERT_STYLES_ERROR);
+    }
+
     this.props.dispatch(WelcomeState.login(
       this.state.user.email,
-      this.state.user.password, callback));
+      this.state.user.password,
+      successCallback,
+      errorCallback));
   }
 
   signup() {
@@ -82,14 +86,18 @@ export default class Welcome extends React.Component {
       this.props.navigator.showLocalAlert(`Please check if all fields are filled in correctly.`, COMMON_STYLES.ALERT_STYLES_ERROR);
     }
 
-    const callback = (error, response) => {
-      if (error) {
-        return this.props.navigator.showLocalAlert(`${error.description}`, COMMON_STYLES.ALERT_STYLES_ERROR);
-      }
+    const successCallback = (error) => {
       this.goToTabMenu();
       this.closeModal();
-      return this.props.navigator.showLocalAlert('Signup succesful. You will receive a confirmation email to activate your account.', COMMON_STYLES.ALERT_STYLES_SUCCESS);
+      return this.props.navigator.showLocalAlert(
+        'Signup succesful. You will receive a confirmation email to activate your account.',
+        COMMON_STYLES.ALERT_STYLES_SUCCESS);
     }
+
+    const errorCallback = (error) => {
+      return this.props.navigator.showLocalAlert(`${error.description}`, COMMON_STYLES.ALERT_STYLES_ERROR);
+    }
+
     this.props.dispatch(WelcomeState.signup(this.state.user, callback));
   }
 

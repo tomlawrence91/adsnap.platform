@@ -38,7 +38,8 @@ export default class RedeemView extends React.Component {
                         </Image>
                     </View>
                     <View style={styles.contentWrapper}>
-                        <Text style={styles.brand}>{this.props.route.params.deal.retailer}</Text>
+                        {/*<Text style={styles.brand}>{this.props.route.params.deal.retailer}</Text>*/}
+                        <Text style={styles.brand}>Brand</Text>
                         <Text style={styles.description}>
                             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.
                     </Text>
@@ -48,7 +49,7 @@ export default class RedeemView extends React.Component {
                         />
                         <KeyValue
                             name={'Brand'}
-                            value={'Nike'}
+                            value={this.props.route.params.deal.retailer}
                         />
                         <KeyValue
                             name={'Expiration'}

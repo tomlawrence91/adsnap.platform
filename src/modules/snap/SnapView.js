@@ -35,7 +35,7 @@ export default class SnapView extends React.Component {
     renderCameraOverlay() {
         return (<CaptureButton
             onPress={() => this.takePicture()}
-                />)
+        />)
         //return <Text style={styles.capture} onPress={() => this.takePicture()}>[CAPTURE]</Text>;
     }
 
@@ -48,8 +48,8 @@ export default class SnapView extends React.Component {
 
     renderUploadingAnimation() {
         return null;
-        this.updateAnimation();
-        return <Text style={styles.capture} onPress={() => { }}>{this.props.animationValue}</Text>;
+        // this.updateAnimation();
+        // return <Text style={styles.capture} onPress={() => { }}>{this.props.animationValue}</Text>;
     }
 
     render() {

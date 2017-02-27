@@ -13,5 +13,4 @@ export const OTHER_ACTIVE = require('../../images/icon_other_selected.png');
 export const OTHER_INACTIVE = require('../../images/icon_other_unselected.png');
 
 /* STOCK PHOTOS */
-export const HEINEKEN = require('../../images/stock/heineken.png');
 export const WELCOME_BG = require('../../images/bg_welcome.png');

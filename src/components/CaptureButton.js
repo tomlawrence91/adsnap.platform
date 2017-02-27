@@ -23,14 +23,14 @@ export default class CaptureButton extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    button:{
-        width: 64,
-        height:64,
+    button: {
+        width: 70,
+        height: 70,
         borderRadius: 40,
         borderWidth: 5,
         borderColor: '#888',
         backgroundColor: '#AAA',
-        marginBottom: 20,
+        marginBottom: 30,
     }
 });
 
