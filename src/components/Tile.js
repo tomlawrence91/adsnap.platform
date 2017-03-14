@@ -18,7 +18,7 @@ const Tile = React.createClass({
     propTypes: {
         onPress: React.PropTypes.func.isRequired,
         amount: React.PropTypes.string.isRequired,
-        description: React.PropTypes.string.isRequired,
+        // description: React.PropTypes.string.isRequired,
         imgUrl: React.PropTypes.string.isRequired,
         brand: React.PropTypes.string.isRequired,
         overlayColor: React.PropTypes.string,
@@ -28,21 +28,20 @@ const Tile = React.createClass({
     },
 
     render() {
-        console.log(this.props.imgUrl)
         return (
             <TouchableOpacity style={styles.wrapper} onPress={() => this.props.onPress()}>
                 <Image
                     style={styles.backgroundImage}
-                    source={{ uri: "https://facebook.github.io/react/img/logo_og.png" }}>
-                    <View style={[styles.coloredOverlay, {backgroundColor: this.props.overlayColor}]} />
+                    source={{ uri: this.props.imgUrl }}>
+                    <View style={[styles.coloredOverlay, { backgroundColor: this.props.overlayColor }]} />
                     <Text style={styles.amount}>{this.props.amount}</Text>
-                    <Text style={styles.text}>{this.props.description}</Text>
+                    {/*<Text style={styles.text}>{this.props.description}</Text>*/}
                     <View style={styles.buttonWrapper} onPress={() => this.props.onPress()}>
                         <Text style={styles.buttonText}>REDEEM  NOW</Text>
                     </View>
                     <Text style={styles.brandText}>{this.props.brand}</Text>
                 </Image>
-            </TouchableOpacity>
+            </TouchableOpacity >
         )
     }
 });

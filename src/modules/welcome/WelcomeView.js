@@ -70,7 +70,7 @@ export default class Welcome extends React.Component {
     }
 
     const errorCallback = (error) => {
-        return this.props.navigator.showLocalAlert(`Email and password don't match.`, COMMON_STYLES.ALERT_STYLES_ERROR);
+      return this.props.navigator.showLocalAlert(`Email and password don't match.`, COMMON_STYLES.ALERT_STYLES_ERROR);
     }
 
     this.props.dispatch(WelcomeState.login(
@@ -132,7 +132,7 @@ export default class Welcome extends React.Component {
 
           <Image style={styles.logo} source={ICONS.LOGO_WHITE} ></Image>
 
-          <Text style={styles.description}>Use Adsnap for something and save money and especially give us your data. 'Cause data is money and mo money is mo money.</Text>
+          <Text style={styles.description}></Text>
 
           <View style={styles.buttonWrapper}>
             <RectButton

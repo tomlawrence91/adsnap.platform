@@ -32,25 +32,18 @@ export default class RedeemView extends React.Component {
             <Container loading={!this.props.deal}>
                 <ScrollView>
                     <View style={styles.codeWrapper}>
-                        <Image style={styles.backgroundImage} source={{ uri: "http://www.urlaubwelt.com/wp-content/uploads/2016/02/Hawaii-15.jpg" }}>
-                            <View style={styles.coloredOverlay} />
-                            <View style={styles.codeBox}><Text style={styles.codeText}>{this.props.route.params.deal.code}</Text></View>
+                        <Image style={styles.backgroundImage} source={{ uri: this.props.deal.campaignImgUrl }}>
+                            {/*<View style={styles.coloredOverlay} />
+                            <View style={styles.codeBox}><Text style={styles.codeText}>{this.props.route.params.deal.code}</Text></View>*/}
                         </Image>
                     </View>
                     <View style={styles.contentWrapper}>
                         {/*<Text style={styles.brand}>{this.props.route.params.deal.retailer}</Text>*/}
-                        <Text style={styles.brand}>Brand</Text>
+                        <Text style={styles.brand}>{this.props.deal.brandName}</Text>
+                        <View style={styles.codeBox}><Text style={styles.codeText}>{this.props.deal.code}</Text></View>
                         <Text style={styles.description}>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.
-                    </Text>
-                        <KeyValue
-                            name={'Discount'}
-                            value={'40%'}
-                        />
-                        <KeyValue
-                            name={'Brand'}
-                            value={this.props.route.params.deal.retailer}
-                        />
+                            {this.props.deal.description}
+                        </Text>
                         <KeyValue
                             name={'Expiration'}
                             value={'12.07.2017'}
@@ -60,9 +53,13 @@ export default class RedeemView extends React.Component {
                             isLink={true}
                             value={'www.this-could-be-your-website.com'}
                         />
-                        <Text style={styles.description}>
+                        <KeyValue
+                            name={'Disclaimer'}
+                            value={this.props.deal.disclaimer}
+                        />
+                        {/*<Text style={styles.longDescription}>
                             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-                    </Text>
+                    </Text>*/}
                         <View style={styles.buttonWrapper}>
                             <RectButton
                                 onPress={() => { }}

@@ -10,10 +10,10 @@ export default styles = StyleSheet.create({
     },
     contentWrapper: {
         paddingHorizontal: 15,
-        
+
     },
     brand: {
-        fontSize: FONTS.HEADER_FONT_SIZE +3,
+        fontSize: FONTS.HEADER_FONT_SIZE + 3,
         color: COLORS.GREY,
         backgroundColor: 'transparent',
         textAlign: 'center',
@@ -23,8 +23,8 @@ export default styles = StyleSheet.create({
         height: 200,
         //marginBottom: 35,
     },
-    description:{
-        marginVertical:10,
+    description: {
+        marginVertical: 10,
         color: COLORS.GREY,
     },
     backgroundImage: {
@@ -49,12 +49,12 @@ export default styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 20,
         borderWidth: 1,
-        borderColor: COLORS.WHITE
+        borderColor: COLORS.GREY
     },
     codeText: {
         backgroundColor: 'transparent',
         textAlign: 'center',
-        color: COLORS.WHITE,
+        color: COLORS.GREY,
         fontSize: FONTS.BIG_FONT_SIZE
     },
     buttonWrapper: {

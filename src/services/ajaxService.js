@@ -1,12 +1,12 @@
 
 export const baseUrl = 'http://192.168.178.26:8000/v1';
 // export const baseUrl = 'http://192.168.22.22/v1/';
-export const flaskBaseUrl = 'http://127.0.0.1:5000/';
+export const flaskBaseUrl = 'http://127.0.0.1:5000';
 
 export const auth0Url = 'https://adsnap.eu.auth0.com';
 const urls = {
-  imageUploadUrl: baseUrl + '/upload/img?XDEBUG_SESSION_START=99999',
-  retrieveDealsUrl: `${baseUrl}/users/deals`,
+  imageUploadUrl: flaskBaseUrl + '/match',
+  retrieveDealsUrl: `${flaskBaseUrl}/users/deals`,
   testUrl: `${baseUrl}/test`,
 
   imageClassifierUrl: flaskBaseUrl + 'search',
@@ -33,8 +33,8 @@ function serialize(obj, prefix) {
 /* default function to perform an ajax get request */
 async function ajaxGetRequest(url, data = {}) {
   // console.log('token: '+JWT_TOKEN)
-  data["XDEBUG_SESSION_START"] = 99999;
-  var str = data ? ('?' + serialize(data)) : '';
+  // data["XDEBUG_SESSION_START"] = 99999;
+  const str = data ? ('?' + serialize(data)) : '';
 
   let response = await fetch(url + str, {
     method: 'GET',
@@ -111,7 +111,7 @@ export async function uploadImage(fd) {
   // headers.append('content-type', 'undefined')
   //data["XDEBUG_SESSION_START"]=99999;
   return fetch(urls.imageUploadUrl, {
-    method: 'POST',
+    method: 'PUT',
     body: body,
     headers: headers
   }).then((res) => handleErrors(res))

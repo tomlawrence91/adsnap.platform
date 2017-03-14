@@ -28,11 +28,12 @@ export function uploadImage(file) {
         await setTimeout(() => dispatch(setUploadingFlag(false)), 10000);
 
         dispatch(DealsState.addDeal({
-            imgUrl: 'http://vignette3.wikia.nocookie.net/mrrobot/images/8/87/ECorp.png/revision/latest?cb=20150602024409',
+            logoUrl: 'http://vignette3.wikia.nocookie.net/mrrobot/images/8/87/ECorp.png/revision/latest?cb=20150602024409',
+            campaignUrl: 'http://vignette3.wikia.nocookie.net/mrrobot/images/8/87/ECorp.png/revision/latest?cb=20150602024409',
             id: '8',
             amount: '15%',
             description: 'on your product',
-            retailer: 'this could be you',
+            brandName: 'this could be you',
             code: 'Td34dJ'
         }))
     }

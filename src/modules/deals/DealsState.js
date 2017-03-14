@@ -2,6 +2,8 @@ import { fromJS, toJS } from 'immutable';
 import * as ajaxService from '../../services/ajaxService';
 import * as ICONS from '../../constants/icons';
 import * as COLORS from '../../constants/colors';
+import { setItem } from '../../services/storageService';
+import * as STORAGE from '../../constants/storageNames';
 
 var _ = require('lodash');
 
@@ -12,20 +14,44 @@ const ADD_DEAL = 'DEALS/ADD_DEAL';
 
 // Initial state
 const initialState = fromJS({
-  'deals': [
-    { imgUrl: 'http://fullhdpictures.com/wp-content/uploads/2016/06/Heineken-HD-Logos.png', id: '0', amount: 'FREE', description: 'get a free heineken', retailer: 'Heineken', code: 'Td34dJ' },
-    { imgUrl: 'http://vignette3.wikia.nocookie.net/mrrobot/images/8/87/ECorp.png/revision/latest?cb=20150602024409', id: '2', amount: '30%', description: 'on a BigMac menu', retailer: 'Mc Donalds', code: 'Td34dJ' },
-    { imgUrl: 'http://vignette3.wikia.nocookie.net/mrrobot/images/8/87/ECorp.png/revision/latest?cb=20150602024409', id: '3', amount: '10%', description: 'on sports wear', retailer: 'Nike', code: 'Td34dJ' },
-    { imgUrl: 'http://vignette3.wikia.nocookie.net/mrrobot/images/8/87/ECorp.png/revision/latest?cb=20150602024409', id: '4', amount: '40%', description: 'on a coffee', retailer: 'Starbucks', code: 'Td34dJ' },
-  ],
-  'colors': [COLORS.TRANSPARENT_ORANGE, COLORS.TRANSPARENT_PURPLE, COLORS.TRANSPARENT_PINK]
+  deals: [
+    {
+      'logoUrl': 'http://fullhdpictures.com/wp-content/uploads/2016/06/Heineken-HD-Logos.png',
+      'campaignImgUrl': 'http://fullhdpictures.com/wp-content/uploads/2016/06/Heineken-HD-Logos.png',
+      'id': '0',
+      'amount': 'FREE',
+      'description': 'Get a free heineken at Tomorrowland festival.',
+      'disclaimer': 'Only available in attending partner shops',
+      'brandName': 'Heineken',
+      'code': 'Td34dJ'
+    },
+    {
+      'logoUrl': 'http://www.adidas.de/static/on/demandware.static/Sites-adidas-DE-Site/-/default/dw721d387e/images/favicons/favicon.png',
+      'campaignImgUrl': 'http://www.adidas.de/static/on/demandware.static/Sites-adidas-DE-Site/-/default/dw721d387e/images/favicons/favicon.png',
+      'id': '1',
+      'amount': '20%',
+      'description': 'Get a 20% discount on sneakers.',
+      'disclaimer': 'Only available in attending partner shops',
+      'brandName': 'Adidas',
+      'code': 'Kd57GF'
+    },
+    {
+      'logoUrl': 'https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/KFC_logo.svg/1024px-KFC_logo.svg.png',
+      'campaignImgUrl': 'https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/KFC_logo.svg/1024px-KFC_logo.svg.png',
+      'id': '2',
+      'amount': '15%',
+      'description': 'The cernal offers you a discount on some chicken.',
+      'disclaimer': 'Only available in attending partner shops',
+      'brandName': 'KFC',
+      'code': 'CHICKEN'
+    }],
+  colors: [COLORS.TRANSPARENT_ORANGE, COLORS.TRANSPARENT_PURPLE, COLORS.TRANSPARENT_PINK]
 });
 
 export function retrieveDeals() {
-  return (dispatch, getState) => {
-    let response = ajaxService.retrieveDeals().then(response => {
-      dispatch(setDeals(response.data));
-    });
+  return async (dispatch, getState) => {
+    let response = ajaxService.retrieveDeals();
+    dispatch(setDeals(response.data));
   }
 }
 
@@ -58,7 +84,9 @@ export default function DealsStateReducer(state = initialState, action = {}) {
       return state.updateIn(['deals'], deals => deals.push(fromJS(action.payload)));
 
     case SET_DEALS:
-      return state.set('deals', fromJS(action.payload));
+      const deals = actions.payload;
+      setItem(STORAGE.DEALS, deals);
+      return state.set('deals', fromJS(deals));
 
     case SET_OVERLAY_COLOR:
       return state.set('deals', fromJS(action.payload));

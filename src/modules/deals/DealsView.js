@@ -41,8 +41,8 @@ export default class DealsView extends React.Component {
         }
         return (
             <Tile
-                description={deal.description} imgUrl={deal.imgUrl}
-                brand={deal.retailer}
+                imgUrl={deal.logoUrl}
+                brand={deal.brandName}
                 amount={deal.amount}
                 overlayColor={this.getColor(i)}
                 onPress={() => this.onPress(deal)} />
@@ -54,7 +54,7 @@ export default class DealsView extends React.Component {
         this.props.dispatch(DealsState.setDealOverlayColor(dealColorMap));
     }
 
-    //new 
+    //new
     // colorDeal(index) {
     //     const color = _.sample(this.props.colors);
     //     const deal = this.props.deals[index];
