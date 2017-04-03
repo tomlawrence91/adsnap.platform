@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native';
 
-export async function setItem(storageKey, value) {
+export async function storeItem(storageKey, value) {
     try {
         await AsyncStorage.setItem(storageKey, value);
     } catch (e) {
@@ -8,7 +8,7 @@ export async function setItem(storageKey, value) {
     }
 }
 
-export async function getItem(storageKey) {
+export async function getStoredItem(storageKey) {
     try {
         const item = await AsyncStorage.getItem(storageKey);
         return item
@@ -20,7 +20,7 @@ export async function getItem(storageKey) {
     }
 }
 
-export async function clearItem(storageKey) {
+export async function deleteStoredItem(storageKey) {
     try {
         await AsyncStorage.removeItem(storageKey);
     } catch (e) {
