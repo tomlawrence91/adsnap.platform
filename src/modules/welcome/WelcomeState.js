@@ -1,14 +1,15 @@
 import { fromJS, toJS } from 'immutable';
-import * as ajaxService from '../../services/ajaxService';
-import {setItem} from '../../services/storageService';
+import AjaxService from '../../services/AjaxService';
 import store from '../../redux/store';
 import * as STORAGE from '../../constants/storageNames';
 import { AsyncStorage } from 'react-native';
+import AuthService from '../../services/AuthService';
 
 
 // Initial state
 const initialState = fromJS({
-  accessToken: '',
+  accessToken: null,
+  idToken: null,
 });
 
 //actions
@@ -16,33 +17,33 @@ const SET_USER_TOKEN = "WELCOME/SET_USER_TOKEN";
 
 //Thunks
 export function login(email, password, successCallback, errorCallback) {
-  console.log("email", email)
-  console.log("password", password)
+
   return async (dispatch, getState) => {
-    response = await ajaxService.auth0login(email, password)
+    const response = await AuthService.login(email, password);
 
     if (response.error) {
-      console.error(response.error)
       errorCallback();
       return;
     }
-    console.log(response);
+
     dispatch(setUserToken(response));
     successCallback();
   }
 }
 
 export function signup(user, successCallback, errorCallback) {
-  return (dispatch, getState) => {
-    //TODO: register user in backend
-    ajaxService.auth0signup(user.email, user.password).then(
-      response => {
-        console.log(response)
-        if (response.error) {
-          errorCallback(response.error)
-        }
-        successCallback()
-      });
+  return async (dispatch, getState) => {
+    const authResponse = await AuthService.signup(email, password);
+    console.log(authResponse);
+    const response = await AjaxService.signup(email, password);
+
+    if (response.error) {
+      errorCallback();
+      return;
+    }
+
+    dispatch(setUserToken(response));
+    successCallback();
   }
 }
 
@@ -57,10 +58,10 @@ export function setUserToken(jwtToken) {
 // Reducer
 export default function WelcomeStateReducer(state = initialState, action = {}) {
   switch (action.type) {
-    case(SET_USER_TOKEN):
-      const accessToken = action.payload.access_token;
-      setItem(STORAGE.ACCESS_TOKEN,accessToken);
-      return state.set('accessToken', fromJS(accessToken));
+    case (SET_USER_TOKEN):
+      console.log(action.payload);
+      return state.set('accessToken', fromJS(action.payload.access_token));
+      return state.set('idToken', fromJS(action.payload.id_token));
 
     default:
       return state;

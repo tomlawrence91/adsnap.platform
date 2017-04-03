@@ -108,7 +108,6 @@ export default class Welcome extends React.Component {
     this.setState({ signInModalVisible: true })
   }
   closeModal() {
-    console.log("clicked")
     this.setState({ signUpModalVisible: false, signInModalVisible: false })
   }
   goToSignin() {

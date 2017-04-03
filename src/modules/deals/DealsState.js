@@ -1,8 +1,8 @@
 import { fromJS, toJS } from 'immutable';
-import * as ajaxService from '../../services/ajaxService';
+import AjaxService from '../../services/AjaxService';
 import * as ICONS from '../../constants/icons';
 import * as COLORS from '../../constants/colors';
-import { setItem } from '../../services/storageService';
+import { storeItem } from '../../utils/storageUtils';
 import * as STORAGE from '../../constants/storageNames';
 
 var _ = require('lodash');
@@ -50,7 +50,7 @@ const initialState = fromJS({
 
 export function retrieveDeals() {
   return async (dispatch, getState) => {
-    let response = ajaxService.retrieveDeals();
+    let response = AjaxService.retrieveDeals();
     dispatch(setDeals(response.data));
   }
 }
@@ -85,7 +85,7 @@ export default function DealsStateReducer(state = initialState, action = {}) {
 
     case SET_DEALS:
       const deals = actions.payload;
-      setItem(STORAGE.DEALS, deals);
+      storeItem(STORAGE.DEALS, deals);
       return state.set('deals', fromJS(deals));
 
     case SET_OVERLAY_COLOR:

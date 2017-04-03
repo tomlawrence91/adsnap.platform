@@ -1,5 +1,5 @@
 import {fromJS} from 'immutable';
-import * as ajaxService from '../../services/ajaxService';
+import AjaxService from '../../services/AjaxService';
 import * as ROUTES from '../../constants/routes';
 
 

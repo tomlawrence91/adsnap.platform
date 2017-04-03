@@ -25,11 +25,12 @@ export default class SnapView extends React.Component {
     }
 
     takePicture() {
-        this.props.navigator.showLocalAlert('Uploading Snap <(<°.°)', COMMON_STYLES.ALERT_STYLES_SUCCESS);
-        this.camera.capture()
-            .then((data) => this.props.dispatch(SnapState.uploadImage(data)))
-            .catch(err => console.error(err));
-        console.log("snap snap")
+        this.props.navigator.push(Router.getRoute('welcome'));
+        // this.props.navigator.showLocalAlert('Uploading Snap <(<°.°)', COMMON_STYLES.ALERT_STYLES_SUCCESS);
+        // this.camera.capture()
+        //     .then((data) => this.props.dispatch(SnapState.uploadImage(data)))
+        //     .catch(err => console.error(err));
+        // console.log("snap snap")
     }
 
     renderCameraOverlay() {

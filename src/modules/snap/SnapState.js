@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import * as ajaxService from '../../services/ajaxService';
+import AjaxService from '../../services/AjaxService';
 import * as DealsState from '../deals/DealsState';
 
 const SET_UPLOADING_FLAG = 'SNAP/SET_UPLOADING_FLAG';
@@ -20,7 +20,7 @@ export function uploadImage(file) {
     console.log(file)
     return async (dispatch, getState) => {
         dispatch(setUploadingFlag(true))
-        // ajaxService.uploadImage(file).then(response => response.json()).then(response => {
+        // AjaxService.uploadImage(file).then(response => response.json()).then(response => {
         //     console.log(response.data.fileName);
         //     let fileLocation = ajaxService.baseUrl + response.data.fileName;
         //     dispatch(setUploadingFlag(false))
