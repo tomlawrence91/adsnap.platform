@@ -6,13 +6,15 @@ import DealsViewStateReducer from "../modules/deals/DealsState";
 import SnapStateReducer from "../modules/snap/SnapState";
 import RedeemStateReducer from "../modules/redeem/RedeemState";
 import SettingsStateReducer from "../modules/settings/SettingsState";
+import ImageBrowserReducer from "../modules/imageBrowser/ImageBrowserState";
 
 const reducers = {
   welcome: WelcomeViewStateReducer,
   deals: DealsViewStateReducer,
   snap: SnapStateReducer,
   redeem: RedeemStateReducer,
-  settings: SettingsStateReducer
+  settings: SettingsStateReducer,
+  imageBrowser: ImageBrowserReducer
 };
 
 // initial state, accessor and mutator for supporting root-level

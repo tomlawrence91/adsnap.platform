@@ -7,6 +7,7 @@ import SnapViewContainer from "./snap/SnapViewContainer";
 import DealsViewContainer from "./deals/DealsViewContainer";
 import RedeemViewContainer from "./redeem/RedeemViewContainer";
 import SettingsViewContainer from "./settings/SettingsViewContainer";
+import ImageBrowserContainer from "./imageBrowser/ImageBrowserContainer";
 
 export default (Router = createRouter(() => ({
   welcome: () => WelcomeViewContainer,
@@ -14,5 +15,6 @@ export default (Router = createRouter(() => ({
   snap: () => SnapViewContainer,
   deals: () => DealsViewContainer,
   redeem: () => RedeemViewContainer,
-  settings: () => SettingsViewContainer
+  settings: () => SettingsViewContainer,
+  imageBrowser: () => ImageBrowserContainer
 })));

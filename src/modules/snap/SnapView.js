@@ -1,8 +1,8 @@
 import * as SnapState from "./SnapState";
-import * as COLORS from "../../constants/colors";
-import * as COMMON_STYLES from "../../constants/commonStyles";
 import React from "react";
 import { Text, Animated } from "react-native";
+import BottomSheet from 'react-native-bottomsheet';
+import { fromJS } from "immutable";
 
 import Container from "../../components/Container";
 import CaptureButton from "../../components/CaptureButton";
@@ -11,6 +11,7 @@ import Camera from "react-native-camera";
 import styles from "./SnapStyles";
 
 export default class SnapView extends React.Component {
+
   // componentDidMount() {
   //     if (this.props.uploading) {
   //        this.updateAnimation();
@@ -24,18 +25,33 @@ export default class SnapView extends React.Component {
   };
 
   takePicture() {
-    console.log("taking picture.");
-    this.props.navigator.showLocalAlert(
-      "Uploading Snap <(<°.°)",
-      COMMON_STYLES.ALERT_STYLES_SUCCESS
-    );
-    this.camera
-      .capture({
-        target: Camera.constants.CaptureTarget.disk
-      })
-      .then(data => this.props.dispatch(SnapState.uploadSnap(data)))
-      .catch(err => console.error(err));
-    console.log("snap snap");
+    BottomSheet.showBottomSheetWithOptions({
+      options: ['Take a picture', 'Use an image from camera roll'],
+      title: 'Demo Bottom Sheet',
+      dark: true,
+      cancelButtonIndex: 3,
+    }, (value) => {
+      switch (value) {
+        case 0:
+          console.log("taking picture.");
+          // this.props.navigator.showLocalAlert(
+          //   "Uploading Snap <(<°.°)",
+          //   COMMON_STYLES.ALERT_STYLES_SUCCESS
+          // );
+          this.camera
+            .capture({
+              target: Camera.constants.CaptureTarget.disk
+            })
+            .then(data => this.props.dispatch(SnapState.uploadSnap(data)))
+            .catch(err => console.error(err));
+          console.log("snap snap");
+          break;
+        case 1:
+          this.props.navigator.push(Router.getRoute("imageBrowser"));
+          break;
+      }
+    });
+
   }
 
   renderCameraOverlay() {
