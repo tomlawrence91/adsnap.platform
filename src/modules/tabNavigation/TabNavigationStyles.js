@@ -21,5 +21,10 @@ export default styles = StyleSheet.create({
         width: 110,
         resizeMode: 'contain',
 
+    },
+    profile: {
+        height: 30,
+        width: 100,
+        resizeMode: 'contain',
     }
 });

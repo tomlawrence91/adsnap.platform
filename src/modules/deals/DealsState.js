@@ -5,7 +5,7 @@ import * as COLORS from '../../constants/colors';
 import { storeItem } from '../../utils/storageUtils';
 import * as STORAGE from '../../constants/storageNames';
 
-var _ = require('lodash');
+const lodash = require('lodash');
 
 const SET_DEALS = 'DEALS/SET_DEALS';
 const SET_OVERLAY_COLOR = 'DEALS/SET_COLOR';

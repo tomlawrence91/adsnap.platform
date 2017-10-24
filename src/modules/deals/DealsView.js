@@ -15,7 +15,7 @@ import Tile from '../../components/Tile';
 
 import styles from './DealsStyles';
 
-var _ = require('lodash');
+const lodash = require('lodash');
 
 export default class DealsView extends React.Component {
     static route = {
@@ -89,7 +89,7 @@ export default class DealsView extends React.Component {
 
     colorDeals() {
         dealColorMap = this.props.deals.map(deal => {
-            return { ...deal, overlayColor: _.sample(this.props.colors) }
+            return { ...deal, overlayColor: lodash.sample(this.props.colors) }
         });
         this.setDealOverlayColor(dealColorMap);
     }

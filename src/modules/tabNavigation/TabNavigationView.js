@@ -5,22 +5,26 @@ import * as ICONS from '../../constants/icons';
 import * as COLORS from '../../constants/colors';
 import AppRouter from '../AppRouter';
 import Container from '../../components/Container';
+import SettingsButton from '../../components/SettingsButton';
 import {
   View,
   Text,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 
 import {
   StackNavigation,
   TabNavigation,
   TabNavigationItem,
+  withNavigation,
 } from '@exponent/ex-navigation';
 
 const defaultRouteConfig = {
   navigationBar: {
     tintColor: COLORS.WHITE,
-    backgroundColor: COLORS.APP_HEADER
+    backgroundColor: COLORS.APP_HEADER,
+    renderRight: (route, props) => <SettingsButton />
   },
 };
 

@@ -4,6 +4,5 @@ import { toJS } from 'immutable';
 
 export default connect(
   state => ({
-    navigation: console.log(state.toJS()),
   })
 )(WelcomeView);

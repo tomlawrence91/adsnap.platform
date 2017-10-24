@@ -14,26 +14,29 @@ import Router from './AppRouter';
 import store from '../redux/store';
 import * as STORAGE from '../constants/storageNames';
 import { getStoredItem } from '../utils/storageUtils';
-
-var _ = require('lodash');
+import AuthService from '../services/AuthService';
+const lodash = require('lodash');
 
 export default class AppView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             initialRoute: 'welcome',
-            isLoading: false,
+            isLoading: true,
             accessToken: '',
         }
     }
 
-    componentDidMount() {
-
+    componentWillMount() {
+        this.getAccessToken().done();
     }
 
     async getAccessToken() {
-        accessToken = await getStoredItem(STORAGE.ACCESS_TOKEN);
-        this.setState({ isLoading: false, accessToken: accessToken });
+        const token = await AuthService.getToken()
+        if (token) {
+            this.setState({ isLoading: false, initialRoute: 'tabNavigation' })
+        }
+        this.setState({ isLoading: false })
     }
 
     render() {
@@ -41,7 +44,11 @@ export default class AppView extends React.Component {
             <NavigationProvider router={Router}>
                 <StatusBar
                     barStyle="light-content" />
-                <StackNavigation initialRoute={Router.getRoute('welcome')} />
+                {
+                    !this.state.isLoading && <StackNavigation
+                        initialRoute={Router.getRoute(this.state.initialRoute)}
+                        navigatorUID="mainNavigation" />
+                }
             </NavigationProvider >
         )
     }
