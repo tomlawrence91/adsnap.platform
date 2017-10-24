@@ -1,6 +1,7 @@
 import * as SnapState from "./SnapState";
 import React from "react";
-import { Text, Animated } from "react-native";
+import { View, Text, Animated, ActivityIndicator } from "react-native";
+import Button from '../../components/Button';
 import BottomSheet from 'react-native-bottomsheet';
 import { fromJS } from "immutable";
 
@@ -40,9 +41,9 @@ export default class SnapView extends React.Component {
           // );
           this.camera
             .capture({
-              target: Camera.constants.CaptureTarget.disk
+              target: Camera.constants.CaptureTarget.cameraRoll
             })
-            .then(data => this.props.dispatch(SnapState.uploadSnap(data)))
+            .then(data => this.props.dispatch(SnapState.uploadSnap(data.path)))
             .catch(err => console.error(err));
           console.log("snap snap");
           break;
@@ -55,27 +56,33 @@ export default class SnapView extends React.Component {
   }
 
   renderCameraOverlay() {
+    // return null;
     return <CaptureButton onPress={() => this.takePicture()} />;
     //return <Text style={styles.capture} onPress={() => this.takePicture()}>[CAPTURE]</Text>;
   }
 
-  updateAnimation() {
-    setTimeout(
-      () => {
-        console.log("I do not leak!");
-        this.props.dispatch(SnapState.updateAnimation());
-      },
-      400
-    );
+  closeResults() {
+    this.props.dispatch(SnapState.hideResults());
   }
 
-  renderUploadingAnimation() {
-    return null;
-    // this.updateAnimation();
-    // return <Text style={styles.capture} onPress={() => { }}>{this.props.animationValue}</Text>;
-  }
+  // updateAnimation() {
+  //   setInterval(
+  //     () => {
+  //       console.log("I do not leak!");
+  //       this.props.dispatch(SnapState.updateAnimation());
+  //     },
+  //     400
+  //   );
+  // }
+  //
+  // renderUploadingAnimation() {
+  //   // return null;
+  //   this.updateAnimation();
+  //   return <Text style={styles.capture} onPress={() => { }}>{this.props.animationValue}</Text>;
+  // }
 
   render() {
+    const results = this.props.results.toJSON();
     return (
       <Container>
         <Camera
@@ -85,9 +92,29 @@ export default class SnapView extends React.Component {
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}
         >
-          {this.props.uploading
-            ? this.renderUploadingAnimation()
-            : this.renderCameraOverlay()}
+          { results.ready
+            ? <View style={styles.overlay}>
+                <Text style={styles.overlayHeadline}>
+                  Labels:
+                </Text>
+                {results.labels.map( (label, idx) => <Text key={idx} style={styles.overlayText}>{label}</Text> )}
+                <Text style={styles.overlayHeadline}>
+                  Texts:
+                </Text>
+                {results.texts.map( (text, idx) => <Text key={idx} style={styles.overlayText}>{text}</Text> )}
+
+                <Button onPress={ () => this.closeResults()} style={{marginTop: 24}} text="Close results">Close</Button>
+              </View>
+            : <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center' }}>
+                {this.props.uploading
+                  ? <ActivityIndicator color='white' style={{bottom: 54}}/>
+                  : this.renderCameraOverlay()
+                }
+              </View>
+          }
+
+
+
         </Camera>
       </Container>
     );
