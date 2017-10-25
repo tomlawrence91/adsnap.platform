@@ -25,13 +25,13 @@ export default class ImageResultsView extends React.Component {
               Labels:
             </Text>
 
-            {results.labels.map( (label, idx) => <Text key={idx} style={styles.resultsText}>{label}</Text> )}
+            {results.labels && results.labels.map( (label, idx) => <Text key={idx} style={styles.resultsText}>{label}</Text> )}
 
             <Text style={styles.resultsHeadline}>
               Texts:
             </Text>
 
-            {results.texts.map( (text, idx) => <Text key={idx} style={styles.resultsText}>{text}</Text>)}
+            {results.texts && results.texts.map( (text, idx) => <Text key={idx} style={styles.resultsText}>{text}</Text>)}
 
           </View>
         </ScrollView>

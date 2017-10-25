@@ -132,7 +132,7 @@ export default function SnapStateReducer(state = initialState, action = {}) {
       results.ready = true;
       results.labels = action.payload.results[0].labelAnnotations && action.payload.results[0].labelAnnotations.map(a => a.description);
       results.texts = action.payload.results[0].textAnnotations && action.payload.results[0].textAnnotations.map(a => a.description);
-      results.logos = action.payload.results[0].logoAnnotation && action.payload.results[0].logoAnnotation.map(a => a.description);
+      results.logos = action.payload.results[0].logoAnnotations && action.payload.results[0].logoAnnotations.map(a => a.description);
       return state.set("results", fromJS(results));
     case SET_UPLOADING_FLAG:
       return state.set("uploading", fromJS(action.payload));

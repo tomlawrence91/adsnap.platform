@@ -4,20 +4,21 @@ import * as COMMON_STYLES from '../../constants/commonStyles';
 
 export default styles = StyleSheet.create({
   preview: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    height: Dimensions.get('window').height,
+    // flex: 1,
+    // justifyContent: 'flex-end',
+    // alignItems: 'center',
+    height: Dimensions.get('window').height - 250,
     width: Dimensions.get('window').width
   },
   actions: {
-    flex: 2,
-    paddingBottom: 130,
+    marginBottom: 0,
     flexDirection:'column',
+    justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width
+    // position: 'absolute',
+    height: 120,
+    width: Dimensions.get('window').width,
+    backgroundColor: COLORS.WHITE
   },
   capture: {
     flex: 0,
@@ -25,6 +26,6 @@ export default styles = StyleSheet.create({
     borderRadius: 5,
     color: '#000',
     padding: 10,
-    margin: 40
+    // margin: 40
   }
 })

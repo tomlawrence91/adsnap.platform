@@ -90,7 +90,7 @@ android {
         applicationId "com.adsnap"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 1
+        versionCode 2
         versionName "1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
@@ -98,10 +98,12 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file('../../my-release-key.keystore')
-            storePassword '123456789'
-            keyAlias 'my-key-alias'
-            keyPassword '123456789'
+            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file(MYAPP_RELEASE_STORE_FILE)
+                storePassword MYAPP_RELEASE_STORE_PASSWORD
+                keyAlias MYAPP_RELEASE_KEY_ALIAS
+                keyPassword MYAPP_RELEASE_KEY_PASSWORD
+            }
         }
     }
     splits {
@@ -148,10 +150,10 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-camera')
     compile project(':react-native-auth0')
     compile project(':react-native-bottomsheet')
     compile project(':react-native-fetch-blob')
-    compile project(':react-native-camera')
     compile fileTree(dir: "libs", include: ["*.jar"])
 }
 
