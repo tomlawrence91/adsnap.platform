@@ -121,32 +121,4 @@ export default class AjaxService {
     return await AjaxService.get(URLS.getUserUrl());
   }
 
-  // static async uploadSnap(snap) {
-  //   return await AjaxService.post(URLS.uploadSnapUrl(), snap);
-  // }
-
-  static async uploadSnap(snap) {
-
-    let data = await RNFetchBlob.fs.readFile(file.path, 'base64');
-
-    vision.init({ auth: 'AIzaSyALgcuT2frN1R6nTr3f9_2UB9c3A7lnAuU'});
-
-    const req = new vision.Request({
-      image: new vision.Image({
-        base64: data,
-      }),
-      features: [
-        new vision.Feature('TEXT_DETECTION', 4),
-        new vision.Feature('LABEL_DETECTION', 10),
-        new vision.Feature('LOGO_DETECTION', 10),
-      ]
-    });
-
-    let result = await vision.annotate(req);
-
-    // handling response
-    console.log(res.responses)
-
-  }
-
 }
