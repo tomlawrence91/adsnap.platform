@@ -150,6 +150,7 @@ android {
 
 dependencies {
     compile project(':react-native-auth0')
+    compile project(':react-native-bottomsheet')
     compile project(':react-native-fetch-blob')
     compile project(':react-native-lock')
     compile project(':react-native-code-push')
