@@ -39,8 +39,8 @@ export default class SettingsView extends React.Component {
     const settings = [
       { name: this.props.user.get("email"), icon: ICONS.ICON_AT_BLACK }
     ];
-    const list = settings.map(setting => (
-      <ListItemWithImage text={setting.name} icon={setting.icon} />
+    const list = settings.map((index, setting) => (
+      <ListItemWithImage key={index} text={setting.name} icon={setting.icon} />
     ));
     console.log(list);
     return (
