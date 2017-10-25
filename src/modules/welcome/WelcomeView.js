@@ -9,7 +9,7 @@ import {
   ScrollView,
   Dimensions
 } from "react-native";
-import Router from "../AppRouter";
+import Router from '../AppRouter';
 import * as COLORS from "../../constants/colors";
 import * as COMMON_STYLES from "../../constants/commonStyles";
 import * as ICONS from "../../constants/icons";
@@ -22,7 +22,7 @@ import {
   KeyboardAwareScrollView
 } from "react-native-keyboard-aware-scrollview";
 import styles from "./WelcomeStyles";
-import Auth0Lock from "react-native-lock";
+import Auth0 from 'react-native-auth0'
 import AuthService from "../../services/AuthService";
 
 export default class Welcome extends React.Component {
@@ -33,8 +33,7 @@ export default class Welcome extends React.Component {
       signInModalVisible: false,
       user: {
         email: "",
-        password: "",
-        gender: ""
+        password: ""
       }
     };
   }
@@ -44,11 +43,10 @@ export default class Welcome extends React.Component {
       visible: false,
       backgroundColor: COLORS.APP_HEADER
     }
-  };
+  }
 
   setEmail(text) {
     this.setState({ user: { ...this.state.user, email: text } });
-    console.log(this.state);
   }
 
   setPassword(text) {
@@ -64,68 +62,60 @@ export default class Welcome extends React.Component {
     }
   }
 
-  setGender(text) {
-    this.setState({ user: { ...this.state.user, gender: text } });
+  goToTabMenu() {
+    this.props.navigator.push(Router.getRoute('tabNavigation'));
   }
 
   login() {
-    const successCallback = () => {
-      this.goToTabMenu();
-      this.closeModal();
-      this.props.navigator.showLocalAlert(
-        "Login succesful.",
-        COMMON_STYLES.ALERT_STYLES_SUCCESS
-      );
-    };
-
-    const errorCallback = error => {
-      return this.props.navigator.showLocalAlert(
-        `Email and password don't match.`,
-        COMMON_STYLES.ALERT_STYLES_ERROR
-      );
-    };
-
-    this.props.dispatch(
-      WelcomeState.login(
-        this.state.user.email,
-        this.state.user.password,
-        successCallback,
-        errorCallback
-      )
+    const auth0 = new Auth0(
+      {
+        domain: 'adsnap-app.eu.auth0.com',
+        clientId: 'EFiUiAIIvyQ7DtInLammnPrP3SLc87QD'
+      }
     );
+
+    auth0
+      .auth
+      .passwordRealm({
+        username: this.state.user.email,
+        password: this.state.user.password,
+        realm: 'Username-Password-Authentication'
+      })
+      .then(credentials => {
+        console.log(credentials)
+        auth0.auth.userInfo({ token: credentials.accessToken })
+          .then(userProfile => {
+            console.log(userProfile)
+            // await AuthService.login(userProfile, credentials.accessToken);
+            this.setState({ signInModalVisible: false })
+            this.goToTabMenu();
+          })
+          .catch(err => console.error(err))
+      })
+      .catch(error => console.log(error));
   }
 
-  // facebookLogin() {
-  //   this.props.dispatch(WelcomeState.facebookLogin());
-  // }
-
   signup() {
-    const user = this.state.user;
-    if (!user.email || !user.password || !user.gender) {
-      this.props.navigator.showLocalAlert(
-        `Please check if all fields are filled in correctly.`,
-        COMMON_STYLES.ALERT_STYLES_ERROR
-      );
-    }
-
-    const successCallback = error => {
-      this.goToTabMenu();
-      this.closeModal();
-      return this.props.navigator.showLocalAlert(
-        "Signup succesful. You will receive a confirmation email to activate your account.",
-        COMMON_STYLES.ALERT_STYLES_SUCCESS
-      );
-    };
-
-    const errorCallback = error => {
-      return this.props.navigator.showLocalAlert(
-        `${error.description}`,
-        COMMON_STYLES.ALERT_STYLES_ERROR
-      );
-    };
-    this.props.dispatch(
-      WelcomeState.signup(this.state.user, successCallback, errorCallback)
+    const auth0 = new Auth0(
+      {
+        domain: 'adsnap-app.eu.auth0.com',
+        clientId: 'EFiUiAIIvyQ7DtInLammnPrP3SLc87QD'
+      }
     );
+
+    auth0
+      .auth
+      .createUser({ 
+        email: this.state.user.email, 
+        password: this.state.user.password,
+        connection: 'Username-Password-Authentication' 
+      })
+      .then(user => {
+        console.log(user)
+        this.setState({ signUpModalVisible: false })
+        this.goToTabMenu();
+      })
+      .catch(console.error);
   }
 
   openSignUpModal() {
@@ -137,38 +127,6 @@ export default class Welcome extends React.Component {
   closeModal() {
     this.setState({ signUpModalVisible: false, signInModalVisible: false });
   }
-  goToSignin() {
-    this.props.navigator.push(Router.getRoute("signin"));
-  }
-  goToTabMenu() {
-    this.props.navigator.push(Router.getRoute("tabNavigation"));
-  }
-  changeTab() {
-    let tab = this.state.tab == 0 ? 1 : 0;
-    this.setState({ tab: tab });
-  }
-
-  openLock() {
-    const lock = new Auth0Lock({
-      clientId: "ajOlns38DT3Sa3Iiahp3I4fzJY6TdrdP",
-      domain: "adsnap.eu.auth0.com",
-      disableSignUp: true
-    });
-
-    lock.show({ closable: true }, async (err, profile, token) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      // Authentication worked!
-      console.log("Logged in with Auth0!");
-      console.log(token);
-      console.log(profile);
-
-      await AuthService.login(profile, token.idToken);
-      this.goToTabMenu();
-    });
-  }
 
   render() {
     const BUTTON_WIDTH = Dimensions.get("window").width - 30;
@@ -176,23 +134,11 @@ export default class Welcome extends React.Component {
     return (
       <Container>
         <Image style={styles.backgroundImage} source={ICONS.WELCOME_BG}>
-
           <Image style={styles.logo} source={ICONS.LOGO_WHITE} />
-
           <Text style={styles.description} />
-          {/* <View style={styles.buttonWrapper}>
-            <RectButton
-              onPress={() => this.openLock()}
-              text={'Log in with Facebook'}
-              width={COMMON_STYLES.BUTTON_WIDTH(Dimensions)}
-              height={COMMON_STYLES.BUTTON_HEIGHT}
-              textColor={COLORS.WHITE}
-              backgroundColor={COLORS.FACEBOOK_BLUE}
-              borderColor={COLORS.FACEBOOK_DARK_BLUE} />
-          </View>*/}
           <View style={styles.buttonWrapper}>
             <RectButton
-              onPress={() => this.openLock()}
+              onPress={() => this.openSignInModal()}
               text={"Login"}
               width={COMMON_STYLES.BUTTON_WIDTH(Dimensions)}
               height={COMMON_STYLES.BUTTON_HEIGHT}
@@ -229,7 +175,6 @@ export default class Welcome extends React.Component {
           setEmail={text => this.setEmail(text)}
           setPassword={text => this.setPassword(text)}
           confirmPassword={text => this.confirmPassword(text)}
-          setGender={text => this.setGender(text)}
           onSignUpPress={() => this.signup()}
         />
         <SignInModal
@@ -244,5 +189,3 @@ export default class Welcome extends React.Component {
     );
   }
 }
-/*
-*/

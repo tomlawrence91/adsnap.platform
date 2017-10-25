@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -43,6 +42,7 @@
 		BDEE113B3210460E91B45415 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D0C41A903D245C38257B3BD /* libRNFetchBlob.a */; };
 		D5679E157DC08056175C9842 /* libPods-adsnap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B890E889BC6010C0F5351B6 /* libPods-adsnap.a */; };
 		FEA9A7DFE6D8458AAD6645C0 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6262546DA4AB4C489860C2AD /* libRCTCamera.a */; };
+		D61935E80F794083A6273F28 /* libA0Auth0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E406237AEB9E4A8C833DAF6D /* libA0Auth0.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -310,6 +310,8 @@
 		BDE28EE71CCD4141AAAA8FE1 /* CodePush.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "../node_modules/react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<group>"; };
 		C6396AABBB384906BB4A1CAF /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
 		DF39B7C04EEFD848F3D3F848 /* Pods-adsnap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-adsnap.release.xcconfig"; path = "Pods/Target Support Files/Pods-adsnap/Pods-adsnap.release.xcconfig"; sourceTree = "<group>"; };
+		9811F8F63A984790AB8379AF /* A0Auth0.xcodeproj */ = {isa = PBXFileReference; name = "A0Auth0.xcodeproj"; path = "../node_modules/react-native-auth0/ios/A0Auth0.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		E406237AEB9E4A8C833DAF6D /* libA0Auth0.a */ = {isa = PBXFileReference; name = "libA0Auth0.a"; path = "libA0Auth0.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -343,6 +345,7 @@
 				50715B1AEF8F4837A7BF793E /* libA0RNLock.a in Frameworks */,
 				D5679E157DC08056175C9842 /* libPods-adsnap.a in Frameworks */,
 				BDEE113B3210460E91B45415 /* libRNFetchBlob.a in Frameworks */,
+				D61935E80F794083A6273F28 /* libA0Auth0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,6 +535,7 @@
 				BDE28EE71CCD4141AAAA8FE1 /* CodePush.xcodeproj */,
 				B370469237DD4AE798C625DC /* A0RNLock.xcodeproj */,
 				C6396AABBB384906BB4A1CAF /* RNFetchBlob.xcodeproj */,
+				9811F8F63A984790AB8379AF /* A0Auth0.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1226,6 +1230,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1248,6 +1253,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1332,6 +1338,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1361,6 +1368,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1397,6 +1405,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.adsnap-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1421,6 +1430,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
