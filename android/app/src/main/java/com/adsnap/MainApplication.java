@@ -37,11 +37,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-<<<<<<< HEAD
             new A0Auth0Package(),
-=======
             new RNBottomSheetPackage(),
->>>>>>> ac3af3ad4299bde52b02d59a698ea3a5141ed09c
             new RNFetchBlobPackage(),
             new LockReactPackage(),
             new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey), getApplicationContext(), BuildConfig.DEBUG),
