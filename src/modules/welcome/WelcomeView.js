@@ -18,11 +18,7 @@ import Container from "../../components/Container";
 import RectButton from "../../components/RectButton";
 import SignUpModal from "../../components/SignUpModal";
 import SignInModal from "../../components/SignInModal";
-import {
-  KeyboardAwareScrollView
-} from "react-native-keyboard-aware-scrollview";
 import styles from "./WelcomeStyles";
-import Auth0 from 'react-native-auth0'
 import AuthService from "../../services/AuthService";
 
 export default class Welcome extends React.Component {
@@ -67,63 +63,23 @@ export default class Welcome extends React.Component {
   }
 
   login() {
-    const auth0 = new Auth0(
-      {
-        domain: 'adsnap-app.eu.auth0.com',
-        clientId: 'EFiUiAIIvyQ7DtInLammnPrP3SLc87QD'
-      }
-    );
-
-    auth0
-      .auth
-      .passwordRealm({
-        username: this.state.user.email,
-        password: this.state.user.password,
-        realm: 'Username-Password-Authentication'
+    AuthService.login(this.state.user.email, this.state.user.password)
+      .then(res => {
+        this.setState({ signInModalVisible: false })
+        this.goToTabMenu()
       })
-      .then(credentials => {
-        console.log(credentials)
-        auth0.auth.userInfo({ token: credentials.accessToken })
-          .then(userProfile => {
-            console.log(userProfile)
-            // await AuthService.login(userProfile, credentials.accessToken);
-            this.setState({ signInModalVisible: false })
-            this.goToTabMenu();
-          })
-          .catch(err => console.error(err))
-      })
-      .catch(error => console.log(error));
+      .catch(err => console.error(err))
   }
 
   signup() {
-    const auth0 = new Auth0(
-      {
-        domain: 'adsnap-app.eu.auth0.com',
-        clientId: 'EFiUiAIIvyQ7DtInLammnPrP3SLc87QD'
-      }
-    );
-
-    auth0
-      .auth
-      .createUser({ 
-        email: this.state.user.email, 
-        password: this.state.user.password,
-        connection: 'Username-Password-Authentication' 
-      })
-      .then(user => {
-        console.log(user)
+    AuthService.signup(this.state.user.email, this.state.user.password)
+      .then(res => {
         this.setState({ signUpModalVisible: false })
-        this.goToTabMenu();
+        this.goToTabMenu()
       })
-      .catch(console.error);
+      .catch(err => console.error(err))
   }
 
-  openSignUpModal() {
-    this.setState({ signUpModalVisible: true });
-  }
-  openSignInModal() {
-    this.setState({ signInModalVisible: true });
-  }
   closeModal() {
     this.setState({ signUpModalVisible: false, signInModalVisible: false });
   }
@@ -138,7 +94,7 @@ export default class Welcome extends React.Component {
           <Text style={styles.description} />
           <View style={styles.buttonWrapper}>
             <RectButton
-              onPress={() => this.openSignInModal()}
+              onPress={() => this.setState({ signInModalVisible: true })}
               text={"Login"}
               width={COMMON_STYLES.BUTTON_WIDTH(Dimensions)}
               height={COMMON_STYLES.BUTTON_HEIGHT}
@@ -154,7 +110,7 @@ export default class Welcome extends React.Component {
           </View>
           <View style={styles.buttonWrapper}>
             <RectButton
-              onPress={() => this.openSignUpModal()}
+              onPress={() => this.setState({ signUpModalVisible: true })}
               text={"Sign up"}
               width={COMMON_STYLES.BUTTON_WIDTH(Dimensions)}
               height={COMMON_STYLES.BUTTON_HEIGHT}
