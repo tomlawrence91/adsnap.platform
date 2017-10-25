@@ -8,6 +8,7 @@ import DealsViewContainer from "./deals/DealsViewContainer";
 import RedeemViewContainer from "./redeem/RedeemViewContainer";
 import SettingsViewContainer from "./settings/SettingsViewContainer";
 import ImageBrowserContainer from "./imageBrowser/ImageBrowserContainer";
+import ImageResultsContainer from "./imageResults/ImageResultsContainer";
 
 export default (Router = createRouter(() => ({
   welcome: () => WelcomeViewContainer,
@@ -16,5 +17,6 @@ export default (Router = createRouter(() => ({
   deals: () => DealsViewContainer,
   redeem: () => RedeemViewContainer,
   settings: () => SettingsViewContainer,
-  imageBrowser: () => ImageBrowserContainer
+  imageBrowser: () => ImageBrowserContainer,
+  results: () => ImageResultsContainer
 })));

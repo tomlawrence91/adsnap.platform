@@ -1,6 +1,6 @@
 import * as SnapState from "./SnapState";
 import React from "react";
-import { View, Text, Animated, ActivityIndicator } from "react-native";
+import { View, Text, TouchableHighlight, Animated, ActivityIndicator } from "react-native";
 import Button from '../../components/Button';
 import BottomSheet from 'react-native-bottomsheet';
 import { fromJS } from "immutable";
@@ -25,44 +25,35 @@ export default class SnapView extends React.Component {
     }
   };
 
-  takePicture() {
-    BottomSheet.showBottomSheetWithOptions({
-      options: ['Take a picture', 'Use an image from camera roll'],
-      title: 'Demo Bottom Sheet',
-      dark: true,
-      cancelButtonIndex: 3,
-    }, (value) => {
-      switch (value) {
-        case 0:
-          console.log("taking picture.");
-          // this.props.navigator.showLocalAlert(
-          //   "Uploading Snap <(<°.°)",
-          //   COMMON_STYLES.ALERT_STYLES_SUCCESS
-          // );
-          this.camera
-            .capture({
-              target: Camera.constants.CaptureTarget.cameraRoll
-            })
-            .then(data => this.props.dispatch(SnapState.uploadSnap(data.path)))
-            .catch(err => console.error(err));
-          console.log("snap snap");
-          break;
-        case 1:
-          this.props.navigator.push(Router.getRoute("imageBrowser"));
-          break;
-      }
-    });
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.results.toJSON().ready) {
+      this.props.navigator.push(Router.getRoute("results"));
+      this.props.dispatch(SnapState.hideResults());
+    }
+  }
 
+  openCameraRoll() {
+    this.props.navigator.push(Router.getRoute("imageBrowser"));
+  }
+
+  takePicture() {
+    this.camera.capture({
+      target: Camera.constants.CaptureTarget.cameraRoll
+    }).then(data => this.props.dispatch(SnapState.uploadSnap(data.path)))
+      .catch(err => console.error(err));
   }
 
   renderCameraOverlay() {
     // return null;
-    return <CaptureButton onPress={() => this.takePicture()} />;
+    return (
+      <View style={{ opacity: this.props.uploading ? 0 : 1, flex: 1, justifyContent: 'flex-end', alignItems: 'center', marginBottom: 20 }}>
+        <CaptureButton onPress={() => this.takePicture()} />
+        <TouchableHighlight onPress={ () => this.openCameraRoll()}>
+          <Text style={{ color: 'white' }}>Choose from library</Text>
+        </TouchableHighlight>
+      </View>
+    );
     //return <Text style={styles.capture} onPress={() => this.takePicture()}>[CAPTURE]</Text>;
-  }
-
-  closeResults() {
-    this.props.dispatch(SnapState.hideResults());
   }
 
   // updateAnimation() {
@@ -92,30 +83,18 @@ export default class SnapView extends React.Component {
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}
         >
-          { results.ready
-            ? <View style={styles.overlay}>
-                <Text style={styles.overlayHeadline}>
-                  Labels:
-                </Text>
-                {results.labels.map( (label, idx) => <Text key={idx} style={styles.overlayText}>{label}</Text> )}
-                <Text style={styles.overlayHeadline}>
-                  Texts:
-                </Text>
-                {results.texts.map( (text, idx) => <Text key={idx} style={styles.overlayText}>{text}</Text> )}
-
-                <Button onPress={ () => this.closeResults()} style={{marginTop: 24}} text="Close results">Close</Button>
-              </View>
-            : <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center' }}>
-                {this.props.uploading
-                  ? <ActivityIndicator color='white' style={{bottom: 54}}/>
-                  : this.renderCameraOverlay()
-                }
-              </View>
-          }
-
-
-
         </Camera>
+
+        <View style={[{
+          justifyContent: this.props.uploading ? 'center' : 'flex-end'
+        }, styles.actions]}>
+
+          { this.props.uploading
+            ? <ActivityIndicator color='white' style={{ opacity: this.props.uploading ? 1 : 0 }}/>
+            : this.renderCameraOverlay()
+          }
+        </View>
+
       </Container>
     );
   }

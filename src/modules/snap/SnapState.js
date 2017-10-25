@@ -1,9 +1,8 @@
 import { fromJS } from "immutable";
-import AjaxService from "../../services/AjaxService";
-import * as DealsState from "../deals/DealsState";
+// import AjaxService from "../../services/AjaxService";
+import VisionService from "../../services/VisionService";
+// import * as DealsState from "../deals/DealsState";
 import { Alert } from "react-native";
-import RNFetchBlob, {wrap} from 'react-native-fetch-blob'
-import vision from 'react-cloud-vision-api';
 
 const SET_UPLOADING_FLAG = "SNAP/SET_UPLOADING_FLAG";
 const UPDATE_ANIMATION = "SNAP/UPDATE_ANIMATION";
@@ -26,58 +25,34 @@ const initialState = fromJS({
   }
 });
 
-const getGeolocation = () => {
-  return new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        resolve({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
-        });
-      },
-      () => {
-        Alert.alert("LABEL_NO_LOCATION_IOS ");
-        reject();
-      },
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-    );
-  });
-};
+// const getGeolocation = () => {
+//   return new Promise((resolve, reject) => {
+//     navigator.geolocation.getCurrentPosition(
+//       position => {
+//         resolve({
+//           latitude: position.coords.latitude,
+//           longitude: position.coords.longitude
+//         });
+//       },
+//       () => {
+//         Alert.alert("LABEL_NO_LOCATION_IOS ");
+//         reject();
+//       },
+//       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+//     );
+//   });
+// };
 
 export function uploadSnap(file) {
-  console.log("uploadSnap");
 
   return async (dispatch, getState) => {
 
     dispatch(setUploadingFlag(true));
 
-    RNFetchBlob.fs.readFile(file, 'base64')
-      .then((data) => {
-
-        vision.init({auth: 'AIzaSyALgcuT2frN1R6nTr3f9_2UB9c3A7lnAuU'});
-
-        const req = new vision.Request({
-          image: new vision.Image({
-            base64: data
-          }),
-          features: [
-            new vision.Feature('TEXT_DETECTION', 3),
-            new vision.Feature('LABEL_DETECTION', 3),
-            new vision.Feature('LOGO_DETECTION', 3),
-          ]
-        });
-
-        vision.annotate(req).then((res) => {
-          // handling response
-          // console.log(JSON.stringify(res.responses));
-          dispatch(showResults(res.responses));
-          dispatch(setUploadingFlag(false));
-        }, (e) => {
-          console.log('Error: ', e)
-        })
-
-      });
-
+    VisionService.annotate(file, (res) => {
+      dispatch(showResults(res.responses));
+      dispatch(setUploadingFlag(false));
+    })
 
     // const geolocation = await getGeolocation();
     // AjaxService.uploadImage(file).then(response => response.json()).then(response => {
@@ -128,7 +103,6 @@ export function updateAnimation() {
 }
 
 export function showResults(results) {
-  console.log(results, results);
   return {
     type: SHOW_RESULTS,
     payload: {
@@ -151,19 +125,14 @@ export default function SnapStateReducer(state = initialState, action = {}) {
   switch (action.type) {
     case HIDE_RESULTS:
       results = state.get("results").toJS();
-      results.labels = [];
-      results.texts = [];
-      results.logos = [];
       results.ready = false;
       return state.set("results", fromJS(results));
     case SHOW_RESULTS:
-      console.log(action.payload);
       results = state.get("results").toJS();
       results.ready = true;
-      results.labels = action.payload.results[0].labelAnnotations.map(a => a.description);
-      results.texts = action.payload.results[0].textAnnotations.map(a => a.description);
+      results.labels = action.payload.results[0].labelAnnotations && action.payload.results[0].labelAnnotations.map(a => a.description);
+      results.texts = action.payload.results[0].textAnnotations && action.payload.results[0].textAnnotations.map(a => a.description);
       results.logos = action.payload.results[0].logoAnnotation && action.payload.results[0].logoAnnotation.map(a => a.description);
-      console.log(results);
       return state.set("results", fromJS(results));
     case SET_UPLOADING_FLAG:
       return state.set("uploading", fromJS(action.payload));

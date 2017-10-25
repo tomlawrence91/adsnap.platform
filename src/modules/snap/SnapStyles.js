@@ -10,22 +10,14 @@ export default styles = StyleSheet.create({
     height: Dimensions.get('window').height,
     width: Dimensions.get('window').width
   },
-  overlay: {
-    padding: 12,
-    flex: 1,
-    justifyContent: 'flex-start',
+  actions: {
+    flex: 2,
+    paddingBottom: 130,
+    flexDirection:'column',
     alignItems: 'center',
+    position: 'absolute',
     height: Dimensions.get('window').height,
     width: Dimensions.get('window').width
-  },
-  overlayHeadline: {
-    marginTop: 24,
-    marginBottom: 12,
-    fontSize: 24
-  },
-  overlayText: {
-    backgroundColor: 'black',
-    color: 'white'
   },
   capture: {
     flex: 0,
