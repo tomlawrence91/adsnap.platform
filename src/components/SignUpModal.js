@@ -94,6 +94,7 @@ export default class SignUpModal extends React.Component {
         animationType={"slide"}
         transparent={true}
         visible={this.props.visible}
+        onRequestClose={this.props.cancel}
       >
         <View style={{ flex: 1 }}>
           <Image style={styles.backgroundImage} source={ICONS.WELCOME_BG} />

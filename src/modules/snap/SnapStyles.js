@@ -7,7 +7,7 @@ export default styles = StyleSheet.create({
     // flex: 1,
     // justifyContent: 'flex-end',
     // alignItems: 'center',
-    height: Dimensions.get('window').height - 250,
+    height: Dimensions.get('window').height - 200,
     width: Dimensions.get('window').width
   },
   actions: {

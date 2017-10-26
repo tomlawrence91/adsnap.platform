@@ -52,7 +52,7 @@ export function uploadSnap(file) {
     dispatch(setUploadingFlag(true));
 
     VisionService.annotate(file, (res) => {
-      dispatch(showResults(res.responses));
+      dispatch(showResults(res.responses, file));
       dispatch(setUploadingFlag(false));
     })
 
@@ -104,11 +104,12 @@ export function updateAnimation() {
   };
 }
 
-export function showResults(results) {
+export function showResults(results, file) {
   return {
     type: SHOW_RESULTS,
     payload: {
-      results: results
+      results: results,
+      file: file
     }
   };
 }
@@ -143,11 +144,17 @@ export default function SnapStateReducer(state = initialState, action = {}) {
       let annotations = { labelAnnotations, textAnnotations, logoAnnotations } = action.payload.results[0];
       let [ labels, texts, logos ] = map(annotations, type => type && map(type, annotation => annotation.description));
 
+      results.file = action.payload.file;
+
       // positive
-      let terms = labels.concat(texts, logos);
-      if (terms.includes('adidas')) {
-        results.match = true;
-      }
+      results.terms = labels.concat(texts, logos);
+      results.termsMatching = ['adidas', 'sports', 'black and white', 'adidas originals'];
+
+      results.termsMatching.forEach( term => {
+        if (results.terms.includes(term)) {
+          results.match = true;
+        }
+      });
 
       return state.set("results", fromJS(results));
 

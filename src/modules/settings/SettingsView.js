@@ -21,13 +21,13 @@ export default class SettingsView extends React.Component {
       title: "Settings"
     }
   };
+  
   async componentWillMount() {
     const user = await getStoredItem(STORAGE.USER);
     this.props.dispatch(SettingsState.setUser(JSON.parse(user)));
   }
 
   async logout() {
-    console.log("Good bye, bro!");
     await AuthService.logout();
     this.props.navigation
       .getNavigatorByUID("mainNavigation")
