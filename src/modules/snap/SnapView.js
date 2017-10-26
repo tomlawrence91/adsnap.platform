@@ -10,18 +10,6 @@ import Camera from "react-native-camera";
 import styles from "./SnapStyles";
 
 export default class SnapView extends React.Component {
-
-
-  state = {
-    cameraUnlocked: false
-  };
-
-  // componentDidMount() {
-  //     if (this.props.uploading) {
-  //        this.updateAnimation();
-  //     }
-  // }
-
   static route = {
     navigationBar: {
       title: "Snap"
@@ -43,7 +31,6 @@ export default class SnapView extends React.Component {
   }
 
   openCameraRollGranted() {
-    this.setState({cameraUnlocked: true});
     this.props.navigator.push(Router.getRoute("imageBrowser"));
   }
 
@@ -61,7 +48,7 @@ export default class SnapView extends React.Component {
         this.camera.capture({
           target: Camera.constants.CaptureTarget.cameraRoll
         }).then(data => this.props.dispatch(SnapState.uploadSnap(data.path)))
-          .catch(err => console.error(err));;
+          .catch(err => console.error(err));
       } else {
         console.log("Camera permission denied")
       }
@@ -82,7 +69,7 @@ export default class SnapView extends React.Component {
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
         this.openCameraRollGranted();
       } else {
-        console.log("Camera permission denied")
+        console.log("Camera roll permission denied")
       }
     } catch (err) {
       console.warn(err)
@@ -91,20 +78,20 @@ export default class SnapView extends React.Component {
 
   takePicture() {
     if (Platform.OS === 'android') {
-      return this.requestCameraPermission();
+      return this.requestCameraPermission()
     }
+
     this.camera.capture({
       target: Camera.constants.CaptureTarget.cameraRoll
     }).then(data => this.props.dispatch(SnapState.uploadSnap(data.path)))
-      .catch(err => console.error(err));
+      .catch(err => console.error(err))
   }
-
 
   renderCameraOverlay() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <CaptureButton onPress={() => this.takePicture()} />
-        <TouchableHighlight onPress={ () => this.openCameraRoll()}>
+        <TouchableHighlight onPress={() => this.openCameraRoll()}>
           <Text style={{ color: 'black' }}>Choose from library</Text>
         </TouchableHighlight>
       </View>
@@ -115,25 +102,19 @@ export default class SnapView extends React.Component {
     const results = this.props.results.toJSON();
     return (
       <Container>
-
-        {this.state.cameraUnlocked ?
-          <Camera
-            ref={cam => {
-              this.camera = cam;
-            }}
-            style={styles.preview}
-            aspect={Camera.constants.Aspect.fit}
-          /> :
-          <View style={styles.preview} />
-        }
-
+        <Camera
+          ref={cam => {
+            this.camera = cam;
+          }}
+          style={styles.preview}
+          aspect={Camera.constants.Aspect.fit}
+        />
         <View style={styles.actions}>
-          { this.props.uploading
+          {this.props.uploading
             ? <ActivityIndicator color='black' />
             : this.renderCameraOverlay()
           }
         </View>
-
       </Container>
     );
   }
