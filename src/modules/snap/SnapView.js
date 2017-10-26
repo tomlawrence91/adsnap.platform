@@ -11,11 +11,6 @@ import styles from "./SnapStyles";
 
 export default class SnapView extends React.Component {
 
-
-  state = {
-    cameraUnlocked: false
-  };
-
   // componentDidMount() {
   //     if (this.props.uploading) {
   //        this.updateAnimation();
@@ -29,8 +24,8 @@ export default class SnapView extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.results.toJSON().ready) {
-      this.props.navigator.push(Router.getRoute("results"));
+    if (nextProps.results.toJSON().match === true) {
+      this.props.navigator.push(Router.getRoute("match"));
       this.props.dispatch(SnapState.hideResults());
     }
   }
@@ -43,7 +38,6 @@ export default class SnapView extends React.Component {
   }
 
   openCameraRollGranted() {
-    this.setState({cameraUnlocked: true});
     this.props.navigator.push(Router.getRoute("imageBrowser"));
   }
 
@@ -134,16 +128,13 @@ export default class SnapView extends React.Component {
     return (
       <Container>
 
-        {this.state.cameraUnlocked ?
-          <Camera
-            ref={cam => {
-              this.camera = cam;
-            }}
-            style={styles.preview}
-            aspect={Camera.constants.Aspect.fill}
-          /> :
-          <View style={styles.preview} />
-        }
+        <Camera
+          ref={cam => {
+            this.camera = cam;
+          }}
+          style={styles.preview}
+          aspect={Camera.constants.Aspect.fill}
+        />
 
         <View style={styles.actions}>
           { this.props.uploading

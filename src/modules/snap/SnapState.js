@@ -1,8 +1,9 @@
 import { fromJS } from "immutable";
+import {map} from 'lodash';
 // import AjaxService from "../../services/AjaxService";
 import VisionService from "../../services/VisionService";
 // import * as DealsState from "../deals/DealsState";
-import { Alert } from "react-native";
+// import { Alert } from "react-native";
 
 const SET_UPLOADING_FLAG = "SNAP/SET_UPLOADING_FLAG";
 const UPDATE_ANIMATION = "SNAP/UPDATE_ANIMATION";
@@ -19,6 +20,7 @@ const initialState = fromJS({
   },
   results: {
     ready: false,
+    match: false,
     labels: [],
     texts: [],
     logos: []
@@ -123,17 +125,32 @@ export default function SnapStateReducer(state = initialState, action = {}) {
   let results = {};
 
   switch (action.type) {
+
     case HIDE_RESULTS:
       results = state.get("results").toJS();
       results.ready = false;
       return state.set("results", fromJS(results));
+
     case SHOW_RESULTS:
+
+      // check if result is positive or negative
       results = state.get("results").toJS();
       results.ready = true;
-      results.labels = action.payload.results[0].labelAnnotations && action.payload.results[0].labelAnnotations.map(a => a.description);
-      results.texts = action.payload.results[0].textAnnotations && action.payload.results[0].textAnnotations.map(a => a.description);
-      results.logos = action.payload.results[0].logoAnnotations && action.payload.results[0].logoAnnotations.map(a => a.description);
+
+      // negative
+      results.match = false;
+
+      let annotations = { labelAnnotations, textAnnotations, logoAnnotations } = action.payload.results[0];
+      let [ labels, texts, logos ] = map(annotations, type => type && map(type, annotation => annotation.description));
+
+      // positive
+      let terms = labels.concat(texts, logos);
+      if (terms.includes('adidas')) {
+        results.match = true;
+      }
+
       return state.set("results", fromJS(results));
+
     case SET_UPLOADING_FLAG:
       return state.set("uploading", fromJS(action.payload));
     case UPDATE_ANIMATION:
