@@ -1,6 +1,7 @@
 import { createRouter } from "@exponent/ex-navigation";
 
 import WelcomeViewContainer from "./welcome/WelcomeViewContainer";
+import HomeViewContainer from './home/HomeViewContainer'
 import ChallengesViewContainer from './challenges/ChallengesViewContainer'
 import TabNavigationViewContainer
   from "./tabNavigation/TabNavigationViewContainer";
@@ -13,6 +14,7 @@ import ImageResultsContainer from "./imageResults/ImageResultsContainer";
 
 export default (Router = createRouter(() => ({
   welcome: () => WelcomeViewContainer,
+  home: () => HomeViewContainer,
   challenges: () => ChallengesViewContainer,
   tabNavigation: () => TabNavigationViewContainer,
   snap: () => SnapViewContainer,
