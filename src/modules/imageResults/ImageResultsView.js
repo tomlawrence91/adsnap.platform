@@ -10,7 +10,7 @@ export default class ImageResultsView extends React.Component {
 
   static route = {
     navigationBar: {
-      title: "Snap feedback"
+      title: "AdSnap image analysis"
     }
   };
 

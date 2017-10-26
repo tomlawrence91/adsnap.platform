@@ -15,7 +15,7 @@ export default class SnapView extends React.Component {
 
   static route = {
     navigationBar: {
-      title: "Snap tests"
+      title: "AdSnap tests"
     }
   };
 
@@ -27,7 +27,9 @@ export default class SnapView extends React.Component {
   }
 
   componentDidMount() {
-    this.requestCameraPermission();
+    if (Platform.OS === 'android') {
+      this.requestCameraPermission();
+    }
   }
 
   openCameraRoll() {
