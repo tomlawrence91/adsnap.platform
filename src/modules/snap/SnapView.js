@@ -58,7 +58,10 @@ export default class SnapView extends React.Component {
         }
       )
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        this.takePictureGranted();
+        this.camera.capture({
+          target: Camera.constants.CaptureTarget.cameraRoll
+        }).then(data => this.props.dispatch(SnapState.uploadSnap(data.path)))
+          .catch(err => console.error(err));;
       } else {
         console.log("Camera permission denied")
       }
@@ -90,18 +93,14 @@ export default class SnapView extends React.Component {
     if (Platform.OS === 'android') {
       return this.requestCameraPermission();
     }
-    this.takePictureGranted()
-  }
-
-  takePictureGranted() {
     this.camera.capture({
       target: Camera.constants.CaptureTarget.cameraRoll
     }).then(data => this.props.dispatch(SnapState.uploadSnap(data.path)))
       .catch(err => console.error(err));
   }
 
+
   renderCameraOverlay() {
-    // return null;
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <CaptureButton onPress={() => this.takePicture()} />
@@ -110,24 +109,7 @@ export default class SnapView extends React.Component {
         </TouchableHighlight>
       </View>
     );
-    //return <Text style={styles.capture} onPress={() => this.takePicture()}>[CAPTURE]</Text>;
   }
-
-  // updateAnimation() {
-  //   setInterval(
-  //     () => {
-  //       console.log("I do not leak!");
-  //       this.props.dispatch(SnapState.updateAnimation());
-  //     },
-  //     400
-  //   );
-  // }
-  //
-  // renderUploadingAnimation() {
-  //   // return null;
-  //   this.updateAnimation();
-  //   return <Text style={styles.capture} onPress={() => { }}>{this.props.animationValue}</Text>;
-  // }
 
   render() {
     const results = this.props.results.toJSON();

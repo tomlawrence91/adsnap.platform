@@ -39,7 +39,7 @@
 		BDEE113B3210460E91B45415 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D0C41A903D245C38257B3BD /* libRNFetchBlob.a */; };
 		D5679E157DC08056175C9842 /* libPods-adsnap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B890E889BC6010C0F5351B6 /* libPods-adsnap.a */; };
 		D61935E80F794083A6273F28 /* libA0Auth0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E406237AEB9E4A8C833DAF6D /* libA0Auth0.a */; };
-		9C6FA913867B488AA46BCA33 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1F9A8DE3094802A4F92D33 /* libRCTCamera.a */; };
+		1FC7F50F47994B498B52575A /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35DF599411F942BD97047E28 /* libRCTCamera.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -281,8 +281,8 @@
 		DF39B7C04EEFD848F3D3F848 /* Pods-adsnap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-adsnap.release.xcconfig"; path = "Pods/Target Support Files/Pods-adsnap/Pods-adsnap.release.xcconfig"; sourceTree = "<group>"; };
 		9811F8F63A984790AB8379AF /* A0Auth0.xcodeproj */ = {isa = PBXFileReference; name = "A0Auth0.xcodeproj"; path = "../node_modules/react-native-auth0/ios/A0Auth0.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		E406237AEB9E4A8C833DAF6D /* libA0Auth0.a */ = {isa = PBXFileReference; name = "libA0Auth0.a"; path = "libA0Auth0.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		478EFDD2C6484400ADBDBDD5 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; name = "RCTCamera.xcodeproj"; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		4F1F9A8DE3094802A4F92D33 /* libRCTCamera.a */ = {isa = PBXFileReference; name = "libRCTCamera.a"; path = "libRCTCamera.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		950757546B1946F698468859 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; name = "RCTCamera.xcodeproj"; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		35DF599411F942BD97047E28 /* libRCTCamera.a */ = {isa = PBXFileReference; name = "libRCTCamera.a"; path = "libRCTCamera.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,7 +313,7 @@
 				D5679E157DC08056175C9842 /* libPods-adsnap.a in Frameworks */,
 				BDEE113B3210460E91B45415 /* libRNFetchBlob.a in Frameworks */,
 				D61935E80F794083A6273F28 /* libA0Auth0.a in Frameworks */,
-				9C6FA913867B488AA46BCA33 /* libRCTCamera.a in Frameworks */,
+				1FC7F50F47994B498B52575A /* libRCTCamera.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,7 +500,7 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				C6396AABBB384906BB4A1CAF /* RNFetchBlob.xcodeproj */,
 				9811F8F63A984790AB8379AF /* A0Auth0.xcodeproj */,
-				478EFDD2C6484400ADBDBDD5 /* RCTCamera.xcodeproj */,
+				950757546B1946F698468859 /* RCTCamera.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
