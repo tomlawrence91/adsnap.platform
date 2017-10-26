@@ -122,7 +122,7 @@ export default class SnapView extends React.Component {
               this.camera = cam;
             }}
             style={styles.preview}
-            aspect={Camera.constants.Aspect.fill}
+            aspect={Camera.constants.Aspect.fit}
           /> :
           <View style={styles.preview} />
         }
