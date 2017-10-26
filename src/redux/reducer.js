@@ -2,6 +2,7 @@ import { Map } from "immutable";
 import GlobalStateReducer from "./GlobalState";
 import { combineReducers } from "redux-immutable";
 import WelcomeViewStateReducer from "../modules/welcome/WelcomeState";
+import ChallengesState from '../modules/challenges/ChallengesState'
 import DealsViewStateReducer from "../modules/deals/DealsState";
 import SnapStateReducer from "../modules/snap/SnapState";
 import RedeemStateReducer from "../modules/redeem/RedeemState";
@@ -10,6 +11,7 @@ import ImageBrowserReducer from "../modules/imageBrowser/ImageBrowserState";
 
 const reducers = {
   welcome: WelcomeViewStateReducer,
+  challenges: ChallengesState,
   deals: DealsViewStateReducer,
   snap: SnapStateReducer,
   redeem: RedeemStateReducer,

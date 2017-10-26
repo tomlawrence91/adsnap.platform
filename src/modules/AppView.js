@@ -21,7 +21,7 @@ export default class AppView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            initialRoute: 'snap',
+            initialRoute: 'challenges',
             isLoading: true,
             accessToken: '',
         }

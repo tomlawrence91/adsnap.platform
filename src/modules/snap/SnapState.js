@@ -6,6 +6,7 @@ import VisionService from "../../services/VisionService";
 // import { Alert } from "react-native";
 
 const SET_UPLOADING_FLAG = "SNAP/SET_UPLOADING_FLAG";
+const SET_CURRENT_CHALLENGE = "SNAP/SET_CURRENT_CHALLENGE";
 const UPDATE_ANIMATION = "SNAP/UPDATE_ANIMATION";
 const SHOW_RESULTS = "SNAP/SHOW_RESULTS";
 const HIDE_RESULTS = "SNAP/HIDE_RESULTS";
@@ -18,6 +19,7 @@ const initialState = fromJS({
     current: "<(°.°)>",
     values: ["<(°.°<)", "<(°.°)>", "(>°.°)>", "<(°.°)>"]
   },
+  currentChallenge: {},
   results: {
     ready: false,
     match: false,
@@ -120,12 +122,21 @@ export function hideResults() {
   };
 }
 
+export function setCurrentChallenge(challenge) {
+  return {
+    type: SET_CURRENT_CHALLENGE,
+    payload: challenge
+  }
+}
+
 // Reducer
 export default function SnapStateReducer(state = initialState, action = {}) {
 
   let results = {};
 
   switch (action.type) {
+    case SET_CURRENT_CHALLENGE:
+      return state.set("currentChallenge", fromJS(action.payload))
 
     case HIDE_RESULTS:
       results = state.get("results").toJS();
@@ -148,7 +159,8 @@ export default function SnapStateReducer(state = initialState, action = {}) {
 
       // positive
       results.terms = labels.concat(texts, logos);
-      results.termsMatching = ['adidas', 'sports', 'black and white', 'adidas originals'];
+      const matchAgainst = state.get('currentChallenge').toJS()
+      results.termsMatching = matchAgainst.keywords
 
       results.termsMatching.forEach( term => {
         if (results.terms.includes(term)) {
