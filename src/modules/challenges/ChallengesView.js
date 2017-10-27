@@ -1,16 +1,16 @@
-import * as SnapState from '../snap/SnapState'
+import * as ChallengeDetailsState from '../challengeDetails/ChallengeDetailsState'
 import React from 'react'
 import { Button, Text, ScrollView, View } from 'react-native'
 import Container from '../../components/Container'
 
-export default class DealsView extends React.Component {
+export default class ChallengesView extends React.Component {
   static route = {
     navigationBar: { title: 'Challenges' }
   }
 
   startChallenge(challenge) {
-    this.props.dispatch(SnapState.setCurrentChallenge(challenge))
-    this.props.navigator.push(Router.getRoute('snap'));
+    this.props.dispatch(ChallengeDetailsState.setChallenge(challenge))
+    this.props.navigator.push(Router.getRoute('challengeDetails'));
   }
 
   render() {
@@ -22,7 +22,7 @@ export default class DealsView extends React.Component {
               <Text>{challenge.name}</Text>
               <Text>{challenge.description}</Text>
               <Button
-                title="Go to Challenge"
+                title="See Challenge Details"
                 onPress={() => this.startChallenge(challenge)} />
             </View>
           )}
