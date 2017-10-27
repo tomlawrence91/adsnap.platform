@@ -13,25 +13,33 @@ export default class SnapView extends React.Component {
 
   static route = {
     navigationBar: {
-      title: "Free snapping"
+      title(params) {
+        return params.challenge ? `Challenge: ${params.challenge}` : 'Free snapping';
+      }
     }
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.results.toJS().ready) {
-      this.props.navigator.push(Router.getRoute("results"));
-
-      if (nextProps.results.match) {
-        SnapState.setCurrentChallenge({});
-        setTimeout(() => {
-          const pointsGained = nextProps.results.type === 'ad' ? 25 : 100;
-          this.props.dispatch(SnapState.updatePoints(nextProps.points + pointsGained));
-        }, 500);
+    const results = nextProps.results.toJS();
+    if (results.ready) {
+      if (results.match) {
+        const pointsGained = results.type === 'ad' ? 25 : 100;
+        // this.props.dispatch(SnapState.setCurrentChallenge({}));
+        this.props.dispatch(SnapState.updatePoints(nextProps.points + pointsGained));
       }
-
+      this.props.navigator.push(Router.getRoute("results"));
       return this.props.dispatch(SnapState.hideResults());
     }
   }
+
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.currentChallenge !== this.props.currentChallenge) {
+  //     const currentChallenge = this.props.currentChallenge.toJS();
+  //     this.props.navigator.updateCurrentRouteParams({
+  //       challenge: currentChallenge && currentChallenge.brandName ? currentChallenge.brandName : null
+  //     });
+  //   }
+  // }
 
   openCameraRoll() {
     if (Platform.OS === 'android') {

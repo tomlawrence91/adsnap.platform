@@ -43,7 +43,7 @@ export default class HomeView extends React.Component {
           <Text>Welcome to AdSnap</Text>
           <Text>Finish challenges to unlock prizes.</Text>
           <Button
-           title='See Challenges'
+           title='Start snapping'
            onPress={() => this.toToTabs()}
            />
         </ScrollView>

@@ -37,9 +37,9 @@ export default class ImageResultsView extends React.Component {
                 <Image style={styles.backgroundImage} source={{ uri: results.file }} />
               </View>
               <View style={styles.resultsContainer}>
-                <Text style={styles.resultsHeadline}>Congrats, you have unlocked {challenge.name}</Text>
-                <Text style={styles.resultsSubHeadline}>The following coupon code has been added to your rewards.</Text>
-                <View style={styles.codeBox}><Text style={styles.codeText}>{challenge.code}</Text></View>
+                <Text style={styles.resultsHeadline}>{challenge.name ? `Congrats, you have unlocked ${challenge.name}` : `Well, done you have taken a photo of an ad`}</Text>
+                {challenge.code && <Text style={styles.resultsSubHeadline}>The following coupon code has been added to your rewards.</Text>}
+                {challenge.code && <View style={styles.codeBox}><Text style={styles.codeText}>{challenge.code}</Text></View>}
                 {/*<TouchableHighlight>*/}
                   {/*<Text style={[styles.resultsSubHeadline, styles.resultsSubHeadlineLink]}>See rewards</Text>*/}
                 {/*</TouchableHighlight>*/}
