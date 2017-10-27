@@ -6,6 +6,8 @@ export default connect(
   state => ({
     uploading: state.getIn(['snap', 'uploading']),
     animationValue: state.getIn(['snap','animationObj','current']),
-    results: state.getIn(['snap', 'results'])
+    results: state.getIn(['snap', 'results']),
+    points: state.getIn(['snap', 'points']),
+    currentChallenge: state.getIn(['snap', 'currentChallenge'])
   })
 )(SnapView);

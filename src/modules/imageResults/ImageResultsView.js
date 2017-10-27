@@ -24,7 +24,7 @@ export default class ImageResultsView extends React.Component {
 
   render() {
     const results = this.props.results.toJS();
-    const challenge = this.props.challenge.toJS()
+    const challenge = this.props.challenge.toJS();
 
     return (
       <Container>

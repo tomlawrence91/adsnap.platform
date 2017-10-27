@@ -10,6 +10,7 @@ const SET_CURRENT_CHALLENGE = "SNAP/SET_CURRENT_CHALLENGE";
 const UPDATE_ANIMATION = "SNAP/UPDATE_ANIMATION";
 const SHOW_RESULTS = "SNAP/SHOW_RESULTS";
 const HIDE_RESULTS = "SNAP/HIDE_RESULTS";
+const UPDATE_POINTS = "SNAP/UPDATE_POINTS";
 
 // Initial state
 const initialState = fromJS({
@@ -26,7 +27,8 @@ const initialState = fromJS({
     labels: [],
     texts: [],
     logos: []
-  }
+  },
+  points: 100
 });
 
 // const getGeolocation = () => {
@@ -129,6 +131,13 @@ export function setCurrentChallenge(challenge) {
   }
 }
 
+export function updatePoints(amount) {
+  return {
+    type: UPDATE_POINTS,
+    payload: amount
+  }
+}
+
 // Reducer
 export default function SnapStateReducer(state = initialState, action = {}) {
 
@@ -136,7 +145,7 @@ export default function SnapStateReducer(state = initialState, action = {}) {
 
   switch (action.type) {
     case SET_CURRENT_CHALLENGE:
-      return state.set("currentChallenge", fromJS(action.payload))
+      return state.set("currentChallenge", fromJS(action.payload));
 
     case HIDE_RESULTS:
       results = state.get("results").toJS();
@@ -159,8 +168,16 @@ export default function SnapStateReducer(state = initialState, action = {}) {
 
       // positive
       results.terms = labels.concat(texts, logos);
-      const matchAgainst = state.get('currentChallenge').toJS()
-      results.termsMatching = matchAgainst.keywords
+
+      const matchAgainst = state.get('currentChallenge').toJS();
+
+      results.type = 'ad';
+      results.termsMatching = ['advertisement', 'billboard', 'logo', 'product'];
+
+      if (matchAgainst.keywords) {
+        results.termsMatching = matchAgainst.keywords;
+        results.type = 'challenge';
+      }
 
       results.termsMatching.forEach( term => {
         if (results.terms.includes(term)) {
@@ -172,14 +189,8 @@ export default function SnapStateReducer(state = initialState, action = {}) {
 
     case SET_UPLOADING_FLAG:
       return state.set("uploading", fromJS(action.payload));
-    case UPDATE_ANIMATION:
-      let newAnimationObj = state.get("animationObj").toJS();
-      newAnimationObj.stage = newAnimationObj.stage <= 3
-        ? newAnimationObj.stage + 1
-        : 0;
-      console.log("stage", newAnimationObj.stage);
-      newAnimationObj.current = newAnimationObj.values[newAnimationObj.stage];
-      return state.set("animationObj", fromJS(newAnimationObj));
+    case UPDATE_POINTS:
+      return state.set("points", fromJS(action.payload));
     default:
       return state;
   }

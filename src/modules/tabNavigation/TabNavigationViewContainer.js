@@ -3,6 +3,7 @@ import TabNavigationView from './TabNavigationView';
 
 export default connect(
   state => ({
-      tabIndex: state.getIn(['tabNav', 'tabIndex'])
+    tabIndex: state.getIn(['tabNav', 'tabIndex']),
+    points: state.getIn(['snap', 'points'])
   })
 )(TabNavigationView);

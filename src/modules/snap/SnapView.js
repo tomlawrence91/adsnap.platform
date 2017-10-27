@@ -11,24 +11,25 @@ import styles from "./SnapStyles";
 
 export default class SnapView extends React.Component {
 
-  cameraPermissionsGranted = false;
-
   static route = {
     navigationBar: {
-      title: "AdSnap tests"
+      title: "Free snapping"
     }
   };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.results.toJS().ready) {
       this.props.navigator.push(Router.getRoute("results"));
-      return this.props.dispatch(SnapState.hideResults());
-    }
-  }
 
-  componentDidMount() {
-    if (Platform.OS === 'android') {
-      this.requestCameraPermission();
+      if (nextProps.results.match) {
+        SnapState.setCurrentChallenge({});
+        setTimeout(() => {
+          const pointsGained = nextProps.results.type === 'ad' ? 25 : 100;
+          this.props.dispatch(SnapState.updatePoints(nextProps.points + pointsGained));
+        }, 500);
+      }
+
+      return this.props.dispatch(SnapState.hideResults());
     }
   }
 
@@ -41,27 +42,6 @@ export default class SnapView extends React.Component {
 
   openCameraRollGranted() {
     this.props.navigator.push(Router.getRoute("imageBrowser"));
-  }
-
-  async requestCameraPermission() {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.CAMERA,
-        {
-          'title': 'Cool Photo App Camera Permission',
-          'message': 'Cool Photo App needs access to your camera ' +
-          'so you can take awesome pictures.'
-        }
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        this.cameraPermissionsGranted = true;
-        this.forceUpdate();
-      } else {
-        console.log("Camera permission denied")
-      }
-    } catch (err) {
-      console.warn(err)
-    }
   }
 
   async requestStoragePermission() {
@@ -85,10 +65,6 @@ export default class SnapView extends React.Component {
   }
 
   takePicture() {
-    if (Platform.OS === 'android' && ! this.cameraPermissionsGranted ) {
-      return this.requestCameraPermission()
-    }
-
     this.camera.capture({
       target: Camera.constants.CaptureTarget.cameraRoll
     }).then(data => this.props.dispatch(SnapState.uploadSnap(data.path)))
@@ -109,7 +85,7 @@ export default class SnapView extends React.Component {
   render() {
     const results = this.props.results.toJSON();
     return (
-      <Container>
+      <View style={{ flex: 1, flexDirection: 'column' }}>
         <Camera
           ref={cam => {
             this.camera = cam;
@@ -123,7 +99,7 @@ export default class SnapView extends React.Component {
             : this.renderCameraOverlay()
           }
         </View>
-      </Container>
+      </View>
     );
   }
 }
