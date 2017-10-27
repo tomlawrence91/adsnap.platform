@@ -41,13 +41,15 @@ export default class TabNavigationView extends React.Component {
       <TabNavigation
         tabBarColor={COLORS.NAVIGATION_PINK}
         tabBarHeight={56}
-        initialTab="snap">
+        initialTab="snap"
+        navigatorUID="main">
 
         <TabNavigationItem
           id="challenges"
           renderIcon={(isSelected) => this.renderTabIcon(ICONS.CAMERA, isSelected)}>
           <StackNavigation
             defaultRouteConfig={defaultRouteConfig}
+            navigatorUID='challenges'
             initialRoute={Router.getRoute('challenges')} />
         </TabNavigationItem>
 
@@ -56,6 +58,7 @@ export default class TabNavigationView extends React.Component {
           renderIcon={(isSelected) => this.renderTabIcon(ICONS.CAMERA, isSelected)}>
           <StackNavigation
             defaultRouteConfig={defaultRouteConfig}
+            navigatorUID='snap'
             initialRoute={Router.getRoute('snap')} />
         </TabNavigationItem>
 
@@ -64,6 +67,7 @@ export default class TabNavigationView extends React.Component {
           renderIcon={(isSelected) => this.renderTabIcon(ICONS.VOUCHER, isSelected)}>
           <StackNavigation
             defaultRouteConfig={defaultRouteConfig}
+            navigatorUID='deals'
             initialRoute={Router.getRoute('deals')} />
         </TabNavigationItem>
 

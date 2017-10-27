@@ -10,7 +10,9 @@ export default class ChallengeDetailsView extends Component {
 
   goToSnap(challenge) {
     this.props.dispatch(setCurrentChallenge(challenge))
-    this.props.navigator.push(Router.getRoute('snap'))
+    this.props.navigation.performAction(({ tabs }) => {
+      tabs('main').jumpToTab('snap');
+    })
   }
 
   render() {
