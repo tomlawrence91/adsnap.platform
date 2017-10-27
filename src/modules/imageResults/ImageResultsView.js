@@ -14,12 +14,8 @@ export default class ImageResultsView extends React.Component {
     }
   };
 
-  goHome() {
-    this.props.navigator.push(Router.getRoute('home'));
-  }
-
   returnToSnap() {
-    this.props.navigator.push(Router.getRoute('snap'));
+    this.props.navigator.pop();
   }
 
   render() {
@@ -43,9 +39,6 @@ export default class ImageResultsView extends React.Component {
                 {/*<TouchableHighlight>*/}
                   {/*<Text style={[styles.resultsSubHeadline, styles.resultsSubHeadlineLink]}>See rewards</Text>*/}
                 {/*</TouchableHighlight>*/}
-                <Button
-                  title="Go Home"
-                  onPress={() => this.goHome()} />
               </View>
             </View>
 
@@ -62,9 +55,6 @@ export default class ImageResultsView extends React.Component {
               <Button 
                 title="Try Again"
                 onPress={() => this.returnToSnap()}/>
-              <Button
-                title="Go Home"
-                onPress={() => this.goHome()} />
             </View>
           }
         </ScrollView>
