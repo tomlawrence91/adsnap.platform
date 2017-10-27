@@ -44,7 +44,7 @@ export default class TabNavigationView extends React.Component {
 
         <TabNavigationItem
           id="challenges"
-          renderIcon={(isSelected) => this.renderTabIcon(ICONS.CAMERA, isSelected)}>
+          renderIcon={(isSelected) => this.renderTabIcon(ICONS.CHALLENGES, isSelected)}>
           <StackNavigation
             defaultRouteConfig={this.defaultRouteConfig}
             initialRoute={Router.getRoute('challenges')} />
