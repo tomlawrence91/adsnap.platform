@@ -6,25 +6,28 @@ const initialState = fromJS({
       id: 0,
       brandName: 'Adidas',
       code: 'y3LUKD',
-      description: 'Take a picture of an Adidas logo',
+      description: 'Snap picture of Adidas Ads',
       keywords: ['Adidas', 'Three Stripes', 'Logo', 'Footwear'],
       name: 'Adidas Challenge',
+      goal: 10
     },
     {
       id: 1,
       brandName: 'KFC',
       code: '5JrkNh',
-      description: 'Take a picture of a KFC logo',
+      description: 'Snap pictures of a KFC Ads',
       keywords: ['KFC', 'Colonel Sanders', 'Logo', 'Fried chicken'],
       name: 'KFC Challenge',
+      goal: 15
     },
     {
       id: 2,
       brandName: 'Heineken',
       code: 'rGgf28',
-      description: 'Take a picture of a Heineken logo',
+      description: 'Snap pictures of Heineken Ads',
       keywords: ['Heineken', 'Beer', 'Logo', 'Lager'],
       name: 'Heineken Challenge',
+      goal: 5
     }
   ]
 })
