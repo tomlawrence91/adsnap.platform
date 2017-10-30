@@ -9,7 +9,7 @@ export default class ChallengesView extends React.Component {
   }
 
   startChallenge(challenge) {
-    this.props.dispatch(ChallengeDetailsState.setChallenge(challenge))
+    this.props.dispatch(ChallengeDetailsState.setChallenge({...challenge, completed: false}));
     this.props.navigator.push(Router.getRoute('challengeDetails'));
   }
 

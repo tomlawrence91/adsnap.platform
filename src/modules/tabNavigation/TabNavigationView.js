@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styles from './TabNavigationStyles';
 import * as ICONS from '../../constants/icons';
 import * as COLORS from '../../constants/colors';
@@ -11,17 +12,21 @@ import {
 import {
   StackNavigation,
   TabNavigation,
-  TabNavigationItem,
+  TabNavigationItem
 } from '@exponent/ex-navigation';
 
 export default class TabNavigationView extends React.Component {
 
   defaultRouteConfig = {
     navigationBar: {
+      title: (params) => {
+        const challenge = this.props.currentChallenge.toJS();
+        return (!challenge.brandName || challenge.completed) ? 'Free snapping' : `Challenge: ${challenge.brandName}`;
+      },
       tintColor: COLORS.WHITE,
       backgroundColor: COLORS.APP_HEADER,
-      renderRight: (route, props) => {
-        return <Score points={this.props.points} />
+      renderRight: (params) => {
+        return <Score points={this.props.points} pointsUpdated={params.params.pointsUpdated} />
       }
     },
   };
@@ -56,7 +61,8 @@ export default class TabNavigationView extends React.Component {
           <StackNavigation
             defaultRouteConfig={this.defaultRouteConfig}
             navigatorUID='snap'
-            initialRoute={Router.getRoute('snap')} />
+            initialRoute={Router.getRoute('snap')}
+            />
         </TabNavigationItem>
 
         <TabNavigationItem
