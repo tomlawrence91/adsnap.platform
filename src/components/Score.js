@@ -6,16 +6,42 @@ import * as ICONS from '../constants/icons';
 import {
   StyleSheet,
   View,
-  Text,
-  Animated
+  Animated,
 } from 'react-native';
 
 export default class Score extends React.Component {
 
+  state = {
+    textScale: new Animated.Value(1)
+  };
+
+  animateText() {
+    Animated.sequence(
+      [
+        Animated.timing(this.state.textScale, {
+          toValue: 2,
+          duration: 250
+        }),
+        Animated.timing(this.state.textScale, {
+          toValue: 1,
+          duration: 250
+        })
+      ]
+    ).start();
+  }
+
+  componentDidUpdate() {
+    if (this.props.pointsUpdated) {
+      setTimeout( () => {
+        this.animateText();
+      }, 500)
+    }
+  }
+
   render() {
     return (
       <View style={styles.points}>
-        <Text style={styles.pointsText}>{this.props.points} points</Text>
+        <Animated.Text style={[styles.pointsText, { transform: [ {scale: this.state.textScale }]}]}>{this.props.points} points</Animated.Text>
       </View>
     )
   }

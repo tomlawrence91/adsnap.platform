@@ -3,7 +3,6 @@ import React from "react";
 import { View, Text, TouchableHighlight, ActivityIndicator, Platform } from "react-native";
 import { PermissionsAndroid } from 'react-native';
 
-import Container from "../../components/Container";
 import CaptureButton from "../../components/CaptureButton";
 import Camera from "react-native-camera";
 
@@ -11,35 +10,16 @@ import styles from "./SnapStyles";
 
 export default class SnapView extends React.Component {
 
-  static route = {
-    navigationBar: {
-      title(params) {
-        return params.challenge ? `Challenge: ${params.challenge}` : 'Free snapping';
-      }
-    }
-  };
-
-  componentWillReceiveProps(nextProps) {
-    const results = nextProps.results.toJS();
-    if (results.ready) {
-      if (results.match) {
-        const pointsGained = results.type === 'ad' ? 25 : 100;
-        // this.props.dispatch(SnapState.setCurrentChallenge({}));
-        this.props.dispatch(SnapState.updatePoints(nextProps.points + pointsGained));
-      }
-      this.props.navigator.push(Router.getRoute("results"));
-      return this.props.dispatch(SnapState.hideResults());
+  componentDidUpdate(prevProps) {
+    const results = this.props.results.toJS();
+    if (results.ready && results.match) {
+      this.props.dispatch(SnapState.hideResults());
+      const pointsGained = results.type === 'ad' ? 25 : 100;
+      this.props.dispatch(SnapState.updatePoints(parseInt(this.props.points) + pointsGained));
+      this.props.dispatch(SnapState.setCurrentChallenge({ ...this.props.currentChallenge.toJS(), completed: true }));
+      this.props.navigator.push(Router.getRoute("results", {pointsUpdated: true }));
     }
   }
-
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.currentChallenge !== this.props.currentChallenge) {
-  //     const currentChallenge = this.props.currentChallenge.toJS();
-  //     this.props.navigator.updateCurrentRouteParams({
-  //       challenge: currentChallenge && currentChallenge.brandName ? currentChallenge.brandName : null
-  //     });
-  //   }
-  // }
 
   openCameraRoll() {
     if (Platform.OS === 'android') {
