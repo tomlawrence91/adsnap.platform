@@ -24,7 +24,7 @@ export default class DealsView extends React.Component {
       this.colorDeals();
     }
 
-    componentWillReceiveProps() {
+    componentDidUpdate() {
       if (this.props.activeDeal.id) {
         this.props.dispatch(RedeemState.setDeal(this.props.activeDeal));
         this.props.dispatch(DealsState.setActiveDeal({}));

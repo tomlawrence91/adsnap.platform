@@ -4,6 +4,7 @@ import Container from "../../components/Container";
 import RectButton from "../../components/RectButton";
 
 import * as DealsState from '../deals/DealsState';
+import * as SnapState from '../snap/SnapState';
 
 import styles from "./ImageResultsStyles";
 import * as COLORS from "../../constants/colors";
@@ -24,6 +25,10 @@ export default class ImageResultsView extends React.Component {
 
   nextAction() {
     if (this.props.results.match && this.props.challenge.name) {
+
+      this.props.dispatch(SnapState.setCurrentChallenge({}));
+      this.props.dispatch(SnapState.hideResults());
+
       const deal = this.props.deals.filter( deal => deal.id == this.props.challenge.id );
       this.props.dispatch(DealsState.setActiveDeal(deal[0]));
       this.props.navigator.pop();
