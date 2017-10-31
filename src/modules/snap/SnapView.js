@@ -84,6 +84,7 @@ export default class SnapView extends React.Component {
           }}
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}
+          captureQuality={Camera.constants.CaptureQuality.medium}
         />
         <View style={styles.actions}>
           {this.props.uploading
