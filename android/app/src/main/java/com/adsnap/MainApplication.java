@@ -5,12 +5,12 @@ import android.app.Application;
 import com.facebook.react.ReactApplication;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.auth0.react.A0Auth0Package;
-import com.clipsub.rnbottomsheet.RNBottomSheetPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.opensettings.OpenSettingsPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,9 +29,9 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
           new A0Auth0Package(),
-          new RNBottomSheetPackage(),
           new RNFetchBlobPackage(),
-          new RCTCameraPackage()
+          new RCTCameraPackage(),
+          new OpenSettingsPackage()
       );
     }
   };
