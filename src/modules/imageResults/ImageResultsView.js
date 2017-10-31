@@ -1,20 +1,36 @@
 import React from "react";
 // import * as ImageBrowserState from "../imageBrowser/ImageBrowserState";
-import { Button, View, Text, Image, TouchableHighlight, ScrollView } from "react-native";
+import { Button, View, Text, Image } from "react-native";
 import Container from "../../components/Container";
+import RectButton from "../../components/RectButton";
 
 import styles from "./ImageResultsStyles";
-// import Button from "../../components/Button";
+import * as COLORS from "../../constants/colors";
+import * as COMMON_STYLES from "../../constants/commonStyles";
+import * as ICONS from "../../constants/icons";
 
 export default class ImageResultsView extends React.Component {
 
   static route = {
-    navigationBar: {
-      title: "AdSnap image analysis"
-    }
+    // navigationBar: {
+    //   title: ""
+    // }
   };
 
   returnToSnap() {
+    this.props.navigator.pop();
+  }
+
+  nextAction() {
+    const results = this.props.results.toJS();
+    const challenge = this.props.challenge.toJS();
+    if (results.match && challenge.name) {
+      this.props.navigator.pop();
+      return this.props.navigation.performAction(({ tabs }) => {
+        tabs('main').jumpToTab('deals');
+      })
+    }
+
     this.props.navigator.pop();
   }
 
@@ -23,41 +39,57 @@ export default class ImageResultsView extends React.Component {
     const challenge = this.props.challenge.toJS();
 
     return (
+
       <Container>
-        <ScrollView>
 
           {results.match ?
 
-            <View>
-              <View style={styles.codeWrapper}>
-                <Image style={styles.backgroundImage} source={{ uri: results.file }} />
-              </View>
-              <View style={styles.resultsContainer}>
-                <Text style={styles.resultsHeadline}>{challenge.name ? `Congrats, you have unlocked ${challenge.name}` : `Well, done you have taken a photo of an ad`}</Text>
-                {challenge.code && <Text style={styles.resultsSubHeadline}>The following coupon code has been added to your rewards.</Text>}
-                {challenge.code && <View style={styles.codeBox}><Text style={styles.codeText}>{challenge.code}</Text></View>}
-                {/*<TouchableHighlight>*/}
-                  {/*<Text style={[styles.resultsSubHeadline, styles.resultsSubHeadlineLink]}>See rewards</Text>*/}
-                {/*</TouchableHighlight>*/}
+            <View style={styles.container}>
+              <Image style={styles.logo} source={{uri: results.file}} />
+              <Text style={styles.description}>{challenge.name ? `Congrats, you have unlocked ${challenge.name}` : `Well, done you have taken a photo of an ad`}</Text>
+              <View style={styles.buttonWrapper}>
+                <RectButton
+                  onPress={ () => this.nextAction()}
+                  text={challenge.name ? 'Get your discount' : 'Collect more points'}
+                  width={240}
+                  height={COMMON_STYLES.BUTTON_HEIGHT}
+                  textColor={COLORS.LIGHT_PINK}
+                  backgroundColor={COLORS.TRANSPARENT}
+                  borderColor={COLORS.LIGHT_PINK}
+                  border={{
+                    borderColor: COLORS.LIGHT_PINK,
+                    borderStyle: "solid",
+                    borderWidth: 2
+                  }}
+                />
               </View>
             </View>
 
             :
 
-            <View style={styles.resultsContainer}>
+            <View style={styles.container}>
 
-              <Text style={styles.resultsHeadline}>Unfortunately, there hasn't been a match to {challenge.name}</Text>
-              <Text style={styles.resultsSubHeadline}>Please make sure that your photo contains one of the following terms:</Text>
-              {results.termsMatching && results.termsMatching.map( (term, idx) => <Text key={idx} style={styles.resultsText}>{term}</Text> )}
-
-              <Text style={styles.resultsSubHeadline}>However, your photo has been annotated with the following terms:</Text>
-              {results.terms && results.terms.map( (term, idx) => <Text key={idx} style={styles.resultsText}>{term}</Text> )}
-              <Button 
-                title="Try Again"
-                onPress={() => this.returnToSnap()}/>
+              <Image style={styles.logo} source={ICONS.SAD} />
+              <Text style={styles.description}>{challenge.name ? `Oops, couldn't find a match for ${challenge.name}` : `Oops, that photo doesn't seem to contain any ad`}</Text>
+              <View style={styles.buttonWrapper}>
+                <RectButton
+                  onPress={ () => this.nextAction()}
+                  text={challenge.name ? 'Try again' : 'Try again'}
+                  width={240}
+                  height={COMMON_STYLES.BUTTON_HEIGHT}
+                  textColor={COLORS.LIGHT_PINK}
+                  backgroundColor={COLORS.TRANSPARENT}
+                  borderColor={COLORS.LIGHT_PINK}
+                  border={{
+                    borderColor: COLORS.LIGHT_PINK,
+                    borderStyle: "solid",
+                    borderWidth: 2
+                  }}
+                />
+              </View>
             </View>
           }
-        </ScrollView>
+
       </Container>
     );
   }
