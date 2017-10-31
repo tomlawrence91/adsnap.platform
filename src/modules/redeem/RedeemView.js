@@ -27,7 +27,6 @@ export default class RedeemView extends React.Component {
     //TODO: fetch code
     //TODO: popup on remove
     render() {
-        console.log(this.props)
         return (
             <Container loading={!this.props.deal}>
                 <ScrollView>

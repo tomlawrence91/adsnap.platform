@@ -10,7 +10,7 @@ const lodash = require('lodash');
 const SET_DEALS = 'DEALS/SET_DEALS';
 const SET_OVERLAY_COLOR = 'DEALS/SET_COLOR';
 const ADD_DEAL = 'DEALS/ADD_DEAL';
-
+const SET_ACTIVE_DEAL = 'DEALS/SET_ACTIVE_DEAL';
 
 // Initial state
 const initialState = fromJS({
@@ -45,6 +45,7 @@ const initialState = fromJS({
       'brandName': 'KFC',
       'code': 'CHICKEN'
     }],
+  activeDeal: {},
   colors: [COLORS.TRANSPARENT_ORANGE, COLORS.TRANSPARENT_PURPLE, COLORS.TRANSPARENT_PINK]
 });
 
@@ -69,6 +70,13 @@ export function setDeals(deals) {
   }
 }
 
+export function setActiveDeal(deal) {
+  return {
+    type: SET_ACTIVE_DEAL,
+    payload: deal
+  }
+}
+
 export function setDealOverlayColor(dealColorMap) {
   return {
     type: SET_OVERLAY_COLOR,
@@ -87,6 +95,10 @@ export default function DealsStateReducer(state = initialState, action = {}) {
       const deals = actions.payload;
       storeItem(STORAGE.DEALS, deals);
       return state.set('deals', fromJS(deals));
+
+    case SET_ACTIVE_DEAL:
+      const deal = action.payload;
+      return state.set('activeDeal', fromJS(deal));
 
     case SET_OVERLAY_COLOR:
       return state.set('deals', fromJS(action.payload));

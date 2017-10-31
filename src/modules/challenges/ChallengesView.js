@@ -24,32 +24,41 @@ export default class ChallengesView extends React.Component {
       <Container>
         <ScrollView
          style={{
-          backgroundColor: '#e2e2e2',
+          backgroundColor: 'white',
           paddingHorizontal: 10
          }}>
           {this.props.challenges.map(challenge =>
             <View key={challenge.id}
               style={{ 
-                flexDirection: 'row', 
-                flexWrap: 'wrap',
-                marginVertical: 10
+                flexDirection: 'row',
+                // justifyContent: 'space-around',
+                alignItems: 'center',
+                marginBottom: 5,
+                marginTop: 5,
+                paddingVertical: 10,
+                paddingBottom: 20,
+                borderBottomWidth: 1,
+                borderBottomColor: '#EEE'
                 }}>
               <Image
-                style={{ width: 100, height: 100 }}
+                style={{ width: 100, height: 100, marginRight: 12 }}
                 source={{ uri: challenge.campaignImgUrl }}
               />
               <View style={{
-                marginLeft: 5,
-                width: 250
+                flex: 1,
+                marginLeft: 5
               }}>
                 <Text style={{
                   color: '#464646',
                   fontSize: 22,
                   fontWeight: 'bold',
                 }}>{challenge.name}</Text>
-                <Text style={{
+                <Text
+                  // numberOfLines={1}
+                  // ellipsizeMode='tail'
+                  style={{
                   color: '#464646',
-                  fontSize: 18
+                  fontSize: 18,
                 }}>{challenge.description}</Text>
                 <TouchableOpacity
                   style={{
@@ -64,7 +73,7 @@ export default class ChallengesView extends React.Component {
                     fontSize: 18,
                     marginVertical: 5,
                     textAlign: 'center'
-                  }}>go to challenge</Text>
+                  }}>Start challenge</Text>
                 </TouchableOpacity>
               </View>
             </View>

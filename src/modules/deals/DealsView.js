@@ -1,27 +1,23 @@
 import * as DealsState from './DealsState';
 import * as RedeemState from '../redeem/RedeemState';
-import * as COLORS from '../../constants/colors';
 import React from 'react';
 import {
-    PropTypes,
-    Text,
-    ScrollView,
-    View,
+  ScrollView,
+  View,
 } from 'react-native';
-import * as ROUTES from '../../constants/routes';
-import * as ICONS from '../../constants/icons';
+
+import {sample} from 'lodash';
+
 import Container from '../../components/Container';
 import Tile from '../../components/Tile';
 
 import styles from './DealsStyles';
 
-const lodash = require('lodash');
-
 export default class DealsView extends React.Component {
     static route = {
-        navigationBar: {
-            title: 'Your Discounts',
-        }
+      navigationBar: {
+        title: 'Your Discounts',
+      }
     };
 
     componentWillMount() {
@@ -29,11 +25,9 @@ export default class DealsView extends React.Component {
     }
 
     componentWillReceiveProps() {
-      const results = this.props.results.toJS();
-      const challenge = this.props.currentChallenge.toJS();
-      if (results.match && challenge.name) {
-        const deal = this.props.deals.filter( deal => deal.id == challenge.id );
-        this.props.dispatch(RedeemState.setDeal(deal[0]));
+      if (this.props.activeDeal.id) {
+        this.props.dispatch(RedeemState.setDeal(this.props.activeDeal));
+        this.props.dispatch(DealsState.setActiveDeal({}));
         this.props.navigator.push(Router.getRoute('redeem'));
       }
     }
@@ -98,7 +92,7 @@ export default class DealsView extends React.Component {
 
     colorDeals() {
         dealColorMap = this.props.deals.map(deal => {
-            return { ...deal, overlayColor: lodash.sample(this.props.colors) }
+            return { ...deal, overlayColor: sample(this.props.colors) }
         });
         this.setDealOverlayColor(dealColorMap);
     }

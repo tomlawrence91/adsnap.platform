@@ -1,8 +1,9 @@
 import React from "react";
-// import * as ImageBrowserState from "../imageBrowser/ImageBrowserState";
-import { Button, View, Text, Image } from "react-native";
+import { View, Text, Image } from "react-native";
 import Container from "../../components/Container";
 import RectButton from "../../components/RectButton";
+
+import * as DealsState from '../deals/DealsState';
 
 import styles from "./ImageResultsStyles";
 import * as COLORS from "../../constants/colors";
@@ -22,21 +23,23 @@ export default class ImageResultsView extends React.Component {
   }
 
   nextAction() {
-    const results = this.props.results.toJS();
-    const challenge = this.props.challenge.toJS();
-    if (results.match && challenge.name) {
+    if (this.props.results.match && this.props.challenge.name) {
+      const deal = this.props.deals.filter( deal => deal.id == this.props.challenge.id );
+      this.props.dispatch(DealsState.setActiveDeal(deal[0]));
       this.props.navigator.pop();
       return this.props.navigation.performAction(({ tabs }) => {
         tabs('main').jumpToTab('deals');
       })
     }
 
+    this.props.dispatch(DealsState.setActiveDeal({}));
     this.props.navigator.pop();
   }
 
   render() {
-    const results = this.props.results.toJS();
-    const challenge = this.props.challenge.toJS();
+
+    const results = this.props.results;
+    const challenge = this.props.challenge;
 
     return (
 
