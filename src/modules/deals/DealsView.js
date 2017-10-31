@@ -22,17 +22,26 @@ export default class DealsView extends React.Component {
         navigationBar: {
             title: 'Your Discounts',
         }
-    }
+    };
+
     componentWillMount() {
-        // this.props.dispatch(DealsState.retrieveDeals());
-        this.colorDeals();
+      this.colorDeals();
     }
 
+    componentWillReceiveProps() {
+      const results = this.props.results.toJS();
+      const challenge = this.props.currentChallenge.toJS();
+      if (results.match && challenge.name) {
+        const deal = this.props.deals.filter( deal => deal.id == challenge.id );
+        this.props.dispatch(RedeemState.setDeal(deal[0]));
+        this.props.navigator.push(Router.getRoute('redeem'));
+      }
+    }
 
     onPress = (deal) => {
-        this.props.dispatch(RedeemState.setDeal(deal));
-        this.props.navigator.push(Router.getRoute('redeem', { deal: deal }));
-    }
+      this.props.dispatch(RedeemState.setDeal(deal));
+      this.props.navigator.push(Router.getRoute('redeem', { deal: deal }));
+    };
 
     renderTile(i, overlayColor) {
         let deal = this.props.deals[i];
