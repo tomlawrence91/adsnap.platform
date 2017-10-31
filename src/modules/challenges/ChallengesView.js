@@ -22,37 +22,50 @@ export default class ChallengesView extends React.Component {
   render() {
     return(
       <Container>
-        <ScrollView>
+        <ScrollView
+         style={{
+          backgroundColor: '#e2e2e2',
+          paddingHorizontal: 10
+         }}>
           {this.props.challenges.map(challenge =>
-            <View key={challenge.id} style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+            <View key={challenge.id}
+              style={{ 
+                flexDirection: 'row', 
+                flexWrap: 'wrap',
+                marginVertical: 10
+                }}>
               <Image
                 style={{ width: 100, height: 100 }}
                 source={{ uri: challenge.campaignImgUrl }}
               />
-              <View>
-              <Text style={{
-                color: '#464646',
-                fontSize: 22,
-                fontWeight: 'bold',
-              }}>{challenge.name}</Text>
-              <Text style={{
-                color: '#464646',
-                fontSize: 18
-              }}>{challenge.description}</Text>
-              <TouchableOpacity
-                style={{
-                  backgroundColor: '#ff1654',
-                  height: 32,
-                  width: 150
-                }}
-                onPress={() => this.startChallenge(challenge)} >
+              <View style={{
+                marginLeft: 5,
+                width: 250
+              }}>
                 <Text style={{
-                  color: '#f7f7f7',
-                  fontSize: 18,
-                  marginVertical: 5,
-                  textAlign: 'center'
-                }}>go to challenge</Text>
-              </TouchableOpacity>
+                  color: '#464646',
+                  fontSize: 22,
+                  fontWeight: 'bold',
+                }}>{challenge.name}</Text>
+                <Text style={{
+                  color: '#464646',
+                  fontSize: 18
+                }}>{challenge.description}</Text>
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: '#ff1654',
+                    height: 32,
+                    marginTop: 10,
+                    width: 150
+                  }}
+                  onPress={() => this.startChallenge(challenge)} >
+                  <Text style={{
+                    color: '#f7f7f7',
+                    fontSize: 18,
+                    marginVertical: 5,
+                    textAlign: 'center'
+                  }}>go to challenge</Text>
+                </TouchableOpacity>
               </View>
             </View>
           )}
