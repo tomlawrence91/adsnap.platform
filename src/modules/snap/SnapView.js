@@ -11,7 +11,9 @@ import styles from "./SnapStyles";
 export default class SnapView extends React.Component {
 
   componentDidUpdate() {
+
     const results = this.props.results.toJS();
+
     if (results.ready && results.match) {
       this.props.dispatch(SnapState.hideResults());
       const pointsGained = results.type === 'ad' ? 25 : 100;
@@ -85,6 +87,7 @@ export default class SnapView extends React.Component {
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}
           captureQuality={Camera.constants.CaptureQuality.medium}
+          captureTarget={Camera.constants.CaptureTarget.disk}
         />
         <View style={styles.actions}>
           {this.props.uploading

@@ -18,15 +18,19 @@ export default class PermissionsView extends React.Component {
     }
 
     try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.CAMERA,
+      const granted = await PermissionsAndroid.requestMultiple(
+        [
+          PermissionsAndroid.PERMISSIONS.CAMERA,
+          PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE
+        ],
         {
           'title': 'Cool Photo App Camera Permission',
           'message': 'Cool Photo App needs access to your camera ' +
           'so you can take awesome pictures.'
         }
       );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      if (granted['android.permission.CAMERA'] === PermissionsAndroid.RESULTS.GRANTED &&
+          granted['android.permission.READ_EXTERNAL_STORAGE'] === PermissionsAndroid.RESULTS.GRANTED) {
         this.props.navigator.push(Router.getRoute('tabNavigation'));
       } else {
         this.props.navigator.push(Router.getRoute('permissionsDenied'));
