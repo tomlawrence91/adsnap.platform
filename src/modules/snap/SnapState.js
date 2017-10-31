@@ -2,6 +2,7 @@ import { fromJS } from "immutable";
 import {map} from 'lodash';
 // import AjaxService from "../../services/AjaxService";
 import VisionService from "../../services/VisionService";
+import { saveToSpreadsheet } from '../../services/SpreadsheetService'
 // import * as DealsState from "../deals/DealsState";
 // import { Alert } from "react-native";
 
@@ -184,6 +185,8 @@ export default function SnapStateReducer(state = initialState, action = {}) {
           results.match = true;
         }
       });
+
+      saveToSpreadsheet(annotations)
 
       return state.set("results", fromJS(results));
 
