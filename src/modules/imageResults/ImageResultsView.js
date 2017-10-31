@@ -1,20 +1,27 @@
 import React from "react";
 // import * as ImageBrowserState from "../imageBrowser/ImageBrowserState";
-import { Button, View, Text, Image, TouchableHighlight, ScrollView } from "react-native";
+import { Button, View, Text, Image } from "react-native";
 import Container from "../../components/Container";
+import RectButton from "../../components/RectButton";
 
 import styles from "./ImageResultsStyles";
-// import Button from "../../components/Button";
+import * as COLORS from "../../constants/colors";
+import * as COMMON_STYLES from "../../constants/commonStyles";
+import * as ICONS from "../../constants/icons";
 
 export default class ImageResultsView extends React.Component {
 
   static route = {
-    navigationBar: {
-      title: "AdSnap image analysis"
-    }
+    // navigationBar: {
+    //   title: ""
+    // }
   };
 
   returnToSnap() {
+    this.props.navigator.pop();
+  }
+
+  nextAction() {
     this.props.navigator.pop();
   }
 
@@ -22,23 +29,32 @@ export default class ImageResultsView extends React.Component {
     const results = this.props.results.toJS();
     const challenge = this.props.challenge.toJS();
 
+    console.log(results);
+
     return (
+
       <Container>
-        <ScrollView>
 
           {results.match ?
 
-            <View>
-              <View style={styles.codeWrapper}>
-                <Image style={styles.backgroundImage} source={{ uri: results.file }} />
-              </View>
-              <View style={styles.resultsContainer}>
-                <Text style={styles.resultsHeadline}>{challenge.name ? `Congrats, you have unlocked ${challenge.name}` : `Well, done you have taken a photo of an ad`}</Text>
-                {challenge.code && <Text style={styles.resultsSubHeadline}>The following coupon code has been added to your rewards.</Text>}
-                {challenge.code && <View style={styles.codeBox}><Text style={styles.codeText}>{challenge.code}</Text></View>}
-                {/*<TouchableHighlight>*/}
-                  {/*<Text style={[styles.resultsSubHeadline, styles.resultsSubHeadlineLink]}>See rewards</Text>*/}
-                {/*</TouchableHighlight>*/}
+            <View style={styles.container}>
+              <Image style={styles.logo} source={{uri: results.file}} />
+              <Text style={styles.description}>{challenge.name ? `Congrats, you have unlocked ${challenge.name}` : `Well, done you have taken a photo of an ad`}</Text>
+              <View style={styles.buttonWrapper}>
+                <RectButton
+                  onPress={ () => this.nextAction()}
+                  text={challenge.name ? 'Get your discount' : 'Collect more points'}
+                  width={240}
+                  height={COMMON_STYLES.BUTTON_HEIGHT}
+                  textColor={COLORS.LIGHT_PINK}
+                  backgroundColor={COLORS.TRANSPARENT}
+                  borderColor={COLORS.LIGHT_PINK}
+                  border={{
+                    borderColor: COLORS.LIGHT_PINK,
+                    borderStyle: "solid",
+                    borderWidth: 2
+                  }}
+                />
               </View>
             </View>
 
@@ -57,7 +73,7 @@ export default class ImageResultsView extends React.Component {
                 onPress={() => this.returnToSnap()}/>
             </View>
           }
-        </ScrollView>
+
       </Container>
     );
   }
