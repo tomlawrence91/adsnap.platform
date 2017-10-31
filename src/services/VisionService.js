@@ -10,7 +10,7 @@ export default class AjaxService {
     RNFetchBlob.fs.readFile(file, 'base64')
       .then((data) => {
 
-        vision.init({auth: 'AIzaSyALgcuT2frN1R6nTr3f9_2UB9c3A7lnAuU'});
+        vision.init({auth: 'AIzaSyBrZSU7C0EraGd8cnGyIfs3_eLBT0mnywY'});
 
         const req = new vision.Request({
           image: new vision.Image({
@@ -24,7 +24,7 @@ export default class AjaxService {
         });
 
         vision.annotate(req).then(cb, (e) => {
-          console.log('Error: ', e)
+          console.log('Error: ', e);
         });
 
       });
