@@ -10,7 +10,7 @@ import styles from "./SnapStyles";
 
 export default class SnapView extends React.Component {
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     const results = this.props.results.toJS();
     if (results.ready && results.match) {
       this.props.dispatch(SnapState.hideResults());
@@ -18,6 +18,10 @@ export default class SnapView extends React.Component {
       this.props.dispatch(SnapState.updatePoints(parseInt(this.props.points) + pointsGained));
       this.props.dispatch(SnapState.setCurrentChallenge({ ...this.props.currentChallenge.toJS(), completed: true }));
       this.props.navigator.push(Router.getRoute("results", {pointsUpdated: true }));
+    }
+    if (results.ready && !results.match) {
+      this.props.dispatch(SnapState.hideResults());
+      this.props.navigator.push(Router.getRoute("results"));
     }
   }
 

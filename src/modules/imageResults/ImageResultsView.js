@@ -22,14 +22,21 @@ export default class ImageResultsView extends React.Component {
   }
 
   nextAction() {
+    const results = this.props.results.toJS();
+    const challenge = this.props.challenge.toJS();
+    if (results.match && challenge.name) {
+      this.props.navigator.pop();
+      return this.props.navigation.performAction(({ tabs }) => {
+        tabs('main').jumpToTab('deals');
+      })
+    }
+
     this.props.navigator.pop();
   }
 
   render() {
     const results = this.props.results.toJS();
     const challenge = this.props.challenge.toJS();
-
-    console.log(results);
 
     return (
 
@@ -60,17 +67,26 @@ export default class ImageResultsView extends React.Component {
 
             :
 
-            <View style={styles.resultsContainer}>
+            <View style={styles.container}>
 
-              <Text style={styles.resultsHeadline}>Unfortunately, there hasn't been a match to {challenge.name}</Text>
-              <Text style={styles.resultsSubHeadline}>Please make sure that your photo contains one of the following terms:</Text>
-              {results.termsMatching && results.termsMatching.map( (term, idx) => <Text key={idx} style={styles.resultsText}>{term}</Text> )}
-
-              <Text style={styles.resultsSubHeadline}>However, your photo has been annotated with the following terms:</Text>
-              {results.terms && results.terms.map( (term, idx) => <Text key={idx} style={styles.resultsText}>{term}</Text> )}
-              <Button 
-                title="Try Again"
-                onPress={() => this.returnToSnap()}/>
+              <Image style={styles.logo} source={ICONS.SAD} />
+              <Text style={styles.description}>{challenge.name ? `Oops, couldn't find a match for ${challenge.name}` : `Oops, that photo doesn't seem to contain any ad`}</Text>
+              <View style={styles.buttonWrapper}>
+                <RectButton
+                  onPress={ () => this.nextAction()}
+                  text={challenge.name ? 'Try again' : 'Try again'}
+                  width={240}
+                  height={COMMON_STYLES.BUTTON_HEIGHT}
+                  textColor={COLORS.LIGHT_PINK}
+                  backgroundColor={COLORS.TRANSPARENT}
+                  borderColor={COLORS.LIGHT_PINK}
+                  border={{
+                    borderColor: COLORS.LIGHT_PINK,
+                    borderStyle: "solid",
+                    borderWidth: 2
+                  }}
+                />
+              </View>
             </View>
           }
 

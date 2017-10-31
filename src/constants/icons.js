@@ -5,6 +5,7 @@ export const VOUCHER = require("../../images/icon_voucher.png");
 export const LOGO_WHITE = require("../../images/logo_white.png");
 export const LOGO_COLORED = require("../../images/logo_colored.png");
 export const CHALLENGES = require("../../images/icon_challenges.png");
+export const SAD = require("../../images/icon_sad.png");
 
 export const MALE_ACTIVE = require("../../images/icon_male_selected.png");
 export const MALE_INACTIVE = require("../../images/icon_male_unselected.png");
