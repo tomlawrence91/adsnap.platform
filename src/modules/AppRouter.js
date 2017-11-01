@@ -3,6 +3,7 @@ import { createRouter } from "@exponent/ex-navigation";
 import WelcomeViewContainer from "./welcome/WelcomeViewContainer";
 import HomeViewContainer from './home/HomeViewContainer';
 import PermissionsView from './permissions/PermissionsView';
+import PermissionsGeolocationView from './permissionsGeolocation/PermissionsGeolocation';
 import PermissionsDeniedView from './permissionsDenied/PermissionsDeniedView';
 import ChallengesViewContainer from './challenges/ChallengesViewContainer';
 import ChallengeDetailsContainer from './challengeDetails/ChallengeDetailsContainer';
@@ -18,6 +19,7 @@ export default (Router = createRouter(() => ({
   welcome: () => WelcomeViewContainer,
   home: () => HomeViewContainer,
   permissions: () => PermissionsView,
+  permissionsGeolocation: () => PermissionsGeolocationView,
   permissionsDenied: () => PermissionsDeniedView,
   challenges: () => ChallengesViewContainer,
   challengeDetails: () => ChallengeDetailsContainer,
