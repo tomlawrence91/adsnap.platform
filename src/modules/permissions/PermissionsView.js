@@ -13,7 +13,7 @@ export default class PermissionsView extends React.Component {
   async requestCameraPermission() {
 
     if (Platform.OS === 'ios') {
-      this.props.navigator.push(Router.getRoute('tabNavigation'));
+      this.props.navigator.push(Router.getRoute('permissionsGeolocation'));
       return;
     }
 
@@ -31,7 +31,7 @@ export default class PermissionsView extends React.Component {
       );
       if (granted['android.permission.CAMERA'] === PermissionsAndroid.RESULTS.GRANTED &&
           granted['android.permission.READ_EXTERNAL_STORAGE'] === PermissionsAndroid.RESULTS.GRANTED) {
-        this.props.navigator.push(Router.getRoute('tabNavigation'));
+        this.props.navigator.push(Router.getRoute('permissionsGeolocation'));
       } else {
         this.props.navigator.push(Router.getRoute('permissionsDenied'));
       }
