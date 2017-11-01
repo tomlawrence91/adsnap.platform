@@ -1,10 +1,10 @@
-export function saveToSpreadsheet(annotations) {
+export function saveToSpreadsheet(match, annotations) {
   const labels = annotations.labelAnnotations ? annotations.labelAnnotations.map(label => label.description) : '-'
   const textPieces = annotations.textAnnotations ? annotations.textAnnotations.map(piece => piece.description) : '-'
-  const textFull = annotations.fullTextAnnotation ? annotations.fullTextAnnotation.text : '-'
+  const logos = annotations.logoAnnotations ? annotations.logoAnnotations.map(logo => logo.description) : '-'
 
   fetch(
-    'https://us-central1-awesome-project-bac2a.cloudfunctions.net/appendToSpreadsheet?labels=' + labels + '&textPieces=' + textPieces + '&textFull=' + textFull)
+    'https://us-central1-adsnap-183811.cloudfunctions.net/appendToSpreadsheet?match=' + match + '&labels=' + labels + '&textPieces=' + textPieces + '&logos=' + logos + '&timestamp=' + new Date())
     .then(res => res.json())
     .then(data => console.log(data))
     .catch(err => console.error(err))

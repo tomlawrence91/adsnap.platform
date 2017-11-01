@@ -186,7 +186,7 @@ export default function SnapStateReducer(state = initialState, action = {}) {
         }
       });
 
-      saveToSpreadsheet(annotations)
+      saveToSpreadsheet(results.match, annotations)
 
       return state.set("results", fromJS(results));
 
