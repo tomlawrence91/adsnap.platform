@@ -44,7 +44,18 @@ const initialState = fromJS({
       'disclaimer': 'Only available in attending partner shops',
       'brandName': 'KFC',
       'code': 'CHICKEN'
-    }],
+    },
+    {
+      'logoUrl': 'https://www.finder.com/wp-content/uploads/sites/3/2017/09/Currys_PC_World_Logo_0.png',
+      'campaignImgUrl': 'https://www.finder.com/wp-content/uploads/sites/3/2017/09/Currys_PC_World_Logo_0.png',
+      'id': '3',
+      'amount': '5%',
+      'description': 'Get 1% off on all purchases today',
+      'disclaimer': 'Only available within the next 24 hours',
+      'brandName': 'Curry\'s PC World',
+      'code': 'DISCOUNTME'
+    }
+    ],
   activeDeal: {},
   colors: [COLORS.TRANSPARENT_ORANGE, COLORS.TRANSPARENT_PURPLE, COLORS.TRANSPARENT_PINK]
 });

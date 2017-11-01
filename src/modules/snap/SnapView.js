@@ -21,10 +21,16 @@ export default class SnapView extends React.Component {
       this.props.dispatch(SnapState.setCurrentChallenge({ ...this.props.currentChallenge.toJS(), completed: true }));
       this.props.navigator.push(Router.getRoute("results", {pointsUpdated: true }));
     }
-    if (results.ready && !results.match) {
+
+    else if (results.ready && !results.match) {
       this.props.dispatch(SnapState.hideResults());
       this.props.navigator.push(Router.getRoute("results"));
     }
+
+    else if (this.props.points === 200) {
+      this.props.navigator.push(Router.getRoute("results", {reward: true }));
+    }
+
   }
 
   openCameraRoll() {
