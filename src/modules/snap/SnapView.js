@@ -1,4 +1,6 @@
 import * as SnapState from "./SnapState";
+import * as DealsState from "../deals/DealsState";
+import * as ChallengesState from "../challenges/ChallengesState";
 import React from "react";
 import { View, Text, TouchableHighlight, ActivityIndicator, Platform } from "react-native";
 import { PermissionsAndroid } from 'react-native';
@@ -14,21 +16,31 @@ export default class SnapView extends React.Component {
 
     const results = this.props.results.toJS();
 
-    if (results.ready && results.match) {
+    if (results.ready && this.props.points === 175 && !results.reward.id) {
       this.props.dispatch(SnapState.hideResults());
-      const pointsGained = results.type === 'ad' ? 25 : 100;
+      const pointsGained = (results.type === 'ad') ? 25 : 100;
       this.props.dispatch(SnapState.updatePoints(parseInt(this.props.points) + pointsGained));
+      this.props.dispatch(SnapState.setReward({ id: '3'} ));
+      this.props.dispatch(DealsState.enableDeal({ id: '3' }));
+      this.props.navigator.push(Router.getRoute("results", {pointsUpdated: true }));
+      return;
+    }
+
+    else if (results.ready && results.match && !results.reward.id) {
+      this.props.dispatch(SnapState.hideResults());
+      const pointsGained = (results.type === 'ad') ? 25 : 100;
+      this.props.dispatch(SnapState.updatePoints(parseInt(this.props.points) + pointsGained));
+      this.props.dispatch(DealsState.enableDeal({ id: this.props.currentChallenge.toJS().id }));
+      this.props.dispatch(ChallengesState.setCompleted({ id: this.props.currentChallenge.toJS().id }));
       this.props.dispatch(SnapState.setCurrentChallenge({ ...this.props.currentChallenge.toJS(), completed: true }));
       this.props.navigator.push(Router.getRoute("results", {pointsUpdated: true }));
+      return;
     }
 
-    else if (results.ready && !results.match) {
+    else if (results.ready && !results.match  && !results.reward.id) {
       this.props.dispatch(SnapState.hideResults());
       this.props.navigator.push(Router.getRoute("results"));
-    }
-
-    else if (this.props.points === 200) {
-      this.props.navigator.push(Router.getRoute("results", {reward: true }));
+      return;
     }
 
   }

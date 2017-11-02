@@ -31,7 +31,9 @@ export default styles = StyleSheet.create({
         flex: 1,
         resizeMode: 'cover',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        width: Dimensions.get('window').width,
+        // height: Dimensions.get('window').height,
     },
     coloredOverlay: {
         opacity: 0.6,

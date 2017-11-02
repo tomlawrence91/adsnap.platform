@@ -4,7 +4,12 @@ import React from 'react';
 import {
   ScrollView,
   View,
+  Text,
+  Dimensions
 } from 'react-native';
+
+import * as COLORS from "../../constants/colors";
+import * as COMMON_STYLES from "../../constants/commonStyles";
 
 import {sample} from 'lodash';
 
@@ -12,6 +17,7 @@ import Container from '../../components/Container';
 import Tile from '../../components/Tile';
 
 import styles from './DealsStyles';
+import RectButton from "../../components/RectButton";
 
 export default class DealsView extends React.Component {
     static route = {
@@ -39,8 +45,8 @@ export default class DealsView extends React.Component {
 
     renderTile(i, overlayColor) {
         let deal = this.props.deals[i];
-        if (!deal) {
-            return (<View style={{ flex: .5 }} />);
+        if (!deal || !deal.enabled) {
+            return null;
         }
         return (
             <Tile
@@ -141,7 +147,7 @@ export default class DealsView extends React.Component {
         return this.props.deals.reduce((tiles, deal, i) => {
             return i % 2 == 0
                 ? tiles.concat([
-                    <View key={i} style={styles.tileWrapper}>
+                    <View key={i}>
                         {this.renderTile(i)}
                         {this.renderTile(i + 1)}
                     </View>])
@@ -150,18 +156,39 @@ export default class DealsView extends React.Component {
     }
 
     renderDeals() {
+      const deals = this.props.deals.filter( deal => deal.enabled )
         return (
-            <View style={styles.table}>
+            <View style={[styles.table, deals.length === 0 ? { flex: 1, height: Dimensions.get('window').height - 100, justifyContent: 'center', alignItems: 'center' } : null]}>
                 {
-                    this.renderTiles()
+                  deals.length ? this.renderTiles() :
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                      <Text style={{ marginVertical: 10 }}>You haven't unlocked any deals yet.</Text>
+                      <RectButton
+                        onPress={() => {
+                          this.props.navigation.performAction(({ tabs }) => {
+                            tabs('main').jumpToTab('snap');
+                          })
+                        }}
+                        text={"Go take some snaps"}
+                        width={COMMON_STYLES.BUTTON_WIDTH(Dimensions)}
+                        height={COMMON_STYLES.BUTTON_HEIGHT}
+                        textColor={COLORS.PINK}
+                        backgroundColor={COLORS.TRANSPARENT}
+                        borderColor={COLORS.PINK}
+                        border={{
+                          borderColor: COLORS.PINK,
+                          borderStyle: "solid",
+                          borderWidth: 2
+                        }}/>
+                    </View>
                 }
             </View>);
     }
 
     render() {
         return (
-            <Container loading={this.props.deals.length == 0}>
-                <ScrollView>{this.renderDeals()}</ScrollView>
+            <Container loading={this.props.deals.length === 0}>
+              <ScrollView>{this.renderDeals()}</ScrollView>
             </Container>
         );
     }

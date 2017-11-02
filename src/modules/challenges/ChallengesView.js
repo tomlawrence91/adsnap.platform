@@ -32,6 +32,9 @@ export default class ChallengesView extends React.Component {
   };
 
   startChallenge(challenge) {
+    if (challenge.completed) {
+      return;
+    }
     this.props.dispatch(setCurrentChallenge(challenge));
     this.props.navigation.performAction(({ tabs }) => {
       tabs('main').jumpToTab('snap');
@@ -58,7 +61,8 @@ export default class ChallengesView extends React.Component {
                       paddingVertical: 10,
                       paddingBottom: 20,
                       borderBottomWidth: 1,
-                      borderBottomColor: '#EEE'
+                      borderBottomColor: '#EEE',
+                      opacity: challenge.completed ? 0.25 : 1
                     }}>
                 <Image
                   style={{width: 100, height: 100, marginRight: 12}}
@@ -121,25 +125,25 @@ export default class ChallengesView extends React.Component {
                     style={{width: 48, height: 48, backgroundColor: 'white', borderRadius: 48}}
                     source={challenge.campaignImgUrl}
                   />
-                  <MapView.Callout style={styles.plainView}>
+                  <MapView.Callout style={styles.plainView}
+                    onPress={() => this.startChallenge(challenge)}>
                     <View>
                       <Text style={styles.calloutTitle}>{challenge.brandName}</Text>
                       <Text style={styles.calloutDescription}>{challenge.description}</Text>
-                      <TouchableOpacity
+                      <View
                         style={{
                           backgroundColor: '#ff1654',
-                          height: 16,
+                          // height: 16,
                           marginTop: 5,
-                          width: 75
-                        }}
-                        onPress={() => this.startChallenge(challenge)}>
+                          // width: 75
+                        }}>
                         <Text style={{
                           color: '#f7f7f7',
                           fontSize: 12,
                           marginVertical: 3,
                           textAlign: 'center'
                         }}>Start challenge</Text>
-                      </TouchableOpacity>
+                      </View>
                     </View>
                   </MapView.Callout>
                 </MapView.Marker>
@@ -166,7 +170,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height
   },
   plainView: {
-    width: 120,
+    width: 150,
     padding: 12
   },
   calloutTitle: {

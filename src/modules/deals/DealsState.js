@@ -5,12 +5,13 @@ import * as COLORS from '../../constants/colors';
 import { storeItem } from '../../utils/storageUtils';
 import * as STORAGE from '../../constants/storageNames';
 
-const lodash = require('lodash');
+// const lodash = require('lodash');
 
-const SET_DEALS = 'DEALS/SET_DEALS';
-const SET_OVERLAY_COLOR = 'DEALS/SET_COLOR';
-const ADD_DEAL = 'DEALS/ADD_DEAL';
+// const SET_DEALS = 'DEALS/SET_DEALS';
+// const ADD_DEAL = 'DEALS/ADD_DEAL';
+const ENABLE_DEAL = 'DEALS/ENABLE_DEAL';
 const SET_ACTIVE_DEAL = 'DEALS/SET_ACTIVE_DEAL';
+const SET_OVERLAY_COLOR = 'DEALS/SET_COLOR';
 
 // Initial state
 const initialState = fromJS({
@@ -23,7 +24,8 @@ const initialState = fromJS({
       'description': 'Get a free heineken at Tomorrowland festival.',
       'disclaimer': 'Only available in attending partner shops',
       'brandName': 'Heineken',
-      'code': 'Td34dJ'
+      'code': 'Td34dJ',
+      enabled: false
     },
     {
       'logoUrl': IMAGES.ADIDAS,
@@ -33,7 +35,8 @@ const initialState = fromJS({
       'description': 'Get a 20% discount on sneakers.',
       'disclaimer': 'Only available in attending partner shops',
       'brandName': 'Adidas',
-      'code': 'Kd57GF'
+      'code': 'Kd57GF',
+      enabled: false
     },
     {
       'logoUrl': IMAGES.KFC,
@@ -43,7 +46,8 @@ const initialState = fromJS({
       'description': 'The cernal offers you a discount on some chicken.',
       'disclaimer': 'Only available in attending partner shops',
       'brandName': 'KFC',
-      'code': 'CHICKEN'
+      'code': 'CHICKEN',
+      enabled: false
     },
     {
       'logoUrl': IMAGES.CURRYS,
@@ -53,31 +57,39 @@ const initialState = fromJS({
       'description': 'Get 1% off on all purchases today',
       'disclaimer': 'Only available within the next 24 hours',
       'brandName': 'Curry\'s PC World',
-      'code': 'DISCOUNTME'
+      'code': 'DISCOUNTME',
+      enabled: false
     }
     ],
   activeDeal: {},
   colors: [COLORS.TRANSPARENT_ORANGE, COLORS.TRANSPARENT_PURPLE, COLORS.TRANSPARENT_PINK]
 });
 
-export function retrieveDeals() {
-  return async (dispatch, getState) => {
-    let response = AjaxService.retrieveDeals();
-    dispatch(setDeals(response.data));
-  }
-}
+// export function retrieveDeals() {
+//   return async (dispatch, getState) => {
+//     let response = AjaxService.retrieveDeals();
+//     dispatch(setDeals(response.data));
+//   }
+// }
+//
+// export function addDeal(deal) {
+//   return {
+//     type: ADD_DEAL,
+//     payload: deal
+//   }
+// }
 
-export function addDeal(deal) {
+// export function setDeals(deals) {
+//   return {
+//     type: SET_DEALS,
+//     payload: deals
+//   }
+// }
+
+export function enableDeal(deal) {
   return {
-    type: ADD_DEAL,
+    type: ENABLE_DEAL,
     payload: deal
-  }
-}
-
-export function setDeals(deals) {
-  return {
-    type: SET_DEALS,
-    payload: deals
   }
 }
 
@@ -99,13 +111,23 @@ export function setDealOverlayColor(dealColorMap) {
 export default function DealsStateReducer(state = initialState, action = {}) {
   switch (action.type) {
 
-    case ADD_DEAL:
-      return state.updateIn(['deals'], deals => deals.push(fromJS(action.payload)));
+    // case ADD_DEAL:
+    //   return state.updateIn(['deals'], deals => deals.push(fromJS(action.payload)));
+    //
+    // case SET_DEALS:
+    //   const deals = actions.payload;
+    //   storeItem(STORAGE.DEALS, deals);
+    //   return state.set('deals', fromJS(deals));
 
-    case SET_DEALS:
-      const deals = actions.payload;
-      storeItem(STORAGE.DEALS, deals);
-      return state.set('deals', fromJS(deals));
+    case ENABLE_DEAL:
+      let deals = state.get("deals").toJS();
+      deals = deals.map( deal => {
+        if (deal.id == action.payload.id) {
+          deal.enabled = true;
+        }
+        return deal;
+      });
+      return state.set("deals", fromJS(deals));
 
     case SET_ACTIVE_DEAL:
       const deal = action.payload;

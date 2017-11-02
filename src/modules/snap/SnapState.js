@@ -7,10 +7,14 @@ import { saveToSpreadsheet } from '../../services/SpreadsheetService'
 // import { Alert } from "react-native";
 
 const SET_UPLOADING_FLAG = "SNAP/SET_UPLOADING_FLAG";
+
 const SET_CURRENT_CHALLENGE = "SNAP/SET_CURRENT_CHALLENGE";
-const UPDATE_ANIMATION = "SNAP/UPDATE_ANIMATION";
+
 const SHOW_RESULTS = "SNAP/SHOW_RESULTS";
 const HIDE_RESULTS = "SNAP/HIDE_RESULTS";
+
+const SET_REWARD = "SNAP/SET_REWARD";
+
 const UPDATE_POINTS = "SNAP/UPDATE_POINTS";
 
 // Initial state
@@ -20,30 +24,13 @@ const initialState = fromJS({
   results: {
     ready: false,
     match: false,
+    reward: {},
     labels: [],
     texts: [],
     logos: []
   },
   points: 100
 });
-
-// const getGeolocation = () => {
-//   return new Promise((resolve, reject) => {
-//     navigator.geolocation.getCurrentPosition(
-//       position => {
-//         resolve({
-//           latitude: position.coords.latitude,
-//           longitude: position.coords.longitude
-//         });
-//       },
-//       () => {
-//         Alert.alert("LABEL_NO_LOCATION_IOS ");
-//         reject();
-//       },
-//       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-//     );
-//   });
-// };
 
 export function uploadSnap(file) {
 
@@ -56,37 +43,6 @@ export function uploadSnap(file) {
       dispatch(setUploadingFlag(false));
     })
 
-    // const geolocation = await getGeolocation();
-    // AjaxService.uploadImage(file).then(response => response.json()).then(response => {
-    //     console.log(response.data.fileName);
-    //     let fileLocation = ajaxService.baseUrl + response.data.fileName;
-    //     dispatch(setUploadingFlag(false))
-    // })
-    // const snap = {
-    //   imageUrl: "http://localhost/test.png",
-    //   geojson: [geolocation.longitude, geolocation.latitude]
-    // };
-
-    // send http request in a new thread (using native code)
-
-    // console.log(file);
-
-    // const deal = await AjaxService.uploadSnap(snap);
-    // dispatch(setUploadingFlag(false));
-
-    // TODO: detirmine if deal was found.
-    // TODO: dispatch new deal or inform the user
-    // await setTimeout(() => dispatch(setUploadingFlag(false)), 10000);
-    // {
-    //         logoUrl: "http://vignette3.wikia.nocookie.net/mrrobot/images/8/87/ECorp.png/revision/latest?cb=20150602024409",
-    //         campaignUrl: "http://vignette3.wikia.nocookie.net/mrrobot/images/8/87/ECorp.png/revision/latest?cb=20150602024409",
-    //         id: "8",
-    //         amount: "15%",
-    //         description: "on your product",
-    //         brandName: "this could be you",
-    //         code: "Td34dJ"
-    //       }
-    // dispatch(DealsState.addDeal(deal));
   };
 }
 
@@ -94,13 +50,6 @@ export function setUploadingFlag(uploadingFlag) {
   return {
     type: SET_UPLOADING_FLAG,
     payload: uploadingFlag
-  };
-}
-
-export function updateAnimation() {
-  return {
-    type: UPDATE_ANIMATION,
-    payload: {}
   };
 }
 
@@ -124,6 +73,13 @@ export function setCurrentChallenge(challenge) {
   return {
     type: SET_CURRENT_CHALLENGE,
     payload: challenge
+  }
+}
+
+export function setReward(reward) {
+  return {
+    type: SET_REWARD,
+    payload: reward
   }
 }
 
@@ -185,10 +141,18 @@ export default function SnapStateReducer(state = initialState, action = {}) {
 
       return state.set("results", fromJS(results));
 
+    case SET_REWARD:
+      console.log(action.payload);
+      results = state.get("results").toJS();
+      results.reward = action.payload;
+      return state.set("results", fromJS(results));
+
     case SET_UPLOADING_FLAG:
       return state.set("uploading", fromJS(action.payload));
+
     case UPDATE_POINTS:
       return state.set("points", fromJS(action.payload));
+
     default:
       return state;
   }

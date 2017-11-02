@@ -19,7 +19,7 @@ const Tile = React.createClass({
         onPress: React.PropTypes.func.isRequired,
         amount: React.PropTypes.string.isRequired,
         // description: React.PropTypes.string.isRequired,
-        imgUrl: React.PropTypes.string.isRequired,
+        // imgUrl: React.PropTypes.string.isRequired,
         brand: React.PropTypes.string.isRequired,
         overlayColor: React.PropTypes.string,
     },

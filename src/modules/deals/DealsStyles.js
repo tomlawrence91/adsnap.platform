@@ -4,7 +4,8 @@ import * as COMMON_STYLES from '../../constants/commonStyles';
 
 export default styles = StyleSheet.create({
     table:{
-        flexDirection: 'column'
+      flexDirection: 'row',
+      flexWrap: 'wrap'
     },
     tileWrapper: {
         flexDirection: 'row',

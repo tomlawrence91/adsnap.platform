@@ -17,7 +17,7 @@ export default class PermissionsGeolocationView extends React.Component {
 
     try {
       const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION)
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
 
       if (granted) {
           this.props.navigator.push(Router.getRoute('tabNavigation'));

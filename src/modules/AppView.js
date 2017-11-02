@@ -22,7 +22,7 @@ export default class AppView extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			initialRoute: 'tabNavigation',
+			initialRoute: 'home',
 			isLoading: true,
 			accessToken: '',
 		}

@@ -21,8 +21,8 @@ export default class ImageResultsView extends React.Component {
 
   nextAction() {
 
-    if (this.props.reward) {
-      const deal = this.props.deals.filter( deal => deal.id == 3 );
+    if (this.props.results.reward.id) {
+      const deal = this.props.deals.filter( deal => deal.id == this.props.results.reward.id );
       this.props.dispatch(DealsState.setActiveDeal(deal[0]));
       this.props.navigator.pop();
       return this.props.navigation.performAction(({ tabs }) => {
@@ -52,11 +52,13 @@ export default class ImageResultsView extends React.Component {
     const results = this.props.results;
     const challenge = this.props.challenge;
 
+    console.log(results);
+
     return (
 
       <Container>
 
-          {this.props.reward &&
+          {results.reward.id &&
             <View style={styles.container}>
               <Image style={styles.logo} source={{uri: 'https://www.finder.com/wp-content/uploads/sites/3/2017/09/Currys_PC_World_Logo_0.png'}} />
               <Text style={styles.description}>Congrats, you have reached <Text style={{fontWeight: 'bold'}}>200 points</Text> and unlocked a discount!</Text>
@@ -79,7 +81,7 @@ export default class ImageResultsView extends React.Component {
             </View>
           }
 
-          {(results.match && !this.props.reward) &&
+          {(results.match && !results.reward.id) &&
 
             <View style={styles.container}>
               <Image style={styles.logo} source={{uri: results.file}}/>
@@ -104,7 +106,7 @@ export default class ImageResultsView extends React.Component {
             </View>
           }
 
-          {(!results.match && !this.props.reward) &&
+          {(!results.match && !results.reward.id) &&
 
             <View style={styles.container}>
 
