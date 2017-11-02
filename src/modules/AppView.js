@@ -22,7 +22,7 @@ export default class AppView extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			initialRoute: 'tabNavigation',
+			initialRoute: 'home',
 			isLoading: true,
 			accessToken: '',
 		}
@@ -35,7 +35,7 @@ export default class AppView extends React.Component {
 	async getAccessToken() {
 		const token = await AuthService.getToken()
 		if (token) {
-			this.setState({ isLoading: false, initialRoute: 'tabNavigation' })
+			this.setState({ isLoading: false, initialRoute: 'home' })
 		}
 		this.setState({ isLoading: false })
 	}
