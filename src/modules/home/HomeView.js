@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Image} from 'react-native'
+import { View, Text, Image, Platform, PermissionsAndroid } from 'react-native'
 import Container from '../../components/Container'
 import RectButton from "../../components/RectButton";
 import * as COLORS from "../../constants/colors";
@@ -12,7 +12,27 @@ import styles from './HomeStyles';
 export default class HomeView extends React.Component {
 
   goToNext() {
-    this.props.navigator.push(Router.getRoute('permissions'))
+    if (Platform.OS === 'ios') {
+      this.props.navigator.push(Router.getRoute('tabNavigation'));
+    } else {
+      const permissionCamera = PermissionsAndroid.check('CAMERA')
+      const permissionStorage = PermissionsAndroid.check('READ_EXTERNAL_STORAGE')
+      const permissionGeolocation = PermissionsAndroid.check('ACCESS_FINE_LOCATION')
+      Promise.all([permissionCamera, permissionStorage, permissionGeolocation])
+        .then(res => {
+          console.log(res)
+          if (res[0] && res[1] && res[2]) {
+            this.props.navigator.push(Router.getRoute('tabNavigation'));
+          }
+          else if (res[0] && res[1] && !res[2]) {
+            this.props.navigator.push(Router.getRoute('permissionsGeolocation'))
+          } else {
+            this.props.navigator.push(Router.getRoute('permissions'))
+          }
+        })
+        .catch(err => console.error(err))
+
+    }
   }
 
   render() {
