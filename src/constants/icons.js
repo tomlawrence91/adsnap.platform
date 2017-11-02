@@ -6,7 +6,7 @@ export const LOGO_WHITE = require("../../images/logo_white.png");
 export const LOGO_COLORED = require("../../images/logo_colored.png");
 export const CHALLENGES = require("../../images/icon_challenges.png");
 export const SAD = require("../../images/icon_sad.png");
-
+export const GEOLOCATION = require('../../images/icon_geolocation.png');
 export const MALE_ACTIVE = require("../../images/icon_male_selected.png");
 export const MALE_INACTIVE = require("../../images/icon_male_unselected.png");
 export const FEMALE_ACTIVE = require("../../images/icon_female_selected.png");
