@@ -83,7 +83,6 @@ export default class SnapView extends React.Component {
   }
 
   render() {
-    const results = this.props.results.toJSON();
     return (
       <View style={{ flex: 1, flexDirection: 'column' }}>
         <Camera

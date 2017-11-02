@@ -16,11 +16,6 @@ const UPDATE_POINTS = "SNAP/UPDATE_POINTS";
 // Initial state
 const initialState = fromJS({
   uploading: false,
-  animationObj: {
-    stage: 0,
-    current: "<(°.°)>",
-    values: ["<(°.°<)", "<(°.°)>", "(>°.°)>", "<(°.°)>"]
-  },
   currentChallenge: {},
   results: {
     ready: false,

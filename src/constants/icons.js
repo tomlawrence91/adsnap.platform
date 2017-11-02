@@ -16,5 +16,8 @@ export const OTHER_INACTIVE = require("../../images/icon_other_unselected.png");
 export const PROFILE = require("../../images/icon_profile.png");
 export const ICON_AT_BLACK = require("../../images/icon_at_black.png");
 
+export const LIST = require("../../images/icon_map.png");
+export const MAP= require("../../images/icon_list.png");
+
 /* STOCK PHOTOS */
 export const WELCOME_BG = require("../../images/bg_welcome.png");

@@ -32,7 +32,7 @@ const Tile = React.createClass({
             <TouchableOpacity style={styles.wrapper} onPress={() => this.props.onPress()}>
                 <Image
                     style={styles.backgroundImage}
-                    source={{ uri: this.props.imgUrl }}>
+                    source={this.props.imgUrl}>
                     <View style={[styles.coloredOverlay, { backgroundColor: this.props.overlayColor }]} />
                     <Text style={styles.amount}>{this.props.amount}</Text>
                     {/*<Text style={styles.text}>{this.props.description}</Text>*/}
@@ -54,9 +54,11 @@ const styles = StyleSheet.create({
     },
     backgroundImage: {
         flex: 1,
-        resizeMode: 'cover',
+        // resizeMode: 'cover',
         justifyContent: 'center',
         alignItems: 'center',
+        width: Dimensions.get('window').width / 2,
+        height: Dimensions.get('window').width / 2
     },
     coloredOverlay: {
         opacity: 0.85,

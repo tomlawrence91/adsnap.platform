@@ -31,7 +31,7 @@ export default class RedeemView extends React.Component {
             <Container loading={!this.props.deal}>
                 <ScrollView>
                     <View style={styles.codeWrapper}>
-                        <Image style={styles.backgroundImage} source={{ uri: this.props.deal.campaignImgUrl }}>
+                        <Image style={styles.backgroundImage} source={deal.campaignImgUrl}>
                             {/*<View style={styles.coloredOverlay} />
                             <View style={styles.codeBox}><Text style={styles.codeText}>{this.props.route.params.deal.code}</Text></View>*/}
                         </Image>

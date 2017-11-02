@@ -1,6 +1,6 @@
 import { fromJS, toJS } from 'immutable';
 import AjaxService from '../../services/AjaxService';
-import * as ICONS from '../../constants/icons';
+import * as IMAGES from '../../constants/images';
 import * as COLORS from '../../constants/colors';
 import { storeItem } from '../../utils/storageUtils';
 import * as STORAGE from '../../constants/storageNames';
@@ -16,8 +16,8 @@ const SET_ACTIVE_DEAL = 'DEALS/SET_ACTIVE_DEAL';
 const initialState = fromJS({
   deals: [
     {
-      'logoUrl': 'http://fullhdpictures.com/wp-content/uploads/2016/06/Heineken-HD-Logos.png',
-      'campaignImgUrl': 'http://fullhdpictures.com/wp-content/uploads/2016/06/Heineken-HD-Logos.png',
+      'logoUrl': IMAGES.HEINEKEN,
+      'campaignImgUrl': IMAGES.HEINEKEN,
       'id': '0',
       'amount': 'FREE',
       'description': 'Get a free heineken at Tomorrowland festival.',
@@ -26,8 +26,8 @@ const initialState = fromJS({
       'code': 'Td34dJ'
     },
     {
-      'logoUrl': 'http://www.adidas.de/static/on/demandware.static/Sites-adidas-DE-Site/-/default/dw721d387e/images/favicons/favicon.png',
-      'campaignImgUrl': 'http://www.adidas.de/static/on/demandware.static/Sites-adidas-DE-Site/-/default/dw721d387e/images/favicons/favicon.png',
+      'logoUrl': IMAGES.ADIDAS,
+      'campaignImgUrl': IMAGES.ADIDAS,
       'id': '1',
       'amount': '20%',
       'description': 'Get a 20% discount on sneakers.',
@@ -36,8 +36,8 @@ const initialState = fromJS({
       'code': 'Kd57GF'
     },
     {
-      'logoUrl': 'https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/KFC_logo.svg/1024px-KFC_logo.svg.png',
-      'campaignImgUrl': 'https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/KFC_logo.svg/1024px-KFC_logo.svg.png',
+      'logoUrl': IMAGES.KFC,
+      'campaignImgUrl': IMAGES.KFC,
       'id': '2',
       'amount': '15%',
       'description': 'The cernal offers you a discount on some chicken.',
@@ -46,8 +46,8 @@ const initialState = fromJS({
       'code': 'CHICKEN'
     },
     {
-      'logoUrl': 'https://www.finder.com/wp-content/uploads/sites/3/2017/09/Currys_PC_World_Logo_0.png',
-      'campaignImgUrl': 'https://www.finder.com/wp-content/uploads/sites/3/2017/09/Currys_PC_World_Logo_0.png',
+      'logoUrl': IMAGES.CURRYS,
+      'campaignImgUrl': IMAGES.CURRYS,
       'id': '3',
       'amount': '5%',
       'description': 'Get 1% off on all purchases today',
