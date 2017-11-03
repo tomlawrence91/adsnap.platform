@@ -8,7 +8,7 @@ import * as STORAGE from '../../constants/storageNames';
 // const lodash = require('lodash');
 
 // const SET_DEALS = 'DEALS/SET_DEALS';
-// const ADD_DEAL = 'DEALS/ADD_DEAL';
+const ADD_DEAL = 'DEALS/ADD_DEAL';
 const ENABLE_DEAL = 'DEALS/ENABLE_DEAL';
 const SET_ACTIVE_DEAL = 'DEALS/SET_ACTIVE_DEAL';
 const SET_OVERLAY_COLOR = 'DEALS/SET_COLOR';
@@ -72,12 +72,13 @@ const initialState = fromJS({
 //   }
 // }
 //
-// export function addDeal(deal) {
-//   return {
-//     type: ADD_DEAL,
-//     payload: deal
-//   }
-// }
+
+export function addDeal(deal) {
+  return {
+    type: ADD_DEAL,
+    payload: deal
+  }
+}
 
 // export function setDeals(deals) {
 //   return {
@@ -111,8 +112,8 @@ export function setDealOverlayColor(dealColorMap) {
 export default function DealsStateReducer(state = initialState, action = {}) {
   switch (action.type) {
 
-    // case ADD_DEAL:
-    //   return state.updateIn(['deals'], deals => deals.push(fromJS(action.payload)));
+    case ADD_DEAL:
+      return state.updateIn(['deals'], deals => deals.push(fromJS(action.payload)));
     //
     // case SET_DEALS:
     //   const deals = actions.payload;

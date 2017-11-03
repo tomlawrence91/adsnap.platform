@@ -17,7 +17,7 @@ export default class ImageBrowserView extends React.Component {
 
   componentWillMount() {
     CameraRoll.getPhotos({
-      first: 20
+      first: 50
     }).then((edges) => {
       this.props.dispatch(ImageBrowserState.addPhotos(edges));
     });

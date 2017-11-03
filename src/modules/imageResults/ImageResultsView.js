@@ -10,19 +10,31 @@ import styles from "./ImageResultsStyles";
 import * as COLORS from "../../constants/colors";
 import * as COMMON_STYLES from "../../constants/commonStyles";
 import * as ICONS from "../../constants/icons";
+import * as IMAGES from "../../constants/images";
 
 export default class ImageResultsView extends React.Component {
 
   static route = {
-    // navigationBar: {
-    //   title: ""
-    // }
+    navigationBar: {
+      title(params) {
+        return params.success ? 'Great job!' : 'Oh no!'
+      }
+    }
   };
 
   nextAction() {
 
     if (this.props.results.reward.id) {
       const deal = this.props.deals.filter( deal => deal.id == this.props.results.reward.id );
+      this.props.dispatch(DealsState.setActiveDeal(deal[0]));
+      this.props.navigator.pop();
+      return this.props.navigation.performAction(({ tabs }) => {
+        tabs('main').jumpToTab('deals');
+      });
+    }
+
+    if (this.props.results.match && this.props.results.type === 'deal') {
+      const deal = this.props.deals.filter( deal => deal.id == this.props.results.brand);
       this.props.dispatch(DealsState.setActiveDeal(deal[0]));
       this.props.navigator.pop();
       return this.props.navigation.performAction(({ tabs }) => {
@@ -81,7 +93,31 @@ export default class ImageResultsView extends React.Component {
             </View>
           }
 
-          {(results.match && !results.reward.id) &&
+          {(results.match && !results.reward.id && results.type === 'deal') &&
+          <View style={styles.container}>
+            <Image style={styles.logo} source={IMAGES.BRANDS[results.brand.toUpperCase()]}/>
+            <Text
+              style={styles.description}>Get 1% off at your next purchase</Text>
+            <View style={styles.buttonWrapper}>
+              <RectButton
+                onPress={() => this.nextAction()}
+                text='Get discount now!'
+                width={240}
+                height={COMMON_STYLES.BUTTON_HEIGHT}
+                textColor={COLORS.LIGHT_PINK}
+                backgroundColor={COLORS.TRANSPARENT}
+                borderColor={COLORS.LIGHT_PINK}
+                border={{
+                  borderColor: COLORS.LIGHT_PINK,
+                  borderStyle: "solid",
+                  borderWidth: 2
+                }}
+              />
+            </View>
+          </View>
+          }
+
+          {(results.match && !results.reward.id && results.type !== 'deal') &&
 
             <View style={styles.container}>
               <Image style={styles.logo} source={{uri: results.file}}/>
@@ -106,7 +142,7 @@ export default class ImageResultsView extends React.Component {
             </View>
           }
 
-          {(!results.match && !results.reward.id) &&
+          {(!results.match && !results.reward.id && results.type !== 'deal') &&
 
             <View style={styles.container}>
 

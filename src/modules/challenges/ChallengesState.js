@@ -8,7 +8,7 @@ const initialState = fromJS({
   activeView: 'list',
   challenges: [
     {
-      id: 1,
+      'id': '1',
       'brandName': 'Adidas',
       'campaignImgUrl': IMAGES.ADIDAS,
       'code': 'y3LUKD',
@@ -18,7 +18,7 @@ const initialState = fromJS({
       'goal': 10,
       'latitude': 51.508351,
       'longitude': -0.130158,
-      completed: false
+      'completed': false
     },
     {
       'id': 2,
@@ -31,7 +31,7 @@ const initialState = fromJS({
       'goal': 15,
       'latitude': 51.507051,
       'longitude': -0.127958,
-      completed: false
+      'completed': false
     },
     {
       'id': 0,
@@ -44,7 +44,7 @@ const initialState = fromJS({
       'goal': 5,
       'latitude': 51.509451,
       'longitude': -0.127258,
-      completed: false
+      'completed': false
     }
   ]
 });

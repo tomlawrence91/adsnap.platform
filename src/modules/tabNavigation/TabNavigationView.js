@@ -4,6 +4,7 @@ import styles from './TabNavigationStyles';
 import * as ICONS from '../../constants/icons';
 import * as COLORS from '../../constants/colors';
 import Score from '../../components/Score';
+import Title from '../../components/Title';
 import {
   View,
   Image
@@ -19,10 +20,6 @@ export default class TabNavigationView extends React.Component {
 
   defaultRouteConfig = {
     navigationBar: {
-      title: (params) => {
-        const challenge = this.props.currentChallenge.toJS();
-        return (!challenge.brandName || challenge.completed) ? 'Free snapping' : `Challenge: ${challenge.brandName}`;
-      },
       tintColor: COLORS.WHITE,
       backgroundColor: COLORS.APP_HEADER,
       renderRight: (params) => {

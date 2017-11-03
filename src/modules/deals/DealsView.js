@@ -43,7 +43,7 @@ export default class DealsView extends React.Component {
       this.props.navigator.push(Router.getRoute('redeem', { deal: deal }));
     };
 
-    renderTile(i, overlayColor) {
+    renderTile(i) {
         let deal = this.props.deals[i];
         if (!deal || !deal.enabled) {
             return null;
@@ -143,24 +143,12 @@ export default class DealsView extends React.Component {
     //     this.setDealOverlayColor(colorMap)
     // }
 
-    renderTiles() {
-        return this.props.deals.reduce((tiles, deal, i) => {
-            return i % 2 == 0
-                ? tiles.concat([
-                    <View key={i}>
-                        {this.renderTile(i)}
-                        {this.renderTile(i + 1)}
-                    </View>])
-                : tiles
-        }, [])
-    }
-
     renderDeals() {
       const deals = this.props.deals.filter( deal => deal.enabled )
         return (
             <View style={[styles.table, deals.length === 0 ? { flex: 1, height: Dimensions.get('window').height - 100, justifyContent: 'center', alignItems: 'center' } : null]}>
                 {
-                  deals.length ? this.renderTiles() :
+                  deals.length ? this.props.deals.map( (tile, idx) => this.renderTile(idx)) :
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                       <Text style={{ marginVertical: 10 }}>You haven't unlocked any deals yet.</Text>
                       <RectButton
