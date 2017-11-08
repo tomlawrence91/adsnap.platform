@@ -22,12 +22,7 @@ export default class PermissionsView extends React.Component {
         [
           PermissionsAndroid.PERMISSIONS.CAMERA,
           PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE
-        ],
-        {
-          'title': 'Cool Photo App Camera Permission',
-          'message': 'Cool Photo App needs access to your camera ' +
-          'so you can take awesome pictures.'
-        }
+        ]
       );
       if (granted['android.permission.CAMERA'] === PermissionsAndroid.RESULTS.GRANTED &&
           granted['android.permission.READ_EXTERNAL_STORAGE'] === PermissionsAndroid.RESULTS.GRANTED) {

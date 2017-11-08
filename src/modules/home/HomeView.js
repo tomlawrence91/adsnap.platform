@@ -15,9 +15,12 @@ export default class HomeView extends React.Component {
     if (Platform.OS === 'ios') {
       this.props.navigator.push(Router.getRoute('tabNavigation'));
     } else {
-      const permissionCamera = PermissionsAndroid.check('CAMERA')
-      const permissionStorage = PermissionsAndroid.check('READ_EXTERNAL_STORAGE')
-      const permissionGeolocation = PermissionsAndroid.check('ACCESS_FINE_LOCATION')
+      const permissionCamera = PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.CAMERA)
+      const permissionStorage = PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE)
+      const permissionGeolocation = PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION)
+
+      console.log(permissionCamera, permissionStorage, permissionGeolocation);
+
       Promise.all([permissionCamera, permissionStorage, permissionGeolocation])
         .then(res => {
           console.log(res)

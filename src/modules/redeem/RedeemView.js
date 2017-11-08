@@ -1,31 +1,32 @@
-import * as RedeemState from './RedeemState';
 import * as COLORS from '../../constants/colors';
 import React from 'react';
 import {
-    Image,
-    Text,
-    View,
-    Dimensions,
-    ScrollView
+  Image,
+  Text,
+  View,
+  Dimensions,
+  ScrollView,
+  Clipboard
 } from 'react-native';
-import * as ICONS from '../../constants/icons';
 import Container from '../../components/Container';
 import KeyValue from '../../components/KeyValue';
 import RectButton from '../../components/RectButton';
-import Tile from '../../components/Tile';
 import * as COMMON_STYLES from '../../constants/commonStyles';
 
 import styles from './RedeemStyles';
-
 
 export default class RedeemView extends React.Component {
     static route = {
         navigationBar: {
             title: 'Redeem',
         }
+    };
+
+    copyToClipboard() {
+      console.log('copied to clipboard');
+      Clipboard.setString(this.props.deal.code);
     }
-    //TODO: fetch code
-    //TODO: popup on remove
+
     render() {
         return (
             <Container loading={!this.props.deal}>
@@ -61,8 +62,8 @@ export default class RedeemView extends React.Component {
                     </Text>*/}
                         <View style={styles.buttonWrapper}>
                             <RectButton
-                                onPress={() => { }}
-                                text={'Trade'}
+                                onPress={() => this.copyToClipboard()}
+                                text={'Copy to clipboard'}
                                 width={COMMON_STYLES.BUTTON_WIDTH(Dimensions)}
                                 height={COMMON_STYLES.BUTTON_HEIGHT}
                                 textColor={COLORS.WHITE}
