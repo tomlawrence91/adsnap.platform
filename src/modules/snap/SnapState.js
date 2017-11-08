@@ -371,7 +371,7 @@ export default function SnapStateReducer(state = initialState, action = {}) {
 
       }
 
-      saveToSpreadsheet(results.match, annotations)
+      saveToSpreadsheet(results.match, results.termsMatching, annotations)
       return state.set("results", fromJS(results));
 
     case SET_REWARD:
