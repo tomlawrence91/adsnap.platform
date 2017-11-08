@@ -308,7 +308,10 @@ export default function SnapStateReducer(state = initialState, action = {}) {
       // negative
       results.match = false;
 
-      let annotations = { labelAnnotations, textAnnotations, logoAnnotations } = action.payload.results[0];
+      let labelAnnotations = action.payload.results[0].labelAnnotations || [];
+      let textAnnotations = action.payload.results[0].textAnnotations || [];
+      let logoAnnotations = action.payload.results[0].logoAnnotations || [];
+      const annotations = [labelAnnotations, textAnnotations, logoAnnotations];
       let [ labels, texts, logos ] = map(annotations, type => type && map(type, annotation => typeof annotation.description === 'string' && annotation.description.toLowerCase() ));
 
       texts && texts.forEach(text => {
@@ -340,7 +343,7 @@ export default function SnapStateReducer(state = initialState, action = {}) {
       });
 
 
-      if (results.type === 'ad' && (results.match)) {
+      if (results.type === 'ad' && (results.match || logos.length)) {
 
         // match against brands
         let matchBrand = false;
@@ -354,18 +357,32 @@ export default function SnapStateReducer(state = initialState, action = {}) {
 
           // match each term in terms array against brand terms
           brandTerms[brandName].forEach(brandTerm => {
-            results.terms.forEach(term => {
 
-              let regex = new RegExp('^' + brandTerm.toLowerCase() + '$', 'gi');
+            if (logos.length) {
+              logos.forEach(logo => {
+                let regex = new RegExp('^' + brandTerm.toLowerCase() + '$', 'gi');
 
-              if (term && term.match(regex)) {
-                console.log(term);
-                matchBrand = true;
-                results.match = true;
-                results.type = 'deal';
-                results.brand = brandName;
-              }
-            });
+                if (logo && logo.match(regex)) {
+                  matchBrand = true;
+                  results.match = true;
+                  results.type = 'deal';
+                  results.brand = brandName;
+                }
+              });
+            }
+
+            if ( ! matchBrand ) {
+              results.terms.forEach(term => {
+                let regex = new RegExp('^' + brandTerm.toLowerCase() + '$', 'gi');
+                if (term && term.match(regex)) {
+                  matchBrand = true;
+                  results.match = true;
+                  results.type = 'deal';
+                  results.brand = brandName;
+                }
+              });
+            }
+
           })
         }
 
