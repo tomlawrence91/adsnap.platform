@@ -70,16 +70,16 @@ export default class RedeemView extends React.Component {
                                 backgroundColor={COLORS.DARK_GREY}
                                 borderColor={COLORS.BLACK} />
                         </View>
-                        <View style={styles.buttonWrapper}>
-                            <RectButton
-                                onPress={() => { }}
-                                text={'Remove Discount'}
-                                width={COMMON_STYLES.BUTTON_WIDTH(Dimensions)}
-                                height={COMMON_STYLES.BUTTON_HEIGHT}
-                                textColor={COLORS.WHITE}
-                                backgroundColor={COLORS.DARK_GREY}
-                                borderColor={COLORS.BLACK} />
-                        </View>
+                        {/*<View style={styles.buttonWrapper}>*/}
+                            {/*<RectButton*/}
+                                {/*onPress={() => { }}*/}
+                                {/*text={'Remove Discount'}*/}
+                                {/*width={COMMON_STYLES.BUTTON_WIDTH(Dimensions)}*/}
+                                {/*height={COMMON_STYLES.BUTTON_HEIGHT}*/}
+                                {/*textColor={COLORS.WHITE}*/}
+                                {/*backgroundColor={COLORS.DARK_GREY}*/}
+                                {/*borderColor={COLORS.BLACK} />*/}
+                        {/*</View>*/}
                     </View>
                 </ScrollView>
             </Container >
