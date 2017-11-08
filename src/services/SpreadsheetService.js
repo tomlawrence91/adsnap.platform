@@ -1,11 +1,12 @@
-export function saveToSpreadsheet(match, annotations) {
+export function saveToSpreadsheet(match, terms, annotations) {
   const labels = annotations.labelAnnotations ? annotations.labelAnnotations.map(label => label.description) : '-'
   const textPieces = annotations.textAnnotations ? annotations.textAnnotations.map(piece => piece.description) : '-'
   const logos = annotations.logoAnnotations ? annotations.logoAnnotations.map(logo => logo.description) : '-'
   
   navigator.geolocation.getCurrentPosition(coordinates => {    
     fetch(
-      'https://us-central1-adsnap-183811.cloudfunctions.net/appendToSpreadsheet?match=' + match + 
+      'https://us-central1-adsnap-183811.cloudfunctions.net/appendToSpreadsheet?match=' + match +
+        '&terms=' + terms +
         '&labels=' + labels + 
         '&textPieces=' +  textPieces + 
         '&logos=' + logos + 
