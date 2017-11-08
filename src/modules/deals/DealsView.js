@@ -97,10 +97,10 @@ export default class DealsView extends React.Component {
     }
 
     colorDeals() {
-        dealColorMap = this.props.deals.map(deal => {
-            return { ...deal, overlayColor: sample(this.props.colors) }
-        });
-        this.setDealOverlayColor(dealColorMap);
+        // dealColorMap = this.props.deals.map(deal => {
+        //     return { ...deal, overlayColor: sample(this.props.colors) }
+        // });
+        this.setDealOverlayColor(this.props.deals);
     }
 
 
