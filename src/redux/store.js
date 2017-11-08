@@ -1,17 +1,19 @@
+import { AsyncStorage } from 'react-native'
 import { applyMiddleware, createStore, compose } from 'redux';
+import { autoRehydrate, persistStore } from 'redux-persist-immutable';
+import thunkMiddleware from 'redux-thunk';
+import loggerMiddleware from './middleware/loggerMiddleware'
+import mainReducer from './reducer';
 
-import middleware from './middleware';
-import reducer from './reducer';
-
-const enhancer = compose(
-  applyMiddleware(...middleware)
-);
-
-// create the store
 const store = createStore(
-  reducer,
+  mainReducer,
   null,
-  enhancer
-);
+  compose(
+    autoRehydrate(),
+    applyMiddleware(thunkMiddleware, loggerMiddleware)
+  )
+)
+
+persistStore(store, {storage: AsyncStorage})
 
 export default store;
