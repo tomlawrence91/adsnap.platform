@@ -326,7 +326,7 @@ export default function SnapStateReducer(state = initialState, action = {}) {
       const matchAgainst = state.get('currentChallenge').toJS();
 
       results.type = 'ad';
-      results.termsMatching = ['advertisement', 'advertising', 'mural', 'billboard', 'logo', 'product', 'brand', 'poster', 'signage', 'sign', 'retail', 'fashion model'];
+      results.termsMatching = ['advertisement', 'advertising', 'mural', 'billboard', 'logo', 'product', 'brand', 'poster', 'signage', 'sign', 'retail', 'fashion model', 'shopping'];
 
       if (matchAgainst.keywords) {
         results.termsMatching = matchAgainst.keywords;
