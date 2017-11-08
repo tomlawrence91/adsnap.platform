@@ -326,7 +326,7 @@ export default function SnapStateReducer(state = initialState, action = {}) {
       const matchAgainst = state.get('currentChallenge').toJS();
 
       results.type = 'ad';
-      results.termsMatching = ['advertisement', 'billboard', 'logo', 'product'];
+      results.termsMatching = ['advertisement', 'advertising', 'mural', 'billboard', 'logo', 'product', 'brand', 'poster', 'signage', 'sign', 'retail', 'fashion model'];
 
       if (matchAgainst.keywords) {
         results.termsMatching = matchAgainst.keywords;
@@ -340,7 +340,7 @@ export default function SnapStateReducer(state = initialState, action = {}) {
       });
 
 
-      if (results.type === 'ad') {
+      if (results.type === 'ad' && (results.match)) {
 
         // match against brands
         let matchBrand = false;
@@ -356,7 +356,10 @@ export default function SnapStateReducer(state = initialState, action = {}) {
           brandTerms[brandName].forEach(brandTerm => {
             results.terms.forEach(term => {
 
-              if (term && ~term.indexOf(brandTerm.toLowerCase())) {
+              let regex = new RegExp('^' + brandTerm.toLowerCase() + '$', 'gi');
+
+              if (term && term.match(regex)) {
+                console.log(term);
                 matchBrand = true;
                 results.match = true;
                 results.type = 'deal';
