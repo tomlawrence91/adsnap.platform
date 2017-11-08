@@ -1,14 +1,16 @@
-export function saveToSpreadsheet(match, terms, annotations) {
-  const labels = annotations.labelAnnotations ? annotations.labelAnnotations.map(label => label.description) : '-'
-  const textPieces = annotations.textAnnotations ? annotations.textAnnotations.map(piece => piece.description) : '-'
-  const logos = annotations.logoAnnotations ? annotations.logoAnnotations.map(logo => logo.description) : '-'
-  
+export function saveToSpreadsheet(match, brand, terms, annotations) {
+
+  const labels = annotations[0] ? annotations[0].map(label => label.description) : '-'
+  const textPieces = annotations[1] ? annotations[1].map(piece => piece.description) : '-'
+  const logos = annotations[2] ? annotations[2].map(logo => logo.description) : '-'
+
   navigator.geolocation.getCurrentPosition(coordinates => {    
     fetch(
       'https://us-central1-adsnap-183811.cloudfunctions.net/appendToSpreadsheet?match=' + match +
         '&terms=' + terms +
+        '&brand=' + brand +
         '&labels=' + labels + 
-        '&textPieces=' +  textPieces + 
+        '&textPieces=' + textPieces + 
         '&logos=' + logos + 
         '&latitude=' + coordinates.coords.latitude +
         '&longitude=' + coordinates.coords.longitude +
