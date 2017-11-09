@@ -114,8 +114,10 @@ export default class SnapView extends React.Component {
   takePicture() {
     this.camera.capture({
       target: Camera.constants.CaptureTarget.cameraRoll
-    }).then(data => this.props.dispatch(SnapState.uploadSnap(data.path)))
-      .catch(err => console.error(err))
+    }).then(data => {
+      this.props.dispatch(SnapState.setReward({}));
+      this.props.dispatch(SnapState.uploadSnap(data.path));
+    }).catch(err => console.error(err))
   }
 
   disableChallenge() {

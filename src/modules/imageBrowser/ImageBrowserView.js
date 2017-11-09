@@ -24,6 +24,7 @@ export default class ImageBrowserView extends React.Component {
   }
 
   onPress(uri) {
+    this.props.dispatch(SnapState.setReward({}));
     this.props.dispatch(SnapState.uploadSnap(uri));
     this.props.navigator.pop();
   }

@@ -28,7 +28,8 @@ const initialState = fromJS({
     reward: {},
     labels: [],
     texts: [],
-    logos: []
+    logos: [],
+    brand: ''
   },
   points: 100,
   brandTerms: {
@@ -329,7 +330,7 @@ export default function SnapStateReducer(state = initialState, action = {}) {
       const matchAgainst = state.get('currentChallenge').toJS();
 
       results.type = 'ad';
-      results.termsMatching = ['advertisement', 'advertising', 'mural', 'billboard', 'logo', 'product', 'brand', 'poster', 'signage', 'sign', 'retail', 'fashion model', 'shopping'];
+      results.termsMatching = ['advertisement', 'advertising', 'mural', 'billboard', 'logo', 'product', 'brand', 'poster', 'signage', 'sign', 'retail', 'fashion model', 'shopping', 'fun'];
 
       if (matchAgainst.keywords) {
         results.termsMatching = matchAgainst.keywords;
@@ -391,9 +392,9 @@ export default function SnapStateReducer(state = initialState, action = {}) {
       return state.set("results", fromJS(results));
 
     case SET_REWARD:
-      console.log(action.payload);
       results = state.get("results").toJS();
       results.reward = action.payload;
+      results.brand = '';
       return state.set("results", fromJS(results));
 
     case SET_UPLOADING_FLAG:
