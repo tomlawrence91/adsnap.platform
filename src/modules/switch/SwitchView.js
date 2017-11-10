@@ -1,19 +1,18 @@
 import React from 'react';
-import { connect } from 'react-redux'
-
-import * as ChallengesState from '../modules/challenges/ChallengesState';
-
-import * as COLORS from '../constants/colors';
-import * as ICONS from '../constants/icons';
-
+import PropTypes from 'prop-types';
 import {
   TouchableOpacity,
-  StyleSheet,
   Text,
   Image
 } from 'react-native';
+import styles from './SwitchStyle';
+import * as ICONS from '../../constants/icons';
+import * as ChallengesState from '../challenges/ChallengesState';
 
 class SwitchView extends React.Component {
+  constructor(props) {
+    super(props)
+  }
 
   onPress() {
     const switchTo = this.props.activeView === 'list' ? 'map' : 'list';
@@ -21,7 +20,7 @@ class SwitchView extends React.Component {
   }
 
   render() {
-    return (
+    return(
       <TouchableOpacity
         style={[
           styles.button,
@@ -35,27 +34,9 @@ class SwitchView extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  button: {
-    flex: 1,
-    paddingLeft: 12,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  buttonIcon: {
-    width: 24,
-    height: 24,
-    marginRight: 6
-  },
-  buttonText: {
-    color: COLORS.WHITE,
-    fontWeight: 'bold'
-  }
-});
+SwitchView.propTypes = {
+  style: PropTypes.object,
+  activeView: PropTypes.string.isRequired
+};
 
-export default connect(
-  state => ({
-    activeView: state.getIn(['challenges', 'activeView'])
-  })
-)(SwitchView);
+export default SwitchView
