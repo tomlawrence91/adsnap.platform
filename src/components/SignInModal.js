@@ -70,8 +70,7 @@ export default class SignUpModal extends React.Component {
 						<Text style={styles.description}>Sign in</Text>
 
 						{this.renderForm()}
-						{/*TODO: password reset*/}
-
+	
 						<View style={styles.buttonWrapper}>
 							<RectButton
 								onPress={this.props.onLoginPress}
@@ -148,14 +147,11 @@ const styles = {
 		left: 0,
 		right: 0,
 		bottom: 0,
-
-		//width: Dimensions.get('window').width,
 		resizeMode: 'cover',
-		// justifyContent: 'center',
 		alignItems: 'center'
 	},
 	scrollView: {
 		alignItems: 'center',
 		justifyContent: 'center'
 	},
-}
+};

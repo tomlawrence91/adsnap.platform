@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Modal,
   TouchableOpacity,
@@ -8,13 +8,12 @@ import {
   Image,
   ScrollView,
   TextInput
-} from "react-native";
-import * as COMMON_STYLES from "../constants/commonStyles";
-import * as COLORS from "../constants/colors";
-import * as ICONS from "../constants/icons";
-import * as FONTS from "../constants/fonts";
-import RectButton from "./RectButton";
-import GenderButton from "./GenderButton";
+} from 'react-native';
+import * as COMMON_STYLES from '../constants/commonStyles';
+import * as COLORS from '../constants/colors';
+import * as ICONS from '../constants/icons';
+import * as FONTS from '../constants/fonts';
+import RectButton from './RectButton';
 
 export default class SignUpModal extends React.Component {
   renderAccountInfoForm() {
@@ -23,9 +22,9 @@ export default class SignUpModal extends React.Component {
         <View style={styles.inputWrapper}>
           <TextInput
             underlineColorAndroid={COLORS.TRANSPARENT}
-            keyboardType={"email-address"}
-            autoCapitalize={"none"}
-            placeholder={"Email"}
+            keyboardType={'email-address'}
+            autoCapitalize={'none'}
+            placeholder={'Email'}
             onChangeText={text => this.props.setEmail(text)}
             placeholderTextColor={COLORS.SOFT_TRANSPARENT_WHITE}
             style={styles.input}
@@ -36,9 +35,9 @@ export default class SignUpModal extends React.Component {
             underlineColorAndroid={COLORS.TRANSPARENT}
             selectionColor={COLORS.WHITE}
             secureTextEntry={true}
-            autoCapitalize={"none"}
+            autoCapitalize={'none'}
             placeholderTextColor={COLORS.SOFT_TRANSPARENT_WHITE}
-            placeholder={"Password"}
+            placeholder={'Password'}
             onChangeText={text => this.props.setPassword(text)}
             style={styles.input}
           />
@@ -48,9 +47,9 @@ export default class SignUpModal extends React.Component {
             underlineColorAndroid={COLORS.TRANSPARENT}
             selectionColor={COLORS.WHITE}
             secureTextEntry={true}
-            autoCapitalize={"none"}
+            autoCapitalize={'none'}
             placeholderTextColor={COLORS.SOFT_TRANSPARENT_WHITE}
-            placeholder={"Repeat password"}
+            placeholder={'Repeat password'}
             onChangeText={text => this.props.confirmPassword(text)}
             style={styles.input}
           />
@@ -58,40 +57,11 @@ export default class SignUpModal extends React.Component {
       </View>
     );
   }
-  renderGenderForm() {
-    return (
-      <View style={styles.form}>
-        <Text style={styles.title}>Gender</Text>
-        <View style={styles.genderButtonWrapper}>
-          <GenderButton
-            text={"Female"}
-            onPress={() => this.props.setGender("FEMALE")}
-            selected={this.props.gender == "FEMALE"}
-            inactiveIcon={ICONS.FEMALE_ACTIVE}
-            activeIcon={ICONS.FEMALE_ACTIVE}
-          />
-          <GenderButton
-            text={"Male"}
-            onPress={() => this.props.setGender("MALE")}
-            selected={this.props.gender == "MALE"}
-            inactiveIcon={ICONS.MALE_ACTIVE}
-            activeIcon={ICONS.MALE_ACTIVE}
-          />
-          <GenderButton
-            text={"Other"}
-            onPress={() => this.props.setGender("OTHER")}
-            selected={this.props.gender == "OTHER"}
-            inactiveIcon={ICONS.OTHER_ACTIVE}
-            activeIcon={ICONS.OTHER_ACTIVE}
-          />
-        </View>
-      </View>
-    );
-  }
+
   render() {
     return (
       <Modal
-        animationType={"slide"}
+        animationType={'slide'}
         transparent={true}
         visible={this.props.visible}
         onRequestClose={this.props.cancel}
@@ -99,8 +69,8 @@ export default class SignUpModal extends React.Component {
         <View style={{ flex: 1 }}>
           <Image style={styles.backgroundImage} source={ICONS.WELCOME_BG} />
           <ScrollView
-            keyboardShouldPersistTaps={"always"}
-            contentContainerStyle={{ alignItems: "center" }}
+            keyboardShouldPersistTaps={'always'}
+            contentContainerStyle={{ alignItems: 'center' }}
           >
             <TouchableOpacity style={styles.cancel} onPress={this.props.cancel}>
               <Text style={styles.cancelIcon}>X</Text>
@@ -111,8 +81,6 @@ export default class SignUpModal extends React.Component {
             <Text style={styles.description}>Sign up</Text>
 
             {this.renderAccountInfoForm()}
-            {/*{this.renderGenderForm()}*/}
-            {/*TODO: password reset*/}
 
             <View style={styles.buttonWrapper}>
               <RectButton
@@ -123,7 +91,7 @@ export default class SignUpModal extends React.Component {
                 backgroundColor={COLORS.TRANSPARENT}
                 border={{
                   borderColor: COLORS.WHITE,
-                  borderStyle: "solid",
+                  borderStyle: 'solid',
                   borderWidth: 2
                 }}
                 text={`Sign up`}
@@ -138,7 +106,7 @@ export default class SignUpModal extends React.Component {
 
 const styles = {
   cancel: {
-    position: "absolute",
+    position: 'absolute',
     top: 30,
     right: 15,
     width: 20,
@@ -146,11 +114,11 @@ const styles = {
   },
   cancelIcon: {
     fontSize: FONTS.HEADER_FONT_SIZE,
-    fontWeight: "500",
+    fontWeight: '500',
     color: COLORS.SOFT_TRANSPARENT_WHITE
   },
   modalContent: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
@@ -158,7 +126,7 @@ const styles = {
   },
   logo: {
     height: 150,
-    resizeMode: "contain",
+    resizeMode: 'contain',
     marginTop: 50
   },
   form: {
@@ -169,15 +137,15 @@ const styles = {
     fontSize: FONTS.DEFAULT_FONT_SIZE
   },
   description: {
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
     color: COLORS.WHITE,
     margin: 20,
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: FONTS.HEADER_FONT_SIZE
   },
   inputWrapper: {
     marginTop: 10,
-    width: Dimensions.get("window").width - 30,
+    width: Dimensions.get('window').width - 30,
     borderBottomColor: COLORS.WHITE,
     borderBottomWidth: 1
   },
@@ -188,20 +156,14 @@ const styles = {
   buttonWrapper: {
     marginTop: 25
   },
-  genderButtonWrapper: {
-    flexDirection: "row",
-    marginHorizontal: -100
-  },
   backgroundImage: {
-    position: "absolute",
+    position: 'absolute',
     flex: 1,
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    //width: 0,//Dimensions.get('window').width,
-    resizeMode: "cover",
-    // justifyContent: 'center',
-    alignItems: "center"
+    resizeMode: 'cover',
+    alignItems: 'center'
   }
 };
