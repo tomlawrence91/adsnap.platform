@@ -1,20 +1,18 @@
 import React from 'react';
-
-import styles from './TabNavigationStyles';
-import * as ICONS from '../../constants/icons';
-import * as COLORS from '../../constants/colors';
-import Score from '../../components/Score';
-import Title from '../../components/Title';
+import PropTypes from 'prop-types';
 import {
   View,
   Image
 } from 'react-native';
-
 import {
   StackNavigation,
   TabNavigation,
   TabNavigationItem
 } from '@exponent/ex-navigation';
+import styles from './TabNavigationStyles';
+import * as ICONS from '../../constants/icons';
+import * as COLORS from '../../constants/colors';
+import Score from '../../components/Score';
 
 export default class TabNavigationView extends React.Component {
 
@@ -74,4 +72,8 @@ export default class TabNavigationView extends React.Component {
       </TabNavigation>
     );
   }
+}
+
+TabNavigationView.propTyps = {
+  points: PropTypes.number.isRequired
 }
