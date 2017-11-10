@@ -1,16 +1,15 @@
 import React from 'react';
-import * as COLORS from '../constants/colors';
-import * as FONTS from '../constants/fonts';
-import * as ICONS from '../constants/icons';
-
+import PropTypes from 'prop-types';
 import {
   StyleSheet,
   View,
   Animated,
 } from 'react-native';
+import * as COLORS from '../constants/colors';
+import * as FONTS from '../constants/fonts';
+import * as ICONS from '../constants/icons';
 
-export default class Score extends React.Component {
-
+class Score extends React.Component {
   state = {
     textScale: new Animated.Value(1)
   };
@@ -59,3 +58,9 @@ const styles = StyleSheet.create({
     color: 'white'
   }
 });
+
+Score.propTypes = {
+  points: PropTypes.number.isRequired
+};
+
+export default Score;
