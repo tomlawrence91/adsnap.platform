@@ -1,10 +1,16 @@
-// import * as ChallengeDetailsState from '../challengeDetails/ChallengeDetailsState'
-import { setCurrentChallenge } from '../snap/SnapState'
 import React from 'react'
+import { 
+  TouchableOpacity, 
+  Text, 
+  ScrollView, 
+  View, 
+  Image 
+} from 'react-native'
 import MapView from 'react-native-maps';
-import { TouchableOpacity, Text, ScrollView, View, Image, StyleSheet, Dimensions } from 'react-native'
 import Container from '../../components/Container'
-import SwitchView from '../../components/SwitchView'
+import SwitchView from '../switch/SwitchContainer'
+import styles from './ChallengesStyles'
+import { setCurrentChallenge } from '../snap/SnapState'
 
 const LATITUDE = 51.507351;
 const LONGITUDE = -0.127758;
@@ -12,22 +18,12 @@ const LATITUDE_DELTA = 0.0122;
 const LONGITUDE_DELTA = 0.0051;
 
 export default class ChallengesView extends React.Component {
-
   static route = {
     navigationBar: {
       title: 'Challenges',
       renderLeft: (params) => {
         return <SwitchView />
       }
-    },
-  };
-
-  state = {
-    region: {
-      latitude: LATITUDE,
-      longitude: LONGITUDE,
-      latitudeDelta: LATITUDE_DELTA,
-      longitudeDelta: LONGITUDE_DELTA,
     },
   };
 
@@ -45,67 +41,28 @@ export default class ChallengesView extends React.Component {
     return(
       <Container>
         {this.props.activeView === 'list' ?
-          <ScrollView
-            style={{
-              backgroundColor: 'white',
-              paddingHorizontal: 10
-            }}>
+          <ScrollView style={styles.listContainer}>
             {this.props.challenges.map(challenge =>
               <View key={challenge.id}
-                    style={{
-                      flexDirection: 'row',
-                      // justifyContent: 'space-around',
-                      alignItems: 'center',
-                      marginBottom: 5,
-                      marginTop: 5,
-                      paddingVertical: 10,
-                      paddingBottom: 20,
-                      borderBottomWidth: 1,
-                      borderBottomColor: '#EEE',
-                      opacity: challenge.completed ? 0.25 : 1
-                    }}>
-                <Image
-                  style={{width: 100, height: 100, marginRight: 12}}
-                  source={challenge.campaignImgUrl}
-                />
-                <View style={{
-                  flex: 1,
-                  marginLeft: 5
-                }}>
-                  <Text style={{
-                    color: '#464646',
-                    fontSize: 22,
-                    fontWeight: 'bold',
-                  }}>{challenge.name}</Text>
-                  <Text
-                    // numberOfLines={1}
-                    // ellipsizeMode='tail'
-                    style={{
-                      color: '#464646',
-                      fontSize: 18,
-                    }}>{challenge.description}</Text>
+                style={[
+                  styles.listChallengeView,
+                  { opacity: challenge.completed ? 0.25 : 1}
+                ]}>
+                <Image style={styles.listChallengeImage}
+                  source={challenge.campaignImgUrl} />
+                <View style={styles.listChallengeDetails}>
+                  <Text style={styles.listChallengeDetailsTitle}>{challenge.name}</Text>
+                  <Text style={styles.listChallengeDetailsDescription}>{challenge.description}</Text>
                   <TouchableOpacity
-                    style={{
-                      backgroundColor: '#ff1654',
-                      height: 32,
-                      marginTop: 10,
-                      width: 150
-                    }}
+                    style={styles.listChallengeButtonWrapper}
                     onPress={() => this.startChallenge(challenge)}>
-                    <Text style={{
-                      color: '#f7f7f7',
-                      fontSize: 18,
-                      marginVertical: 5,
-                      textAlign: 'center'
-                    }}>Start challenge</Text>
+                    <Text style={styles.listChallengeButtonText}>Start challenge</Text>
                   </TouchableOpacity>
                 </View>
               </View>
             )}
           </ScrollView>
-
           :
-
           <View style={styles.mapContainer}>
             <MapView
               style={styles.map}
@@ -122,7 +79,7 @@ export default class ChallengesView extends React.Component {
                   coordinate={{ latitude: challenge.latitude, longitude: challenge.longitude }}
                 >
                   <Image
-                    style={{width: 48, height: 48, backgroundColor: 'white', borderRadius: 48}}
+                    style={styles.mapMarker}
                     source={challenge.campaignImgUrl}
                   />
                   <MapView.Callout style={styles.plainView}
@@ -130,19 +87,8 @@ export default class ChallengesView extends React.Component {
                     <View>
                       <Text style={styles.calloutTitle}>{challenge.brandName}</Text>
                       <Text style={styles.calloutDescription}>{challenge.description}</Text>
-                      <View
-                        style={{
-                          backgroundColor: '#ff1654',
-                          // height: 16,
-                          marginTop: 5,
-                          // width: 75
-                        }}>
-                        <Text style={{
-                          color: '#f7f7f7',
-                          fontSize: 12,
-                          marginVertical: 3,
-                          textAlign: 'center'
-                        }}>Start challenge</Text>
+                      <View style={styles.detailsView}>
+                        <Text style={styles.detailsCta}>Start challenge</Text>
                       </View>
                     </View>
                   </MapView.Callout>
@@ -155,30 +101,3 @@ export default class ChallengesView extends React.Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  mapContainer: {
-    ...StyleSheet.absoluteFillObject,
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  map: {
-    ...StyleSheet.absoluteFillObject,
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height
-  },
-  plainView: {
-    width: 150,
-    padding: 12
-  },
-  calloutTitle: {
-    fontWeight: 'bold',
-    fontSize: 16
-  },
-  calloutDescription: {
-    fontSize: 12
-  }
-});
-
