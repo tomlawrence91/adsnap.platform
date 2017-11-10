@@ -5,10 +5,9 @@ import RectButton from "../../components/RectButton";
 import * as COLORS from "../../constants/colors";
 import * as COMMON_STYLES from "../../constants/commonStyles";
 import * as ICONS from "../../constants/icons";
+import styles from './PermissionsCameraStyles';
 
-import styles from './PermissionsStyles';
-
-export default class PermissionsView extends React.Component {
+export default class PermissionsCameraView extends React.Component {
 
   async requestCameraPermission() {
 

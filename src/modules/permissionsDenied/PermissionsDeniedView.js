@@ -7,7 +7,7 @@ import * as COLORS from "../../constants/colors";
 import * as COMMON_STYLES from "../../constants/commonStyles";
 import * as ICONS from "../../constants/icons";
 
-import styles from '../permissions/PermissionsStyles';
+import styles from '../permissionsCamera/PermissionsCameraStyles';
 
 export default class PermissionsDeniedView extends React.Component {
 
