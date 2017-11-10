@@ -1,18 +1,12 @@
 import { fromJS, toJS } from 'immutable';
 import * as IMAGES from '../../constants/images';
 import * as COLORS from '../../constants/colors';
-import { storeItem } from '../../utils/storageUtils';
-import * as STORAGE from '../../constants/storageNames';
 
-// const lodash = require('lodash');
-
-// const SET_DEALS = 'DEALS/SET_DEALS';
 const ADD_DEAL = 'DEALS/ADD_DEAL';
 const ENABLE_DEAL = 'DEALS/ENABLE_DEAL';
 const SET_ACTIVE_DEAL = 'DEALS/SET_ACTIVE_DEAL';
 const SET_OVERLAY_COLOR = 'DEALS/SET_COLOR';
 
-// Initial state
 const initialState = fromJS({
   deals: [
     {
@@ -59,7 +53,7 @@ const initialState = fromJS({
       'code': 'DISCOUNTME',
       enabled: false
     }
-    ],
+  ],
   activeDeal: {},
   colors: [COLORS.TRANSPARENT_ORANGE, COLORS.TRANSPARENT_PURPLE, COLORS.TRANSPARENT_PINK]
 });
@@ -70,13 +64,6 @@ export function addDeal(deal) {
     payload: deal
   }
 }
-
-// export function setDeals(deals) {
-//   return {
-//     type: SET_DEALS,
-//     payload: deals
-//   }
-// }
 
 export function enableDeal(deal) {
   return {
@@ -99,21 +86,14 @@ export function setDealOverlayColor(dealColorMap) {
   }
 }
 
-// Reducer
 export default function DealsStateReducer(state = initialState, action = {}) {
   switch (action.type) {
-
     case ADD_DEAL:
       return state.updateIn(['deals'], deals => deals.push(fromJS(action.payload)));
-    //
-    // case SET_DEALS:
-    //   const deals = actions.payload;
-    //   storeItem(STORAGE.DEALS, deals);
-    //   return state.set('deals', fromJS(deals));
 
     case ENABLE_DEAL:
       let deals = state.get("deals").toJS();
-      deals = deals.map( deal => {
+      deals = deals.map(deal => {
         if (deal.id == action.payload.id) {
           deal.enabled = true;
         }
