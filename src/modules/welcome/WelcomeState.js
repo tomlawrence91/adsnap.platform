@@ -1,5 +1,4 @@
 import { fromJS, toJS } from "immutable";
-import AjaxService from "../../services/AjaxService";
 import store from "../../redux/store";
 import * as STORAGE from "../../constants/storageNames";
 import { AsyncStorage } from "react-native";
@@ -54,7 +53,7 @@ export function signup(user, successCallback, errorCallback) {
       }
       const persistableUser = lodash.omit(user, "password");
       console.log("about to persist user");
-      const response = await AjaxService.signup(persistableUser);
+      // const response = await AjaxService.signup(persistableUser);
       console.log(response);
 
       if (response.error) {

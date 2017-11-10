@@ -1,5 +1,4 @@
 import { fromJS, toJS } from 'immutable';
-import AjaxService from '../../services/AjaxService';
 import * as IMAGES from '../../constants/images';
 import * as COLORS from '../../constants/colors';
 import { storeItem } from '../../utils/storageUtils';
@@ -64,14 +63,6 @@ const initialState = fromJS({
   activeDeal: {},
   colors: [COLORS.TRANSPARENT_ORANGE, COLORS.TRANSPARENT_PURPLE, COLORS.TRANSPARENT_PINK]
 });
-
-// export function retrieveDeals() {
-//   return async (dispatch, getState) => {
-//     let response = AjaxService.retrieveDeals();
-//     dispatch(setDeals(response.data));
-//   }
-// }
-//
 
 export function addDeal(deal) {
   return {

@@ -1,8 +1,5 @@
-import {fromJS} from 'immutable';
-import AjaxService from '../../services/AjaxService';
+import { fromJS } from 'immutable';
 
-
-// Initial state
 const initialState = fromJS({
   deal:{}
 });
@@ -16,7 +13,6 @@ export function setDeal(deal){
   }
 }
 
-// Reducer
 export default function DealsStateReducer(state = initialState, action = {}) {
   switch (action.type) {
 

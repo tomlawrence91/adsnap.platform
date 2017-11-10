@@ -1,5 +1,4 @@
 import { fromJS } from "immutable";
-import AjaxService from "../../services/AjaxService";
 
 const SET_USER = "SETTINGS/SET_USER";
 // Initial state

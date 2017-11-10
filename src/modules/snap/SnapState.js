@@ -1,6 +1,5 @@
 import { fromJS } from "immutable";
 import {map} from 'lodash';
-// import AjaxService from "../../services/AjaxService";
 import VisionService from "../../services/VisionService";
 import { saveToSpreadsheet } from '../../services/SpreadsheetService'
 import * as DealsState from "../deals/DealsState";
