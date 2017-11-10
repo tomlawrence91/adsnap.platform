@@ -1,26 +1,16 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 import {
-	AppRegistry,
-	Text,
-	View,
-	StatusBar
-} from 'react-native';
-import {
-	NavigationContext,
 	StackNavigation,
 	NavigationProvider
 } from '@exponent/ex-navigation';
 import Router from './AppRouter';
 import store from '../redux/store';
-import * as STORAGE from '../constants/storageNames';
-import { getStoredItem } from '../utils/storageUtils';
 import AuthService from '../services/AuthService';
-const lodash = require('lodash');
 
 export default class AppView extends React.Component {
-
-	constructor(props) {
-		super(props);
+	constructor() {
+		super();
 		this.state = {
 			initialRoute: 'home',
 			isLoading: true,

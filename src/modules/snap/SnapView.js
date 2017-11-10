@@ -5,7 +5,7 @@ import React from "react";
 import { View, Text, TouchableHighlight, ActivityIndicator, Platform } from "react-native";
 import { PermissionsAndroid } from 'react-native';
 
-import Title from '../../components/Title';
+import Title from '../title/TitleContainer';
 
 import CaptureButton from "../../components/CaptureButton";
 import Camera from "react-native-camera";

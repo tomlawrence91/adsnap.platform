@@ -30,7 +30,7 @@ export default class HomeView extends React.Component {
           else if (res[0] && res[1] && !res[2]) {
             this.props.navigator.push(Router.getRoute('permissionsGeolocation'))
           } else {
-            this.props.navigator.push(Router.getRoute('permissions'))
+            this.props.navigator.push(Router.getRoute('permissionsCamera'))
           }
         })
         .catch(err => console.error(err))
