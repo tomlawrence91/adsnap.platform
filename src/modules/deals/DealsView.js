@@ -48,6 +48,7 @@ export default class DealsView extends React.Component {
 		}
 		return (
 			<Tile
+				key={i}
 				imgUrl={deal.logoUrl}
 				brand={deal.brandName}
 				amount={deal.amount}
