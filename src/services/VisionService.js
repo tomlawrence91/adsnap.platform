@@ -1,15 +1,11 @@
-// import AuthService from "./AuthService";
-// import * as URLS from "../constants/urls";
-import RNFetchBlob from 'react-native-fetch-blob'
-import vision from "react-cloud-vision-api";
+import RNFetchBlob from 'react-native-fetch-blob';
+import vision from 'react-cloud-vision-api';
 
-export default class AjaxService {
-
+export default class VisionService {
   static async annotate(file, cb) {
 
     RNFetchBlob.fs.readFile(file, 'base64')
       .then((data) => {
-
         vision.init({auth: 'AIzaSyBrZSU7C0EraGd8cnGyIfs3_eLBT0mnywY'});
 
         const req = new vision.Request({
@@ -26,9 +22,6 @@ export default class AjaxService {
         vision.annotate(req).then(cb, (e) => {
           console.log('Error: ', e);
         });
-
       });
-
   }
-
 }

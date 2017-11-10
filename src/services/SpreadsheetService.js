@@ -1,8 +1,7 @@
 export function saveToSpreadsheet(match, brand, terms, annotations) {
-
-  const labels = annotations[0] ? annotations[0].map(label => label.description) : '-'
-  const textPieces = annotations[1] ? annotations[1].map(piece => piece.description) : '-'
-  const logos = annotations[2] ? annotations[2].map(logo => logo.description) : '-'
+  const labels = annotations[0] ? annotations[0].map(label => label.description) : '-';
+  const textPieces = annotations[1] ? annotations[1].map(piece => piece.description) : '-';
+  const logos = annotations[2] ? annotations[2].map(logo => logo.description) : '-';
 
   navigator.geolocation.getCurrentPosition(coordinates => {    
     fetch(
@@ -19,5 +18,4 @@ export function saveToSpreadsheet(match, brand, terms, annotations) {
       .then(data => console.log(data))
       .catch(err => console.error(err))
   })
-
-}
+};

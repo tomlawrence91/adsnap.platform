@@ -1,12 +1,11 @@
-import { isTokenExpired } from "../utils/jwtUtils";
+import Auth0 from 'react-native-auth0';
+import { isTokenExpired } from '../utils/jwtUtils';
 import {
   storeItem,
   getStoredItem,
   deleteStoredItem
-} from "../utils/storageUtils";
-import * as STORAGE from "../constants/storageNames";
-import AjaxService from "./AjaxService";
-import Auth0 from 'react-native-auth0';
+} from '../utils/storageUtils';
+import * as STORAGE from '../constants/storageNames';
 
 const auth0 = new Auth0({
   domain: 'adsnap-app.eu.auth0.com',
@@ -24,7 +23,6 @@ export default class AuthService {
           realm: 'Username-Password-Authentication'
         })
         .then(credentials => {
-          console.log(credentials)
           AuthService.setToken(credentials.accessToken, credentials.idToken)
 
           auth0
@@ -33,7 +31,6 @@ export default class AuthService {
               token: credentials.accessToken
             })
             .then(userInfo => {
-              console.log(userInfo)
               AuthService.setUser(JSON.stringify(userInfo))
               resolve(userInfo)
             })
