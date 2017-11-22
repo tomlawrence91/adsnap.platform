@@ -13,9 +13,9 @@ export default class VisionService {
             base64: data
           }),
           features: [
-            new vision.Feature('TEXT_DETECTION', 10),
-            new vision.Feature('LABEL_DETECTION', 10),
-            new vision.Feature('LOGO_DETECTION', 10),
+            new vision.Feature('TEXT_DETECTION', 20),
+            new vision.Feature('LABEL_DETECTION', 20),
+            new vision.Feature('LOGO_DETECTION', 20),
           ]
         });
 
