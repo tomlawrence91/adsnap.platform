@@ -1,87 +1,83 @@
-import { isTokenExpired } from '../utils/jwtHelper'
-import auth0 from 'auth0-js'
-import { storeItem, getStoredItem, deleteStoredItem } from '../utils/storageUtils';
+import Auth0 from 'react-native-auth0';
+import { isTokenExpired } from '../utils/jwtUtils';
+import {
+  storeItem,
+  getStoredItem,
+  deleteStoredItem
+} from '../utils/storageUtils';
 import * as STORAGE from '../constants/storageNames';
 
+const auth0 = new Auth0({
+  domain: 'adsnap-app.eu.auth0.com',
+  clientId: 'EFiUiAIIvyQ7DtInLammnPrP3SLc87QD'
+});
+
 export default class AuthService {
-    static auth0 = new auth0.WebAuth({
-        clientID: 'ajOlns38DT3Sa3Iiahp3I4fzJY6TdrdP',
-        domain: 'adsnap.eu.auth0.com'
+  static login(email, password) {
+    return new Promise((resolve, reject) => {
+      auth0
+        .auth
+        .passwordRealm({
+          username: email,
+          password: password,
+          realm: 'Username-Password-Authentication'
+        })
+        .then(credentials => {
+          AuthService.setToken(credentials.accessToken, credentials.idToken)
+
+          auth0
+            .auth
+            .userInfo({
+              token: credentials.accessToken
+            })
+            .then(userInfo => {
+              AuthService.setUser(JSON.stringify(userInfo))
+              resolve(userInfo)
+            })
+            .catch(err => reject(err))
+        })
+        .catch(err => reject(err))
     })
+  }
 
-    /**
-     * Logsin the user in Auth0, stores the token and retruns the auth0 user object.
-     * @param {*} email
-     * @param {*} password
-     */
-    static async login(email, password) {
-        return new Promise((resolve, reject) => {
-            this.auth0.client.login({
-                realm: 'Username-Password-Authentication',
-                responseType: 'token',
-                username: email,
-                password,
-            }, (err, user) => {
-                if (err) {
-                    reject(err)
-                    return;
-                }
-                AuthService.setToken(user.accessToken, user.idToken)
-                resolve(user)
-            })
-        });
-    }
+  static signup(email, password) {
+    return new Promise((resolve, reject) => {
+      auth0
+        .auth
+        .createUser({
+          email: email,
+          password: password,
+          connection: 'Username-Password-Authentication'
+        })
+        .then(credentials => {
+          AuthService.setUser(JSON.stringify(credentials))          
+          resolve()
+        })
+        .catch(err => reject(err))
+    })
+  }
 
-    /**
-     * Signsup the user in Auth0 and retruns the auth0 user object.
-     * @param {*} email
-     * @param {*} password
-     */
-    static async signup(email, password) {
-        return new Promise((resolve, reject) => {
-            this.auth0.signup({
-                connection: 'Username-Password-Authentication',
-                email,
-                password,
-            }, (err, user) => {
-                if (err) {
-                    reject(err)
-                }
-                resolve(user)
-            })
-        });
-    }
+  static isLoggedIn() {
+    const token = this.getToken();
+    return !!token && !isTokenExpired(token);
+  }
 
-    /**
-     * Checks if there is a saved token and it's still valid.
-     */
-    static isLoggedIn() {
-        const token = this.getToken();
-        return !!token && !isTokenExpired(token);
-    }
+  static setToken(accessToken, idToken) {
+    storeItem(STORAGE.ACCESS_TOKEN, accessToken);
+    storeItem(STORAGE.ID_TOKEN, idToken);
+  }
 
-    /**
-     * Save user access token and id token to local storage.
-     * @param {*} accessToken
-     * @param {*} idToken
-     */
-    static setToken(accessToken, idToken) {
-        storeItem(STORAGE.ACCESS_TOKEN, accessToken);
-        storeItem(STORAGE.ID_TOKEN, idToken);
-    }
+  static setUser(user) {
+    storeItem(STORAGE.USER, user)
+  }
 
-    /**
-     * Retrieves user toke from storage.
-     */
-    static getToken() {
-        return localStorage.getStoredItem(STORAGE.ID_TOKEN);
-    }
+  static getToken() {
+    return getStoredItem(STORAGE.ID_TOKEN);
+  }
 
-    /**
-     * Clears user token and profile data from storage.
-     */
-    static logout() {
-        // TODO: remove profile.
-        deleteStoredItem(STORAGE.ID_TOKEN);
-    }
+  static logout() {
+    deleteStoredItem(STORAGE.ACCESS_TOKEN);
+    deleteStoredItem(STORAGE.ID_TOKEN);
+    deleteStoredItem(STORAGE.USER);
+  }
 }

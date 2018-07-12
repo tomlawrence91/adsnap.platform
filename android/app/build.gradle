@@ -66,7 +66,6 @@ import com.android.build.OutputFile
  */
 
 apply from: "../../node_modules/react-native/react.gradle"
-apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -84,14 +83,14 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
         applicationId "com.adsnap"
         minSdkVersion 16
-        targetSdkVersion 22
-        versionCode 1
+        targetSdkVersion 25
+        versionCode 6
         versionName "1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
@@ -99,10 +98,12 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file('../../my-release-key.keystore')
-            storePassword '123456789'
-            keyAlias 'my-key-alias'
-            keyPassword '123456789'
+            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file(MYAPP_RELEASE_STORE_FILE)
+                storePassword MYAPP_RELEASE_STORE_PASSWORD
+                keyAlias MYAPP_RELEASE_KEY_ALIAS
+                keyPassword MYAPP_RELEASE_KEY_PASSWORD
+            }
         }
     }
     splits {
@@ -133,14 +134,28 @@ android {
             }
         }
     }
+    
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+    }
 }
 
 dependencies {
-    compile project(':react-native-code-push')
+    compile project(':react-native-maps')
     compile project(':react-native-camera')
+    compile project(':react-native-auth0')
+    compile project(':react-native-fetch-blob')
+    compile project(':react-native-open-settings')
     compile fileTree(dir: "libs", include: ["*.jar"])
-    compile "com.android.support:appcompat-v7:23.0.1"
-    compile "com.facebook.react:react-native:+"  // From node_modules
 }
 
 // Run this once to be able to run the application with BUCK

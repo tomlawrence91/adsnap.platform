@@ -1,165 +1,118 @@
 import * as DealsState from './DealsState';
 import * as RedeemState from '../redeem/RedeemState';
-import * as COLORS from '../../constants/colors';
 import React from 'react';
 import {
-    PropTypes,
-    Text,
-    ScrollView,
-    View,
+	ScrollView,
+	View,
+	Text,
+	Dimensions
 } from 'react-native';
-import * as ROUTES from '../../constants/routes';
-import * as ICONS from '../../constants/icons';
+
+import * as COLORS from "../../constants/colors";
+import * as COMMON_STYLES from "../../constants/commonStyles";
+
 import Container from '../../components/Container';
 import Tile from '../../components/Tile';
 
 import styles from './DealsStyles';
-
-var _ = require('lodash');
+import RectButton from "../../components/RectButton";
 
 export default class DealsView extends React.Component {
-    static route = {
-        navigationBar: {
-            title: 'Your Discounts',
-        }
-    }
-    componentWillMount() {
-        // this.props.dispatch(DealsState.retrieveDeals());
-        this.colorDeals();
-    }
+	static route = {
+		navigationBar: {
+			title: 'Your Discounts',
+		}
+	};
 
+	componentWillMount() {
+		this.colorDeals();
+	}
 
-    onPress = (deal) => {
-        this.props.dispatch(RedeemState.setDeal(deal));
-        this.props.navigator.push(Router.getRoute('redeem', { deal: deal }));
-    }
+	componentDidUpdate() {
+		if (this.props.activeDeal.id) {
+			this.props.dispatch(RedeemState.setDeal(this.props.activeDeal));
+			this.props.dispatch(DealsState.setActiveDeal({}));
+			this.props.navigator.push(Router.getRoute('redeem'));
+		}
+	}
 
-    renderTile(i, overlayColor) {
-        let deal = this.props.deals[i];
-        if (!deal) {
-            return (<View style={{ flex: .5 }} />);
-        }
-        return (
-            <Tile
-                imgUrl={deal.logoUrl}
-                brand={deal.brandName}
-                amount={deal.amount}
-                overlayColor={this.getColor(i)}
-                onPress={() => this.onPress(deal)} />
-        );
-    }
+	onPress = (deal) => {
+		this.props.dispatch(RedeemState.setDeal(deal));
+		this.props.navigator.push(Router.getRoute('redeem', { deal: deal }));
+	};
 
-    setDealOverlayColor(dealColorMap) {
-        console.log('called')
-        this.props.dispatch(DealsState.setDealOverlayColor(dealColorMap));
-    }
+	renderTile(i) {
+		let deal = this.props.deals[i];
+		if (!deal || !deal.enabled) {
+			return null;
+		}
+		return (
+			<Tile
+				key={i}
+				imgUrl={deal.logoUrl}
+				brand={deal.brandName}
+				amount={deal.amount}
+				overlayColor={this.getColor(i)}
+				onPress={() => this.onPress(deal)} />
+		);
+	}
 
-    //new
-    // colorDeal(index) {
-    //     const color = _.sample(this.props.colors);
-    //     const deal = this.props.deals[index];
-    //     if(index === 0) {
-    //         return color;
-    //     } else if ( index % 2 === 0 && index > 0 ) {
-    //         const prevDeal = this.props.deals[index-2];
-    //         if (prevDeal.overlayColor !== color) {
-    //             this.setDealOverlayColor(deal.id, color);
-    //         }
-    //         return colorDeal(index)
-    //     } else if ( index % 2 !== 0 && index > 0 ) {
-    //         const prevDeal = this.props.deals[index-1];
-    //         if (prevDeal.overlayColor !== color) {
-    //             this.setDealOverlayColor(deal.id, color);
-    //         }
-    //         return colorDeal(index)
-    //     }
-    // }
+	setDealOverlayColor(dealColorMap) {
+		console.log('called')
+		this.props.dispatch(DealsState.setDealOverlayColor(dealColorMap));
+	}
 
-    getColor(index) {
-        let ci = index % 4;
-        switch (ci) {
-            case 0:
-                return this.props.colors[2];
-            case 3:
-                return this.props.colors[1];
-            default:
-                return this.props.colors[0];
-        }
-    }
+	getColor(index) {
+		let ci = index % 4;
+		switch (ci) {
+			case 0:
+				return this.props.colors[2];
+			case 3:
+				return this.props.colors[1];
+			default:
+				return this.props.colors[0];
+		}
+	}
 
-    colorDeals() {
-        dealColorMap = this.props.deals.map(deal => {
-            return { ...deal, overlayColor: _.sample(this.props.colors) }
-        });
-        this.setDealOverlayColor(dealColorMap);
-    }
+	colorDeals() {
+		this.setDealOverlayColor(this.props.deals);
+	}
 
+	renderDeals() {
+		const deals = this.props.deals.filter(deal => deal.enabled)
+		return (
+			<View style={[styles.table, deals.length === 0 ? { flex: 1, height: Dimensions.get('window').height - 100, justifyContent: 'center', alignItems: 'center' } : null]}>
+				{
+					deals.length ? this.props.deals.map((tile, idx) => this.renderTile(idx)) :
+						<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+							<Text style={{ marginVertical: 10 }}>You haven't unlocked any deals yet.</Text>
+							<RectButton
+								onPress={() => {
+									this.props.navigation.performAction(({ tabs }) => {
+										tabs('main').jumpToTab('snap');
+									})
+								}}
+								text={"Go take some snaps"}
+								width={COMMON_STYLES.BUTTON_WIDTH(Dimensions)}
+								height={COMMON_STYLES.BUTTON_HEIGHT}
+								textColor={COLORS.PINK}
+								backgroundColor={COLORS.TRANSPARENT}
+								borderColor={COLORS.PINK}
+								border={{
+									borderColor: COLORS.PINK,
+									borderStyle: "solid",
+									borderWidth: 2
+								}} />
+						</View>
+				}
+			</View>);
+	}
 
-
-    // colorDeals(colorMap = [], retryCount = 0) {
-    //     let deals = this.props.deals;
-    //     if (retryCount > this.props.deals.length) {
-    //         return;
-    //     }
-    //     for (let i = 0; i < this.props.deals.length; i++) {
-
-    //         let deal = this.props.deals[i];
-    //         console.log("i", i)
-    //         console.log("deal", deal)
-
-    //         if (deal['overlayColor']) {
-    //             continue;
-    //         }
-    //         const color = _.sample(this.props.colors);
-    //         if (i === 0) {
-    //             colorMap.push({ id: deal.id, overlayColor: color });
-    //         }
-    //         else if (i % 2 === 0) {
-    //             const prevDeal = this.props.deals[i - 2]
-    //             if (color !== prevDeal.overlayColor) {
-    //                 colorMap.push({ id: deal.id, overlayColor: color });
-    //             } else {
-    //                 return colorDeals(colorMap, retryCount++);
-    //             }
-    //         }
-    //         else if (i % 2 !== 0) {
-    //             const prevDeal = this.props.deals[i - 1]
-    //             if (color !== prevDeal.overlayColor) {
-    //                 colorMap.push({ id: deal.id, overlayColor: color });
-    //             } else {
-    //                 return colorDeals(colorMap, retryCount++);
-    //             }
-    //         }
-    //     }
-    //     this.setDealOverlayColor(colorMap)
-    // }
-
-    renderTiles() {
-        return this.props.deals.reduce((tiles, deal, i) => {
-            return i % 2 == 0
-                ? tiles.concat([
-                    <View key={i} style={styles.tileWrapper}>
-                        {this.renderTile(i)}
-                        {this.renderTile(i + 1)}
-                    </View>])
-                : tiles
-        }, [])
-    }
-
-    renderDeals() {
-        return (
-            <View style={styles.table}>
-                {
-                    this.renderTiles()
-                }
-            </View>);
-    }
-
-    render() {
-        return (
-            <Container loading={this.props.deals.length == 0}>
-                <ScrollView>{this.renderDeals()}</ScrollView>
-            </Container>
-        );
-    }
+	render() {
+		return (
+			<Container loading={this.props.deals.length === 0}>
+				<ScrollView>{this.renderDeals()}</ScrollView>
+			</Container>
+		);
+	}
 }

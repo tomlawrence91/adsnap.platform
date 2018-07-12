@@ -1,30 +1,31 @@
 import React from 'react';
-import * as TabNavigationState from '../tabNavigation/TabNavigationState';
-import styles from './TabNavigationStyles';
-import * as ICONS from '../../constants/icons';
-import * as COLORS from '../../constants/colors';
-import AppRouter from '../AppRouter';
-import Container from '../../components/Container';
+import PropTypes from 'prop-types';
 import {
   View,
-  Text,
-  Image,
+  Image
 } from 'react-native';
-
 import {
   StackNavigation,
   TabNavigation,
-  TabNavigationItem,
+  TabNavigationItem
 } from '@exponent/ex-navigation';
-
-const defaultRouteConfig = {
-  navigationBar: {
-    tintColor: COLORS.WHITE,
-    backgroundColor: COLORS.APP_HEADER
-  },
-};
+import styles from './TabNavigationStyles';
+import * as ICONS from '../../constants/icons';
+import * as COLORS from '../../constants/colors';
+import Score from '../../components/Score';
 
 export default class TabNavigationView extends React.Component {
+
+  defaultRouteConfig = {
+    navigationBar: {
+      tintColor: COLORS.WHITE,
+      backgroundColor: COLORS.APP_HEADER,
+      renderRight: (params) => {
+        return <Score points={this.props.points} pointsUpdated={params.params.pointsUpdated} />
+      }
+    },
+  };
+
   renderTabIcon(icon, isSelected) {
     const iconStyle = isSelected ? styles.tabIconActive : styles.tabIcon;
     return (
@@ -32,30 +33,47 @@ export default class TabNavigationView extends React.Component {
         <Image style={iconStyle} source={icon} />
       </View>);
   }
+
   render() {
     return (
       <TabNavigation
         tabBarColor={COLORS.NAVIGATION_PINK}
         tabBarHeight={56}
-        initialTab="snap">
+        initialTab="snap"
+        navigatorUID="main">
+
+        <TabNavigationItem
+          id="challenges"
+          renderIcon={(isSelected) => this.renderTabIcon(ICONS.CHALLENGES, isSelected)}>
+          <StackNavigation
+            defaultRouteConfig={this.defaultRouteConfig}
+            initialRoute={Router.getRoute('challenges')} />
+        </TabNavigationItem>
 
         <TabNavigationItem
           id="snap"
           renderIcon={(isSelected) => this.renderTabIcon(ICONS.CAMERA, isSelected)}>
           <StackNavigation
-            defaultRouteConfig={defaultRouteConfig}
-            initialRoute={Router.getRoute('snap')} />
+            defaultRouteConfig={this.defaultRouteConfig}
+            navigatorUID='snap'
+            initialRoute={Router.getRoute('snap')}
+            />
         </TabNavigationItem>
 
         <TabNavigationItem
           id="deals"
           renderIcon={(isSelected) => this.renderTabIcon(ICONS.VOUCHER, isSelected)}>
           <StackNavigation
-            defaultRouteConfig={defaultRouteConfig}
+            defaultRouteConfig={this.defaultRouteConfig}
+            navigatorUID='deals'
             initialRoute={Router.getRoute('deals')} />
         </TabNavigationItem>
 
       </TabNavigation>
     );
   }
+}
+
+TabNavigationView.propTyps = {
+  points: PropTypes.number.isRequired
 }

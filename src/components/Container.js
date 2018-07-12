@@ -1,45 +1,41 @@
 import React from 'react';
-import * as COMMON_STYLES from '../constants/commonStyles';
-import * as COLORS from '../constants/colors';
-
+import PropTypes from 'prop-types';
 import {
   StyleSheet,
   View,
   ActivityIndicator
 } from 'react-native';
+import * as COMMON_STYLES from '../constants/commonStyles';
+import * as COLORS from '../constants/colors';
 
-const Container = React.createClass({
-
-    render() {
-      return(
-        <View style={styles.viewContainer}>
-          {/*<LinearGradient colors={[COLORS.BACKGROUND_GRADIENT_START, COLORS.BACKGROUND_GRADIENT_END]} style={styles.linearGradient}>*/}
-          {!this.props.loading && this.props.children}
-          {this.props.loading && 
-            <ActivityIndicator
-              size="large"
-              style={styles.loading}
-              color={COLORS.WHITE}
-            />}
-            {/*</LinearGradient>*/}
-        </View>
-      )
-    }
-
-});
+const Container = (props) => (
+  <View style={styles.viewContainer}>
+    {!props.loading && props.children}
+    {props.loading &&
+      <ActivityIndicator
+        size="large"
+        style={styles.loading}
+        color={COLORS.WHITE}
+      />}
+  </View>
+)
 
 const styles = StyleSheet.create({
-  loading:{
-    flex:1,
+  loading: {
+    flex: 1,
   },
   viewContainer: {
-    //marginTop: COMMON_STYLES.HEADER_HEIGHT,
-    flex:1,
+    flex: 1,
     backgroundColor: COLORS.APP_BACKGROUND,
   },
-  linearGradient:{
-    flex:1
+  linearGradient: {
+    flex: 1
   }
 });
+
+Container.propTypes = {
+  loading: PropTypes.bool,
+  children: PropTypes.any
+}
 
 export default Container;

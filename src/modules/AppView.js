@@ -1,48 +1,46 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 import {
-    AppRegistry,
-    Text,
-    View,
-    StatusBar
-} from 'react-native';
-import {
-    NavigationContext,
-    StackNavigation,
-    NavigationProvider
+	StackNavigation,
+	NavigationProvider
 } from '@exponent/ex-navigation';
 import Router from './AppRouter';
 import store from '../redux/store';
-import * as STORAGE from '../constants/storageNames';
-import { getStoredItem } from '../utils/storageUtils';
-
-var _ = require('lodash');
+import AuthService from '../services/AuthService';
 
 export default class AppView extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            initialRoute: 'welcome',
-            isLoading: false,
-            accessToken: '',
-        }
-    }
+	constructor() {
+		super();
+		this.state = {
+			initialRoute: 'home',
+			isLoading: true,
+			accessToken: '',
+		}
+	}
 
-    componentDidMount() {
+	componentWillMount() {
+		this.getAccessToken().done();
+	}
 
-    }
+	async getAccessToken() {
+		const token = await AuthService.getToken()
+		if (token) {
+			this.setState({ isLoading: false, initialRoute: 'home' })
+		}
+		this.setState({ isLoading: false })
+	}
 
-    async getAccessToken() {
-        accessToken = await getStoredItem(STORAGE.ACCESS_TOKEN);
-        this.setState({ isLoading: false, accessToken: accessToken });
-    }
-
-    render() {
-        return (
-            <NavigationProvider router={Router}>
-                <StatusBar
-                    barStyle="light-content" />
-                <StackNavigation initialRoute={Router.getRoute('welcome')} />
-            </NavigationProvider >
-        )
-    }
+	render() {
+		return (
+			<NavigationProvider router={Router}>
+				<StatusBar
+					barStyle="light-content" />
+				{
+					!this.state.isLoading && <StackNavigation
+						initialRoute={Router.getRoute(this.state.initialRoute)}
+						navigatorUID="mainNavigation" />
+				}
+			</NavigationProvider >
+		)
+	}
 }

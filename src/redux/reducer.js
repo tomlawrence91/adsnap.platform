@@ -1,20 +1,22 @@
-import { Map } from 'immutable';
-import GlobalStateReducer from './GlobalState';
-import { combineReducers } from 'redux-immutable';
-import WelcomeViewStateReducer from '../modules/welcome/WelcomeState';
-import DealsViewStateReducer from '../modules/deals/DealsState';
-import SnapStateReducer from '../modules/snap/SnapState';
-import SignInStateReducer from '../modules/signin/SignInState';
-import SignUpStateReducer from '../modules/signup/SignUpState';
-import RedeemStateReducer from '../modules/redeem/RedeemState';
+import { Map } from "immutable";
+import GlobalStateReducer from "./GlobalState";
+import { combineReducers } from "redux-immutable";
+import WelcomeViewStateReducer from "../modules/welcome/WelcomeState";
+import ChallengesState from '../modules/challenges/ChallengesState'
+import DealsViewStateReducer from "../modules/deals/DealsState";
+import SnapStateReducer from "../modules/snap/SnapState";
+import RedeemStateReducer from "../modules/redeem/RedeemState";
+import SettingsStateReducer from "../modules/settings/SettingsState";
+import ImageBrowserReducer from "../modules/imageBrowser/ImageBrowserState";
 
 const reducers = {
   welcome: WelcomeViewStateReducer,
+  challenges: ChallengesState,
   deals: DealsViewStateReducer,
   snap: SnapStateReducer,
-  signin: SignInStateReducer,
-  signup: SignUpStateReducer,
   redeem: RedeemStateReducer,
+  settings: SettingsStateReducer,
+  imageBrowser: ImageBrowserReducer
 };
 
 // initial state, accessor and mutator for supporting root-level
@@ -31,7 +33,7 @@ const namespacedReducer = combineReducers(
 );
 
 export default function mainReducer(state, action) {
-  if (action.type === 'RESET_STATE') {
+  if (action.type === "RESET_STATE") {
     return namespacedReducer(action.payload, action);
   }
   return namespacedReducer(state || void 0, action);

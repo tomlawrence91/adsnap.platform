@@ -1,37 +1,25 @@
 import React from 'react';
-import * as COLORS from '../constants/colors';
-import * as FONTS from '../constants/fonts';
-
+import PropTypes from 'prop-types';
 import {
   TouchableOpacity,
   StyleSheet,
   View,
   Text
 } from 'react-native';
+import * as COLORS from '../constants/colors';
+import * as FONTS from '../constants/fonts';
 
-
-const Button = React.createClass({
-  propTypes: {
-    onPress: React.PropTypes.func.isRequired,
-    text: React.PropTypes.string.isRequired,
-    width: React.PropTypes.number,
-    styles: React.PropTypes.object,
-  },
-
-  render() {
-    return (
-      <TouchableOpacity
-        style={[
-          styles.buttonWrapper,
-          { width: this.props.width },
-          { ...this.props.style }
-        ]}
-        onPress={() => this.props.onPress()}>
-        <Text style={styles.buttonText}>{this.props.text}</Text>
-      </TouchableOpacity>
-    )
-  }
-});
+const Button = (props) => (
+  <TouchableOpacity
+    style={[
+      styles.buttonWrapper,
+      { width: props.width },
+      { ...props.style }
+    ]}
+    onPress={() => props.onPress()}>
+    <Text style={styles.buttonText}>{props.text}</Text>
+  </TouchableOpacity>
+);
 
 const styles = StyleSheet.create({
   buttonWrapper: {
@@ -51,5 +39,12 @@ const styles = StyleSheet.create({
     fontSize: FONTS.BUTTON_FONT_SIZE
   }
 });
+
+Button.propTypes = {
+  onPress: PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired,
+  width: PropTypes.number,
+  styles: PropTypes.object
+};
 
 export default Button;

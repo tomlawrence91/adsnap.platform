@@ -1,36 +1,35 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import {
+	TouchableOpacity,
+	StyleSheet,
+	View,
+	Text
+} from 'react-native';
 import * as COLORS from '../constants/colors';
 import * as FONTS from '../constants/fonts';
 
-import {
-    TouchableOpacity,
-    StyleSheet,
-    View,
-    Text
-} from 'react-native';
-
-
-export default class CaptureButton extends React.Component {
-
-    render() {
-        return (
-            <TouchableOpacity
-                onPress={() => this.props.onPress()}
-                style={styles.button}
-            />
-        )
-    }
-}
+const CaptureButton = (props) => (
+	<TouchableOpacity
+		onPress={() => props.onPress()}
+		style={styles.button}
+	/>
+);
 
 const styles = StyleSheet.create({
-    button: {
-        width: 70,
-        height: 70,
-        borderRadius: 40,
-        borderWidth: 5,
-        borderColor: '#888',
-        backgroundColor: '#AAA',
-        marginBottom: 30,
-    }
+	button: {
+		width: 50,
+		height: 50,
+		borderRadius: 40,
+		borderWidth: 5,
+		borderColor: '#888',
+		backgroundColor: '#AAA',
+		marginBottom: 15,
+	}
 });
 
+CaptureButton.propTypes = {
+	onPress: PropTypes.func.isRequired
+};
+
+export default CaptureButton;
