@@ -1,0 +1,551 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9E226158CFD07CC3CCC6B079 /* Pods_AdSnap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7752C3F7A30218211592CF15 /* Pods_AdSnap.framework */; };
+		F340934020F50451001B74BE /* Networker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F340933F20F50451001B74BE /* Networker.swift */; };
+		F345C23A20EFD68700F0B9A3 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F345C23920EFD68700F0B9A3 /* CameraViewController.swift */; };
+		F345C23C20EFD69800F0B9A3 /* DiscountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F345C23B20EFD69800F0B9A3 /* DiscountsViewController.swift */; };
+		F345C23E20EFD6A800F0B9A3 /* TakeOffTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F345C23D20EFD6A800F0B9A3 /* TakeOffTableViewController.swift */; };
+		F3A4A39B210F161500EBD593 /* UpdateDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A4A39A210F161500EBD593 /* UpdateDataProvider.swift */; };
+		F3B66E412100C0D800D0CF4A /* SuccessScanView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3B66E402100C0D800D0CF4A /* SuccessScanView.xib */; };
+		F3B66E432100C0E800D0CF4A /* SuccessScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B66E422100C0E800D0CF4A /* SuccessScanView.swift */; };
+		F3D41BAA20EFC4F4001DB7F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D41BA920EFC4F4001DB7F2 /* AppDelegate.swift */; };
+		F3D41BAC20EFC4F4001DB7F2 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D41BAB20EFC4F4001DB7F2 /* RootViewController.swift */; };
+		F3D41BAF20EFC4F4001DB7F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3D41BAD20EFC4F4001DB7F2 /* Main.storyboard */; };
+		F3D41BB120EFC4F5001DB7F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3D41BB020EFC4F5001DB7F2 /* Assets.xcassets */; };
+		F3D41BB420EFC4F5001DB7F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3D41BB220EFC4F5001DB7F2 /* LaunchScreen.storyboard */; };
+		F3ED651720FCAA9B00D3E227 /* DiscountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ED651620FCAA9B00D3E227 /* DiscountModel.swift */; };
+		F3ED651B20FCAD2100D3E227 /* AdsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ED651A20FCAD2100D3E227 /* AdsTableViewCell.swift */; };
+		F3ED651D20FCB11300D3E227 /* EmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3ED651C20FCB11300D3E227 /* EmptyView.xib */; };
+		F3ED651F20FCB12700D3E227 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ED651E20FCB12700D3E227 /* EmptyView.swift */; };
+		F3F161B720F0987A0051018E /* Intro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3F161B620F0987A0051018E /* Intro.storyboard */; };
+		F3F161B920F09C690051018E /* IntroGetStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F161B820F09C690051018E /* IntroGetStartViewController.swift */; };
+		F3F161BB20F09C7C0051018E /* IntroAllowCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F161BA20F09C7C0051018E /* IntroAllowCameraViewController.swift */; };
+		F3F161BD20F09C8D0051018E /* IntroAllowLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F161BC20F09C8D0051018E /* IntroAllowLocationViewController.swift */; };
+		F3F161BF20F0A0D50051018E /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F161BE20F0A0D50051018E /* ViewExtension.swift */; };
+		F3F161C220F0AB520051018E /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F161C120F0AB520051018E /* ButtonExtension.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5C27D83F74F8BE1FCE1238D1 /* Pods-AdSnap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdSnap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AdSnap/Pods-AdSnap.debug.xcconfig"; sourceTree = "<group>"; };
+		7752C3F7A30218211592CF15 /* Pods_AdSnap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AdSnap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8553A389DAD75C52F91FB354 /* Pods-AdSnap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdSnap.release.xcconfig"; path = "Pods/Target Support Files/Pods-AdSnap/Pods-AdSnap.release.xcconfig"; sourceTree = "<group>"; };
+		F340933F20F50451001B74BE /* Networker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networker.swift; sourceTree = "<group>"; };
+		F345C23920EFD68700F0B9A3 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		F345C23B20EFD69800F0B9A3 /* DiscountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountsViewController.swift; sourceTree = "<group>"; };
+		F345C23D20EFD6A800F0B9A3 /* TakeOffTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeOffTableViewController.swift; sourceTree = "<group>"; };
+		F3A4A39A210F161500EBD593 /* UpdateDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDataProvider.swift; sourceTree = "<group>"; };
+		F3B66E402100C0D800D0CF4A /* SuccessScanView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuccessScanView.xib; sourceTree = "<group>"; };
+		F3B66E422100C0E800D0CF4A /* SuccessScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessScanView.swift; sourceTree = "<group>"; };
+		F3D41BA620EFC4F4001DB7F2 /* AdSnap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdSnap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3D41BA920EFC4F4001DB7F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F3D41BAB20EFC4F4001DB7F2 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		F3D41BAE20EFC4F4001DB7F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F3D41BB020EFC4F5001DB7F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F3D41BB320EFC4F5001DB7F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F3D41BB520EFC4F5001DB7F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F3ED651620FCAA9B00D3E227 /* DiscountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountModel.swift; sourceTree = "<group>"; };
+		F3ED651A20FCAD2100D3E227 /* AdsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsTableViewCell.swift; sourceTree = "<group>"; };
+		F3ED651C20FCB11300D3E227 /* EmptyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyView.xib; sourceTree = "<group>"; };
+		F3ED651E20FCB12700D3E227 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		F3F161B620F0987A0051018E /* Intro.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Intro.storyboard; sourceTree = "<group>"; };
+		F3F161B820F09C690051018E /* IntroGetStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroGetStartViewController.swift; sourceTree = "<group>"; };
+		F3F161BA20F09C7C0051018E /* IntroAllowCameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroAllowCameraViewController.swift; sourceTree = "<group>"; };
+		F3F161BC20F09C8D0051018E /* IntroAllowLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroAllowLocationViewController.swift; sourceTree = "<group>"; };
+		F3F161BE20F0A0D50051018E /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
+		F3F161C120F0AB520051018E /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F3D41BA320EFC4F3001DB7F2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E226158CFD07CC3CCC6B079 /* Pods_AdSnap.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9F01EF172FF902C5E02E7686 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5C27D83F74F8BE1FCE1238D1 /* Pods-AdSnap.debug.xcconfig */,
+				8553A389DAD75C52F91FB354 /* Pods-AdSnap.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F345C23F20EFD8D400F0B9A3 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F3D41BAB20EFC4F4001DB7F2 /* RootViewController.swift */,
+				F345C23920EFD68700F0B9A3 /* CameraViewController.swift */,
+				F345C23B20EFD69800F0B9A3 /* DiscountsViewController.swift */,
+				F3ED651A20FCAD2100D3E227 /* AdsTableViewCell.swift */,
+				F345C23D20EFD6A800F0B9A3 /* TakeOffTableViewController.swift */,
+				F3A4A39A210F161500EBD593 /* UpdateDataProvider.swift */,
+				F3F161C020F0A5510051018E /* Intro */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F3D41B9D20EFC4F3001DB7F2 = {
+			isa = PBXGroup;
+			children = (
+				F3D41BA820EFC4F4001DB7F2 /* AddSnap */,
+				F3D41BA720EFC4F4001DB7F2 /* Products */,
+				9F01EF172FF902C5E02E7686 /* Pods */,
+				F7303A1D86A7A20D5C7DD58D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		F3D41BA720EFC4F4001DB7F2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F3D41BA620EFC4F4001DB7F2 /* AdSnap.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F3D41BA820EFC4F4001DB7F2 /* AddSnap */ = {
+			isa = PBXGroup;
+			children = (
+				F3D41BA920EFC4F4001DB7F2 /* AppDelegate.swift */,
+				F340933F20F50451001B74BE /* Networker.swift */,
+				F3ED651820FCAAA000D3E227 /* Model */,
+				F3F161C320F0AB590051018E /* Helpers */,
+				F345C23F20EFD8D400F0B9A3 /* ViewControllers */,
+				F3ED651920FCAAC300D3E227 /* Recources */,
+			);
+			path = AddSnap;
+			sourceTree = "<group>";
+		};
+		F3ED651820FCAAA000D3E227 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F3ED651620FCAA9B00D3E227 /* DiscountModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F3ED651920FCAAC300D3E227 /* Recources */ = {
+			isa = PBXGroup;
+			children = (
+				F3D41BAD20EFC4F4001DB7F2 /* Main.storyboard */,
+				F3F161B620F0987A0051018E /* Intro.storyboard */,
+				F3D41BB020EFC4F5001DB7F2 /* Assets.xcassets */,
+				F3D41BB220EFC4F5001DB7F2 /* LaunchScreen.storyboard */,
+				F3D41BB520EFC4F5001DB7F2 /* Info.plist */,
+			);
+			path = Recources;
+			sourceTree = "<group>";
+		};
+		F3F161C020F0A5510051018E /* Intro */ = {
+			isa = PBXGroup;
+			children = (
+				F3F161B820F09C690051018E /* IntroGetStartViewController.swift */,
+				F3F161BA20F09C7C0051018E /* IntroAllowCameraViewController.swift */,
+				F3F161BC20F09C8D0051018E /* IntroAllowLocationViewController.swift */,
+			);
+			path = Intro;
+			sourceTree = "<group>";
+		};
+		F3F161C320F0AB590051018E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F3F161BE20F0A0D50051018E /* ViewExtension.swift */,
+				F3F161C120F0AB520051018E /* ButtonExtension.swift */,
+				F3B66E422100C0E800D0CF4A /* SuccessScanView.swift */,
+				F3B66E402100C0D800D0CF4A /* SuccessScanView.xib */,
+				F3ED651E20FCB12700D3E227 /* EmptyView.swift */,
+				F3ED651C20FCB11300D3E227 /* EmptyView.xib */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F7303A1D86A7A20D5C7DD58D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7752C3F7A30218211592CF15 /* Pods_AdSnap.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F3D41BA520EFC4F3001DB7F2 /* AdSnap */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3D41BB820EFC4F5001DB7F2 /* Build configuration list for PBXNativeTarget "AdSnap" */;
+			buildPhases = (
+				DD10812629ADF5D173FD8ED5 /* [CP] Check Pods Manifest.lock */,
+				F3D41BA220EFC4F3001DB7F2 /* Sources */,
+				F3D41BA320EFC4F3001DB7F2 /* Frameworks */,
+				F3D41BA420EFC4F3001DB7F2 /* Resources */,
+				23D8E72DC6248E527FD14161 /* [CP] Embed Pods Frameworks */,
+				1BE14AAD27111E997A506D79 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AdSnap;
+			productName = AddSnap;
+			productReference = F3D41BA620EFC4F4001DB7F2 /* AdSnap.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F3D41B9E20EFC4F3001DB7F2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0940;
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = "AddSnap Inc";
+				TargetAttributes = {
+					F3D41BA520EFC4F3001DB7F2 = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+				};
+			};
+			buildConfigurationList = F3D41BA120EFC4F3001DB7F2 /* Build configuration list for PBXProject "AdSnap" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F3D41B9D20EFC4F3001DB7F2;
+			productRefGroup = F3D41BA720EFC4F4001DB7F2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F3D41BA520EFC4F3001DB7F2 /* AdSnap */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F3D41BA420EFC4F3001DB7F2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3D41BB420EFC4F5001DB7F2 /* LaunchScreen.storyboard in Resources */,
+				F3B66E412100C0D800D0CF4A /* SuccessScanView.xib in Resources */,
+				F3D41BB120EFC4F5001DB7F2 /* Assets.xcassets in Resources */,
+				F3D41BAF20EFC4F4001DB7F2 /* Main.storyboard in Resources */,
+				F3F161B720F0987A0051018E /* Intro.storyboard in Resources */,
+				F3ED651D20FCB11300D3E227 /* EmptyView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1BE14AAD27111E997A506D79 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-AdSnap/Pods-AdSnap-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleMobileVision/GoogleMVFaceDetectorResources.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleMobileVision/GoogleMVTextDetectorResources.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMVFaceDetectorResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMVTextDetectorResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AdSnap/Pods-AdSnap-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		23D8E72DC6248E527FD14161 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-AdSnap/Pods-AdSnap-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AdSnap/Pods-AdSnap-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DD10812629ADF5D173FD8ED5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AdSnap-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F3D41BA220EFC4F3001DB7F2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3ED651B20FCAD2100D3E227 /* AdsTableViewCell.swift in Sources */,
+				F340934020F50451001B74BE /* Networker.swift in Sources */,
+				F3F161BF20F0A0D50051018E /* ViewExtension.swift in Sources */,
+				F3D41BAC20EFC4F4001DB7F2 /* RootViewController.swift in Sources */,
+				F3F161B920F09C690051018E /* IntroGetStartViewController.swift in Sources */,
+				F345C23E20EFD6A800F0B9A3 /* TakeOffTableViewController.swift in Sources */,
+				F3B66E432100C0E800D0CF4A /* SuccessScanView.swift in Sources */,
+				F3D41BAA20EFC4F4001DB7F2 /* AppDelegate.swift in Sources */,
+				F3F161BD20F09C8D0051018E /* IntroAllowLocationViewController.swift in Sources */,
+				F345C23A20EFD68700F0B9A3 /* CameraViewController.swift in Sources */,
+				F3ED651720FCAA9B00D3E227 /* DiscountModel.swift in Sources */,
+				F3A4A39B210F161500EBD593 /* UpdateDataProvider.swift in Sources */,
+				F3F161C220F0AB520051018E /* ButtonExtension.swift in Sources */,
+				F3F161BB20F09C7C0051018E /* IntroAllowCameraViewController.swift in Sources */,
+				F3ED651F20FCB12700D3E227 /* EmptyView.swift in Sources */,
+				F345C23C20EFD69800F0B9A3 /* DiscountsViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F3D41BAD20EFC4F4001DB7F2 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F3D41BAE20EFC4F4001DB7F2 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F3D41BB220EFC4F5001DB7F2 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F3D41BB320EFC4F5001DB7F2 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F3D41BB620EFC4F5001DB7F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F3D41BB720EFC4F5001DB7F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F3D41BB920EFC4F5001DB7F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5C27D83F74F8BE1FCE1238D1 /* Pods-AdSnap.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 62EKEVK8YQ;
+				INFOPLIST_FILE = "$(SRCROOT)/AddSnap/Recources/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.adsnap.kk;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F3D41BBA20EFC4F5001DB7F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8553A389DAD75C52F91FB354 /* Pods-AdSnap.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 62EKEVK8YQ;
+				INFOPLIST_FILE = "$(SRCROOT)/AddSnap/Recources/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.adsnap.kk;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F3D41BA120EFC4F3001DB7F2 /* Build configuration list for PBXProject "AdSnap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3D41BB620EFC4F5001DB7F2 /* Debug */,
+				F3D41BB720EFC4F5001DB7F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F3D41BB820EFC4F5001DB7F2 /* Build configuration list for PBXNativeTarget "AdSnap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3D41BB920EFC4F5001DB7F2 /* Debug */,
+				F3D41BBA20EFC4F5001DB7F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F3D41B9E20EFC4F3001DB7F2 /* Project object */;
+}
